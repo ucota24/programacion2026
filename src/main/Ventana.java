@@ -12,7 +12,7 @@ public class Ventana extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocation(100,100);
 		setResizable(false);
-		setTitle("Mi ventana");
+		setTitle("Mi ventana 2.0");
 		setLocationRelativeTo(null);
 		
 		Toolkit tk = Toolkit.getDefaultToolkit();
