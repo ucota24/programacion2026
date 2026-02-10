@@ -5,6 +5,8 @@ import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 
+import views.MiPanel;
+
 public class Ventana extends JFrame {
 	
 	public Ventana() {
