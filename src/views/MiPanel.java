@@ -6,6 +6,7 @@ import java.awt.Font;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
@@ -19,6 +20,9 @@ public class MiPanel extends JPanel {
 		boton();
 		ingresarCorreo();
 		ingresarContrasena();
+		errorDeInicioDeSesion();
+		textoErrorContrasena();
+		//imagenBoton();
 				
 	}
 	
@@ -61,6 +65,29 @@ public class MiPanel extends JPanel {
 		add(contrasena);
 	}
 	
+	public void errorDeInicioDeSesion () {
+		JLabel textoError = new JLabel ("Correo Incorrecto");
+		textoError.setFont(new Font("Arial", Font.PLAIN,14));
+		textoError.setBounds(280,245,500,100);
+		textoError.setForeground(Color.RED);
+
+		add(textoError);
+		
+	}
+	
+	public void textoErrorContrasena () {
+		JLabel textoErrorContrasena = new JLabel("Contraseña Incorrecta");
+		textoErrorContrasena.setFont(new Font("Arial", Font.PLAIN,14));
+		textoErrorContrasena.setBounds(265,350,500,100);
+		textoErrorContrasena.setForeground(Color.RED);
+		add(textoErrorContrasena);
+	}
+	
+	/*public void imagenBoton() {
+		JButton boton = new JButton ("INGRESAR", new ImageIcon("src/image/logoteniventana.jpg"));
+		boton.setBounds(265,555,150,50);
+		add(boton);
+	}*/
 	
 
 }
