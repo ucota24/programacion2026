@@ -3,14 +3,12 @@ package views;
 import java.awt.Image;
 import java.awt.Toolkit;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 
 public class LoginWindow extends JFrame {
 	
 	public LoginWindow() {
-		setSize(700,700);
+		setSize(700,600);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocation(100,100);
 		setResizable(false);
