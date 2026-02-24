@@ -38,15 +38,13 @@ public class LoginView extends JPanel {
         bordePanel();
     }
     
-    /* public void fondoLogin () {
+     /* public void fondoLogin () {
     	try {
             imagen = ImageIO.read(new File("src/image/fondologin.jpg"));
         } catch (IOException e) {
             System.out.println("No se encontró la imagen.");
         }
     }
-
-    
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
