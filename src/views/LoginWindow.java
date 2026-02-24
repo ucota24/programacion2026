@@ -2,17 +2,17 @@ package views;
 
 import java.awt.Image;
 import java.awt.Toolkit;
-
 import javax.swing.JFrame;
+
 
 public class LoginWindow extends JFrame {
 	
 	public LoginWindow() {
-		setSize(700,600);
+		setSize(600,480);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocation(100,100);
-		setResizable(false);
-		setTitle("Tienda de Tenis");
+		setResizable(true);
+		setTitle("SneakersShop");
 		setLocationRelativeTo(null);
 		
 		Toolkit tk = Toolkit.getDefaultToolkit();
@@ -21,9 +21,6 @@ public class LoginWindow extends JFrame {
 
 		LoginView panelito = new LoginView();
 		add(panelito);
-
-		//FlowPanel flow = new FlowPanel();
-		//add(flow);
 		
 		setVisible(true);
 		
