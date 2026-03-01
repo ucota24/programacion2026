@@ -1,12 +1,20 @@
 package views;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -15,20 +23,21 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import views.LoginWindow;
+import views.LoginVentana;
 
 public class FormularioRegistro extends JFrame {
 	
+
 	public FormularioRegistro() {
 		setSize(600,480);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocation(100,100);
 		setResizable(true);
-		setTitle("Registro");
+		setTitle("SneakerShop");
 		setLocationRelativeTo(null);
 		
 		Toolkit tk = Toolkit.getDefaultToolkit();
-		Image myIcon = tk.getImage("src/image/logoventana.png");
+		Image myIcon = tk.getImage("src/image/logoventana1.png");
 		setIconImage(myIcon);
 		
 		inicializarComponentes();
@@ -38,31 +47,91 @@ public class FormularioRegistro extends JFrame {
 	
 	public void inicializarComponentes() {
 		
-		JLabel tituloRegistro = new JLabel("Datos Usuarios");
-		tituloRegistro.setFont(new Font("Arial", Font.PLAIN, 20));
-		add(tituloRegistro, BorderLayout.NORTH);
-		tituloRegistro.setHorizontalAlignment(SwingConstants.CENTER);
+		JPanel encabezadoForm = encabezadoForm();
+		add(encabezadoForm, BorderLayout.NORTH);
+
+		JPanel panelComponentes = new JPanel(new GridLayout(0,2,15,10));
+		panelComponentes.setBorder(BorderFactory.createEmptyBorder(10,20, 40, 20));
 		
-		
-		
-		JPanel panelComponentes = new JPanel();
-		panelComponentes.setLayout(new BoxLayout(panelComponentes, BoxLayout.Y_AXIS));
-		panelComponentes.setBorder(BorderFactory.createEmptyBorder(25,15,15,15));
-		
-		for (int i = 0; i < 20; i++ ) {
-			JLabel textoCampo = new JLabel("Campo " + i);
-			panelComponentes.add(textoCampo);
-			
-			JTextField texto = new JTextField(20);
-			panelComponentes.add(texto);
-		}
-		
+		panelComponentes.add(campo("Nombre(s)"));
+	    panelComponentes.add(campo("Apellido(s)"));
+	    panelComponentes.add(campo("Correo Electronico"));
+	    panelComponentes.add(campo("Contraseña"));
+        panelComponentes.add(campo("Fecha de Nacimiento"));
+	    panelComponentes.add(campo("Confirmar Contraseña"));
+	    panelComponentes.add(campo("Telefono"));
+	    
+	    JPanel boton = boton();
+	    add(boton, BorderLayout.SOUTH);
+
 		JScrollPane scroll = new JScrollPane(panelComponentes);
-		scroll.setHorizontalScrollBar(null);
+		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scroll.setBorder(null);
 		add(scroll);
+	}
+	
+	public JPanel campo (String nombre) {
 		
+	    JPanel panel = new JPanel();
+	    panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+	    JLabel lbl = new JLabel(nombre);
+	    lbl.setFont(new Font("Segoe UI", Font.BOLD, 12));
+	    lbl.setForeground(Color.BLACK);
+	    lbl.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+	    JTextField txt = new JTextField();
+	    txt.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+	    txt.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+	    panel.add(lbl);
+	    panel.add(Box.createVerticalStrut(4));
+	    panel.add(txt);
+
+	    return panel;
+	}
+	
+	public JPanel encabezadoForm() {
+		
+		JPanel encabezadoForm = new JPanel();
+		encabezadoForm.setLayout(new BoxLayout(encabezadoForm, BoxLayout.Y_AXIS));
+		encabezadoForm.setBorder(BorderFactory.createEmptyBorder(10,15,12,40));
+		
+		JLabel titulo = new JLabel("Registro de Usuario");
+		titulo.setFont(new Font("Arial", Font.BOLD, 23));
+		titulo.setAlignmentX(Component.LEFT_ALIGNMENT);
+		encabezadoForm.add(titulo);	
+		
+		encabezadoForm.add(Box.createVerticalStrut(3));
+		
+		JLabel subtitulo = new JLabel (" Completa lo siguiente para unirte a nuestra tienda!");
+		subtitulo.setFont(new Font ("Arial", Font.PLAIN, 12));
+		subtitulo.setAlignmentX(Component.LEFT_ALIGNMENT);
+		encabezadoForm.add(subtitulo);
+		
+		return encabezadoForm;
 		
 	}
+	
+	private JPanel boton() {
+        JPanel boton = new JPanel(new FlowLayout(FlowLayout.RIGHT, 30, 10));
+        boton.setBorder(BorderFactory.createMatteBorder(2, 0, 0, 0, Color.BLACK));
+
+        JButton cancelar = new JButton("Cancelar");
+        cancelar.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        cancelar.setPreferredSize(new Dimension(120, 40));
+
+        JButton registrar = new JButton("Aceptar");
+        registrar.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        registrar.setPreferredSize(new Dimension(120, 40));
+        registrar.setBackground(Color.GRAY);
+        registrar.setForeground(Color.WHITE);
+        registrar.setOpaque(true);
+
+        boton.add(cancelar);
+        boton.add(registrar);
+        return boton;
+    }
 	
 	
 

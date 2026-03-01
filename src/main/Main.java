@@ -1,7 +1,8 @@
 package main;
 
 import views.FormularioRegistro;
-import views.LoginWindow;
+import views.LoginVentana;
+import views.LoginVista;
 
 import javax.swing.UIManager;
 
@@ -18,7 +19,7 @@ public class Main {
 		
 		//UIManager.put(" ", AppFont.normal());
 
-		//LoginWindow ventanita = new LoginWindow();
+		//LoginVentana ventanita = new LoginVentana();
 		
 		FormularioRegistro registro = new FormularioRegistro();
 

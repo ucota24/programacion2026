@@ -26,16 +26,16 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-public class LoginView extends JPanel {
+public class LoginVista extends JPanel {
 	
 	private BufferedImage imagen;
 
-    public LoginView() {
-        setBackground(new Color(245, 245, 245));  /*240, 248, 255 Azul claro*/   /*245, 245, 245 blanco*/ //30, 30, 30 negro
+    public LoginVista() {
+    setBackground(new Color(245, 245, 245));  /*240, 248, 255 Azul claro*/   /*245, 245, 245 blanco*/ //30, 30, 30 negro
     	setLayout(new BorderLayout());
     	//fondoLogin();
-        inicializarComponentes();
-        bordePanel();
+    inicializarComponentes();
+    bordePanel();
     }
     
      /* public void fondoLogin () {
@@ -66,7 +66,7 @@ public class LoginView extends JPanel {
         panelCampos.setLayout(new BoxLayout(panelCampos, BoxLayout.Y_AXIS));
         //panelCampos.setOpaque(false);
         panelCampos.setBackground(new Color(245, 245, 245));
-        panelCampos.add(Box.createVerticalStrut(100));
+        panelCampos.add(Box.createVerticalStrut(95));
         panelCampos.add(ingresarCorreo());
         panelCampos.add(Box.createVerticalStrut(10));
         panelCampos.add(ingresarContrasena());
@@ -81,17 +81,16 @@ public class LoginView extends JPanel {
     	//panel.setOpaque(false);
         panel.setBackground(new Color(245, 245, 245));
 
-        //boton
         JPanel panelBoton = new JPanel(new FlowLayout(FlowLayout.CENTER));
         //panelBoton.setOpaque(false);
         panelBoton.setBackground(new Color(245, 245, 245));
         JButton boton = new JButton("INGRESAR");
-        boton.setPreferredSize(new Dimension(125, 45));
+        boton.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        boton.setPreferredSize(new Dimension(120, 40));
         panelBoton.add(boton);
-        panel.setBorder(BorderFactory.createEmptyBorder(0, 0, 30, 0));
+        panel.setBorder(BorderFactory.createEmptyBorder(0, 0, 40, 0));
 
         panel.add(panelBoton, BorderLayout.CENTER);
-        
 
         return panel;
     }
@@ -103,7 +102,7 @@ public class LoginView extends JPanel {
         panel.setBackground(new Color(245, 245, 245));
 
         JLabel txtNombre = new JLabel("Correo electronico");
-        txtNombre.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        txtNombre.setFont(new Font("Segoe UI", Font.BOLD, 18));
         txtNombre.setForeground(Color.BLACK);
         txtNombre.setAlignmentX(CENTER_ALIGNMENT);
         panel.add(txtNombre);
@@ -111,12 +110,12 @@ public class LoginView extends JPanel {
         panel.add(Box.createVerticalStrut(5));
 
         JTextField textField = new JTextField();
-        textField.setFont(new Font("Arial", Font.PLAIN, 16));
-        textField.setMaximumSize(new Dimension(280, 35));
+        textField.setFont(new Font("Arial", Font.PLAIN, 15));
+        textField.setMaximumSize(new Dimension(270, 35));
         textField.setAlignmentX(CENTER_ALIGNMENT);
         panel.add(textField);
 
-        JLabel textoError = new JLabel("Se requiere un correo");
+        JLabel textoError = new JLabel("Se requiere un correo para ingresar");
         textoError.setFont(new Font("Arial", Font.PLAIN + Font.ITALIC, 12));
         textoError.setForeground(Color.RED);
         textoError.setAlignmentX(CENTER_ALIGNMENT);
@@ -132,23 +131,23 @@ public class LoginView extends JPanel {
         panel.setBackground(new Color(245, 245, 245));
 
         JLabel txtcontrasena = new JLabel("Contraseña");
-        txtcontrasena.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        txtcontrasena.setFont(new Font("Segoe UI", Font.BOLD, 18));
         txtcontrasena.setForeground(Color.BLACK);
-        panel.add(Box.createVerticalStrut(10));
+        panel.add(Box.createVerticalStrut(5));
 
 
         txtcontrasena.setAlignmentX(CENTER_ALIGNMENT);
         panel.add(txtcontrasena);
         
-        panel.add(Box.createVerticalStrut(10));
+        panel.add(Box.createVerticalStrut(5));
 
         JPasswordField contrasena = new JPasswordField();
-        contrasena.setFont(new Font("Arial", Font.PLAIN, 16));
-        contrasena.setMaximumSize(new Dimension(280, 35));
+        contrasena.setFont(new Font("Arial", Font.PLAIN, 15));
+        contrasena.setMaximumSize(new Dimension(270, 35));
         contrasena.setAlignmentX(CENTER_ALIGNMENT);
         panel.add(contrasena);
 
-        JLabel textoErrorContrasena = new JLabel("Se require una contraseña");
+        JLabel textoErrorContrasena = new JLabel("Se require una contraseña para ingresar");
         textoErrorContrasena.setFont(new Font("Arial", Font.PLAIN + Font.ITALIC, 12));
         textoErrorContrasena.setForeground(Color.RED);
         textoErrorContrasena.setAlignmentX(CENTER_ALIGNMENT);
@@ -161,7 +160,7 @@ public class LoginView extends JPanel {
     	
     	Border emptyBorder = BorderFactory.createEmptyBorder(10,10,10,10);
     	Border panelTitledBorder = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLACK, 2),
-    			"Bienvenid@s!", TitledBorder.CENTER, TitledBorder.TOP, new Font ("Arial", Font.BOLD, 14), Color.BLACK);
+    			"Bienvenid@!", TitledBorder.CENTER, TitledBorder.TOP, new Font ("Arial", Font.BOLD, 14), Color.BLACK);
     	
     	this.setBorder(BorderFactory.createCompoundBorder(emptyBorder, panelTitledBorder));
     }

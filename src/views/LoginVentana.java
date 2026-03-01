@@ -7,9 +7,9 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 
 
-public class LoginWindow extends JFrame {
+public class LoginVentana extends JFrame {
 	
-	public LoginWindow() {
+	public LoginVentana() {
 		setSize(600,480);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocation(100,100);
@@ -18,10 +18,10 @@ public class LoginWindow extends JFrame {
 		setLocationRelativeTo(null);
 		
 		Toolkit tk = Toolkit.getDefaultToolkit();
-		Image myIcon = tk.getImage("src/image/logoventana.png");
+		Image myIcon = tk.getImage("src/image/logoventana1.png");
 		setIconImage(myIcon);
 
-		LoginView panelito = new LoginView();
+		LoginVista panelito = new LoginVista();
 		add(panelito);
 		
 		setVisible(true);
