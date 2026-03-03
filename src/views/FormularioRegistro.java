@@ -113,7 +113,7 @@ public class FormularioRegistro extends JFrame {
 		
 	}
 	
-	private JPanel boton() {
+	public JPanel boton() {
         JPanel boton = new JPanel(new FlowLayout(FlowLayout.RIGHT, 30, 10));
         boton.setBorder(BorderFactory.createMatteBorder(2, 0, 0, 0, Color.BLACK));
 
@@ -126,7 +126,6 @@ public class FormularioRegistro extends JFrame {
         registrar.setPreferredSize(new Dimension(120, 40));
         registrar.setBackground(Color.GRAY);
         registrar.setForeground(Color.WHITE);
-        registrar.setOpaque(true);
 
         boton.add(cancelar);
         boton.add(registrar);

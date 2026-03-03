@@ -8,6 +8,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -25,10 +27,16 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class LoginVista extends JPanel {
 	
-	private BufferedImage imagen;
+	public BufferedImage imagen;
+	JTextField correoElectronico;
+	JPasswordField contrasena;
+	
+	JLabel textoErrorCorreo;
+	JLabel textoErrorContrasena;
 
     public LoginVista() {
     setBackground(new Color(245, 245, 245));  /*240, 248, 255 Azul claro*/   /*245, 245, 245 blanco*/ //30, 30, 30 negro
@@ -92,7 +100,26 @@ public class LoginVista extends JPanel {
 
         panel.add(panelBoton, BorderLayout.CENTER);
 
+        /*boton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null,"Se inicio sesion", 
+						"Sesion Iniciada", JOptionPane.INFORMATION_MESSAGE);
+			}
+		});*/
+        
+        boton.addActionListener(e -> alertaLogin());
+        
         return panel;
+    }
+    
+    public void alertaLogin() {
+    		if(validacionLogin(correoElectronico.getText(), String.valueOf(contrasena.getPassword()))) {
+    			JOptionPane.showMessageDialog(this, 
+    					"Se inicio Sesion", "Sesion Iniciada", JOptionPane.INFORMATION_MESSAGE);
+    		}
+    	
     }
     
     public JPanel ingresarCorreo() {
@@ -101,25 +128,26 @@ public class LoginVista extends JPanel {
         //panel.setOpaque(false);
         panel.setBackground(new Color(245, 245, 245));
 
-        JLabel txtNombre = new JLabel("Correo electronico");
-        txtNombre.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        txtNombre.setForeground(Color.BLACK);
-        txtNombre.setAlignmentX(CENTER_ALIGNMENT);
-        panel.add(txtNombre);
+        JLabel textoCorreo = new JLabel("Correo electronico");
+        textoCorreo.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        textoCorreo.setForeground(Color.BLACK);
+        textoCorreo.setAlignmentX(CENTER_ALIGNMENT);
+        panel.add(textoCorreo);
         
         panel.add(Box.createVerticalStrut(5));
 
-        JTextField textField = new JTextField();
-        textField.setFont(new Font("Arial", Font.PLAIN, 15));
-        textField.setMaximumSize(new Dimension(270, 35));
-        textField.setAlignmentX(CENTER_ALIGNMENT);
-        panel.add(textField);
+        correoElectronico = new JTextField();
+        correoElectronico.setFont(new Font("Arial", Font.PLAIN, 15));
+        correoElectronico.setMaximumSize(new Dimension(270, 35));
+        correoElectronico.setAlignmentX(CENTER_ALIGNMENT);
+        panel.add(correoElectronico);
 
-        JLabel textoError = new JLabel("Se requiere un correo para ingresar");
-        textoError.setFont(new Font("Arial", Font.PLAIN + Font.ITALIC, 12));
-        textoError.setForeground(Color.RED);
-        textoError.setAlignmentX(CENTER_ALIGNMENT);
-        panel.add(textoError);
+        textoErrorCorreo = new JLabel("");
+        textoErrorCorreo.setFont(new Font("Arial", Font.PLAIN + Font.ITALIC, 12));
+        textoErrorCorreo.setForeground(Color.RED);
+        textoErrorCorreo.setAlignmentX(CENTER_ALIGNMENT);
+        textoErrorCorreo.setVisible(false);
+        panel.add(textoErrorCorreo);
 
         return panel;
     }
@@ -130,40 +158,74 @@ public class LoginVista extends JPanel {
         //panel.setOpaque(false);
         panel.setBackground(new Color(245, 245, 245));
 
-        JLabel txtcontrasena = new JLabel("Contraseña");
-        txtcontrasena.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        txtcontrasena.setForeground(Color.BLACK);
+        JLabel textoContrasena = new JLabel("Contraseña");
+        textoContrasena.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        textoContrasena.setForeground(Color.BLACK);
         panel.add(Box.createVerticalStrut(5));
 
 
-        txtcontrasena.setAlignmentX(CENTER_ALIGNMENT);
-        panel.add(txtcontrasena);
+        textoContrasena.setAlignmentX(CENTER_ALIGNMENT);
+        panel.add(textoContrasena);
         
         panel.add(Box.createVerticalStrut(5));
 
-        JPasswordField contrasena = new JPasswordField();
+        contrasena = new JPasswordField();
         contrasena.setFont(new Font("Arial", Font.PLAIN, 15));
         contrasena.setMaximumSize(new Dimension(270, 35));
         contrasena.setAlignmentX(CENTER_ALIGNMENT);
         panel.add(contrasena);
 
-        JLabel textoErrorContrasena = new JLabel("Se require una contraseña para ingresar");
+        textoErrorContrasena = new JLabel("");
         textoErrorContrasena.setFont(new Font("Arial", Font.PLAIN + Font.ITALIC, 12));
         textoErrorContrasena.setForeground(Color.RED);
         textoErrorContrasena.setAlignmentX(CENTER_ALIGNMENT);
+        textoErrorContrasena.setVisible(false);
         panel.add(textoErrorContrasena);
 
         return panel;
     }
     
+    public void mostrarErrorCorreo(String message) {
+		textoErrorCorreo.setText(message);
+		textoErrorCorreo.setVisible(true);
+		
+    }
+    
+    public void mostrarErrorContrasena(String message) {
+		textoErrorContrasena.setText(message);    	
+		textoErrorContrasena.setVisible(true);
+	
+    }
+
+    public void reinicioMensajeError() {
+		textoErrorCorreo.setText("");
+		textoErrorContrasena.setText("");
+    }
+
+    public boolean validacionLogin(String email, String password) {
+		reinicioMensajeError();
+	
+		if (email.trim().isEmpty()) {
+			mostrarErrorCorreo("El correo electronico es OBLIGATORIO");
+			return false;
+		}
+	
+		if (password.trim().isEmpty()) {
+			mostrarErrorContrasena("La contraseña es OBLIGATORIA");
+			return false;
+		}
+		
+		return true;
+    }
+    
     public void bordePanel() {
     	
-    	Border emptyBorder = BorderFactory.createEmptyBorder(10,10,10,10);
-    	Border panelTitledBorder = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLACK, 2),
+    		Border emptyBorder = BorderFactory.createEmptyBorder(10,10,10,10);
+    		Border panelTitledBorder = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLACK, 2),
     			"Bienvenid@!", TitledBorder.CENTER, TitledBorder.TOP, new Font ("Arial", Font.BOLD, 14), Color.BLACK);
     	
-    	this.setBorder(BorderFactory.createCompoundBorder(emptyBorder, panelTitledBorder));
-    }
+    			this.setBorder(BorderFactory.createCompoundBorder(emptyBorder, panelTitledBorder));
+    	}
     
     
     
