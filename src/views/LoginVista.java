@@ -76,7 +76,7 @@ public class LoginVista extends JPanel {
         panelCampos.setBackground(new Color(245, 245, 245));
         panelCampos.add(Box.createVerticalStrut(95));
         panelCampos.add(ingresarCorreo());
-        panelCampos.add(Box.createVerticalStrut(10));
+        panelCampos.add(Box.createVerticalStrut(20));
         panelCampos.add(ingresarContrasena());
 
         panelCentro.add(panelCampos, BorderLayout.CENTER);
@@ -119,7 +119,6 @@ public class LoginVista extends JPanel {
     			JOptionPane.showMessageDialog(this, 
     					"Se inicio Sesion", "Sesion Iniciada", JOptionPane.INFORMATION_MESSAGE);
     		}
-    	
     }
     
     public JPanel ingresarCorreo() {
@@ -142,7 +141,7 @@ public class LoginVista extends JPanel {
         correoElectronico.setAlignmentX(CENTER_ALIGNMENT);
         panel.add(correoElectronico);
 
-        textoErrorCorreo = new JLabel("");
+        textoErrorCorreo = new JLabel();
         textoErrorCorreo.setFont(new Font("Arial", Font.PLAIN + Font.ITALIC, 12));
         textoErrorCorreo.setForeground(Color.RED);
         textoErrorCorreo.setAlignmentX(CENTER_ALIGNMENT);
@@ -175,7 +174,7 @@ public class LoginVista extends JPanel {
         contrasena.setAlignmentX(CENTER_ALIGNMENT);
         panel.add(contrasena);
 
-        textoErrorContrasena = new JLabel("");
+        textoErrorContrasena = new JLabel();
         textoErrorContrasena.setFont(new Font("Arial", Font.PLAIN + Font.ITALIC, 12));
         textoErrorContrasena.setForeground(Color.RED);
         textoErrorContrasena.setAlignmentX(CENTER_ALIGNMENT);

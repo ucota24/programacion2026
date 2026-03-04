@@ -15,6 +15,7 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -27,6 +28,21 @@ import views.LoginVentana;
 
 public class FormularioRegistro extends JFrame {
 	
+	public JTextField campoNombre;
+	public JTextField campoApellido;
+	public JTextField campoCorreo;
+	public JTextField campoCiudadEstado;
+	public JTextField campoDireccion;
+	public JTextField campoFNacimiento;
+	public JTextField campoTelefono;
+	
+	public JLabel lblErrorNombre;
+	public JLabel lblErrorApellido;
+	public JLabel lblErrorCorreo;
+	public JLabel lblErrorCiudadEstado;
+	public JLabel lblErrorDireccion;
+	public JLabel lblErrorFNacimiento;
+	public JLabel lblErrorTelefono;
 
 	public FormularioRegistro() {
 		setSize(600,480);
@@ -49,20 +65,36 @@ public class FormularioRegistro extends JFrame {
 		
 		JPanel encabezadoForm = encabezadoForm();
 		add(encabezadoForm, BorderLayout.NORTH);
+		
+		campoNombre = new JTextField();
+		campoApellido = new JTextField();
+		campoCiudadEstado = new JTextField();
+		campoCorreo = new JTextField();
+		campoDireccion = new JTextField();
+		campoFNacimiento = new JTextField();
+		campoTelefono = new JTextField();
+		
+		lblErrorApellido = errorLabel();
+		lblErrorCiudadEstado = errorLabel();
+		lblErrorCorreo = errorLabel();
+		lblErrorNombre = errorLabel();
+		lblErrorFNacimiento = errorLabel();
+		lblErrorTelefono = errorLabel();
+		lblErrorDireccion = errorLabel();
 
 		JPanel panelComponentes = new JPanel(new GridLayout(0,2,15,10));
 		panelComponentes.setBorder(BorderFactory.createEmptyBorder(10,20, 40, 20));
 		
-		panelComponentes.add(campo("Nombre(s)"));
-	    panelComponentes.add(campo("Apellido(s)"));
-	    panelComponentes.add(campo("Correo Electronico"));
-	    panelComponentes.add(campo("Contraseña"));
-        panelComponentes.add(campo("Fecha de Nacimiento"));
-	    panelComponentes.add(campo("Confirmar Contraseña"));
-	    panelComponentes.add(campo("Telefono"));
+		panelComponentes.add(campo("Nombre(s)", campoNombre, lblErrorNombre));
+	    panelComponentes.add(campo("Apellido(s)", campoApellido, lblErrorApellido));
+	    panelComponentes.add(campo("Correo Electronico", campoCorreo, lblErrorCorreo));
+	    panelComponentes.add(campo("Ciudad / Estado", campoCiudadEstado, lblErrorCiudadEstado));
+        panelComponentes.add(campo("Direccion", campoDireccion, lblErrorDireccion));
+	    panelComponentes.add(campo("Fecha de Nacimiento", campoFNacimiento, lblErrorFNacimiento));
+	    panelComponentes.add(campo("Telefono", campoTelefono, lblErrorTelefono));
 	    
 	    JPanel boton = boton();
-	    add(boton, BorderLayout.SOUTH);
+	    add(boton, BorderLayout.SOUTH );
 
 		JScrollPane scroll = new JScrollPane(panelComponentes);
 		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -70,23 +102,24 @@ public class FormularioRegistro extends JFrame {
 		add(scroll);
 	}
 	
-	public JPanel campo (String nombre) {
+	public JPanel campo (String labelText, JComponent field, JLabel errorLabel) {
 		
 	    JPanel panel = new JPanel();
 	    panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-	    JLabel lbl = new JLabel(nombre);
+	    JLabel lbl = new JLabel(labelText);
 	    lbl.setFont(new Font("Segoe UI", Font.BOLD, 12));
 	    lbl.setForeground(Color.BLACK);
 	    lbl.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-	    JTextField txt = new JTextField();
-	    txt.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-	    txt.setAlignmentX(Component.LEFT_ALIGNMENT);
+	    field.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+	    field.setAlignmentX(Component.LEFT_ALIGNMENT);
+	    errorLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
 	    panel.add(lbl);
 	    panel.add(Box.createVerticalStrut(4));
-	    panel.add(txt);
+	    panel.add(field);
+	    panel.add(errorLabel);
 
 	    return panel;
 	}
@@ -117,20 +150,96 @@ public class FormularioRegistro extends JFrame {
         JPanel boton = new JPanel(new FlowLayout(FlowLayout.RIGHT, 30, 10));
         boton.setBorder(BorderFactory.createMatteBorder(2, 0, 0, 0, Color.BLACK));
 
-        JButton cancelar = new JButton("Cancelar");
+        /*JButton cancelar = new JButton("Cancelar");
         cancelar.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        cancelar.setPreferredSize(new Dimension(120, 40));
+        cancelar.setPreferredSize(new Dimension(120, 40)); */
 
         JButton registrar = new JButton("Aceptar");
         registrar.setFont(new Font("Segoe UI", Font.PLAIN, 13));
         registrar.setPreferredSize(new Dimension(120, 40));
         registrar.setBackground(Color.GRAY);
         registrar.setForeground(Color.WHITE);
+        
+        registrar.addActionListener(e -> {
+        	if (validacionFormulario()) {
+        		javax.swing.JOptionPane.showMessageDialog(this, 
+        				"Has sido Registrado!", "Bienvenid@", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        		}
+        });
 
-        boton.add(cancelar);
         boton.add(registrar);
         return boton;
     }
+	
+	public JLabel errorLabel() {
+		JLabel label = new JLabel();
+		label.setFont(new Font("Arial",Font.ITALIC, 12));
+		label.setForeground(Color.RED);
+		label.setHorizontalAlignment(SwingConstants.LEFT);
+		label.setText("");
+	
+	return label;
+	
+	}
+	
+	public void mostrarError(JLabel errorLabel, String mensaje) {
+		errorLabel.setText(mensaje);
+		errorLabel.setVisible(true);
+	}
+	
+	public void limpiarErrores() {
+		lblErrorNombre.setText("");
+        lblErrorApellido.setText("");
+        lblErrorCorreo.setText("");
+        lblErrorCiudadEstado.setText("");
+        lblErrorDireccion.setText("");
+        lblErrorFNacimiento.setText("");
+        lblErrorTelefono.setText("");
+	}
+	
+	public boolean validacionFormulario() {
+		limpiarErrores();
+		
+		if(campoNombre.getText().trim().isEmpty()) {
+			mostrarError(lblErrorNombre, "Este campo es OBLIGATORIO");
+			return false;
+		}
+		
+		if(campoApellido.getText().trim().isEmpty()) {
+			mostrarError(lblErrorApellido, "Este campo es OBLIGATORIO");
+			return false;
+		}
+		
+		if(campoCorreo.getText().trim().isEmpty()) {
+			mostrarError(lblErrorCorreo, "Este campo es OBLIGATORIO");
+			return false;
+		}
+		
+		if(campoCiudadEstado.getText().trim().isEmpty()) {
+			mostrarError(lblErrorCiudadEstado, "Este campo es OBLIGATORIO");
+			return false;
+		}
+		
+		if(campoDireccion.getText().trim().isEmpty()) {
+			mostrarError(lblErrorDireccion, "Este campo es OBLIGATORIO");
+			return false;
+		}
+		
+		if(campoFNacimiento.getText().trim().isEmpty()) {
+			mostrarError(lblErrorFNacimiento, "Este campo es OBLIGATORIO");
+			return false;
+		}
+		
+		if(campoTelefono.getText().trim().isEmpty()) {
+			mostrarError(lblErrorTelefono, "Este campo es OBLIGATORIO");
+			return false;
+		}
+		
+		
+		
+		return true;
+		
+	}
 	
 	
 
