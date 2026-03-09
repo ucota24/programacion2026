@@ -18,11 +18,14 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import views.LoginVentana;
 
@@ -81,6 +84,8 @@ public class FormularioRegistro extends JFrame {
 		lblErrorFNacimiento = errorLabel();
 		lblErrorTelefono = errorLabel();
 		lblErrorDireccion = errorLabel();
+		
+		assignListeners();
 
 		JPanel panelComponentes = new JPanel(new GridLayout(0,2,15,10));
 		panelComponentes.setBorder(BorderFactory.createEmptyBorder(10,20, 40, 20));
@@ -150,9 +155,21 @@ public class FormularioRegistro extends JFrame {
         JPanel boton = new JPanel(new FlowLayout(FlowLayout.RIGHT, 30, 10));
         boton.setBorder(BorderFactory.createMatteBorder(2, 0, 0, 0, Color.BLACK));
 
-        /*JButton cancelar = new JButton("Cancelar");
+        JButton cancelar = new JButton("Cancelar");
         cancelar.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        cancelar.setPreferredSize(new Dimension(120, 40)); */
+        cancelar.setPreferredSize(new Dimension(120, 40)); 
+        		
+        cancelar.addActionListener(e -> {
+			
+			int option = JOptionPane.showConfirmDialog(this, 
+					"¿Estas seguro de que quieres regresar? \nSe perderan los datos!");
+			
+			if(option == JOptionPane.YES_OPTION) {
+				new LoginVentana();
+				dispose();
+			}
+			
+		});
 
         JButton registrar = new JButton("Aceptar");
         registrar.setFont(new Font("Segoe UI", Font.PLAIN, 13));
@@ -166,7 +183,11 @@ public class FormularioRegistro extends JFrame {
         				"Has sido Registrado!", "Bienvenid@", javax.swing.JOptionPane.INFORMATION_MESSAGE);
         		}
         });
-
+        
+        
+        boton.add(cancelar);
+        
+        
         boton.add(registrar);
         return boton;
     }
@@ -188,13 +209,119 @@ public class FormularioRegistro extends JFrame {
 	}
 	
 	public void limpiarErrores() {
-		lblErrorNombre.setText("");
-        lblErrorApellido.setText("");
-        lblErrorCorreo.setText("");
-        lblErrorCiudadEstado.setText("");
+		//lblErrorNombre.setText("");
+        //lblErrorApellido.setText("");
+        //lblErrorCorreo.setText("");
+        //lblErrorCiudadEstado.setText("");
         lblErrorDireccion.setText("");
         lblErrorFNacimiento.setText("");
         lblErrorTelefono.setText("");
+	}
+	
+	public void assignListeners() {
+		
+		campoNombre.getDocument().addDocumentListener(new DocumentListener() {
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				validacionNombre();
+			}
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				validacionNombre();
+			}
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				validacionNombre();
+			}
+		});
+		
+		campoApellido.getDocument().addDocumentListener(new DocumentListener() {
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				validacionApellido();
+			}
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				validacionApellido();
+			}
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				validacionApellido();
+				
+			}
+			
+		});
+		
+		campoCorreo.getDocument().addDocumentListener(new DocumentListener() {
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				validacionCorreo();
+			}
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				validacionCorreo();
+			}
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				validacionCorreo();
+				
+			}
+			
+		});
+		
+		campoCiudadEstado.getDocument().addDocumentListener(new DocumentListener() {
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				validacionCiudadEstado();
+			}
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				validacionCiudadEstado();
+			}
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				validacionCiudadEstado();
+				
+			}
+			
+		});
+		
+		campoTelefono.getDocument().addDocumentListener(new DocumentListener() {
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				validacionTelefono();
+			}
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				validacionTelefono();
+			}
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				validacionTelefono();
+				
+			}
+			
+		});
+		
+		campoDireccion.getDocument().addDocumentListener(new DocumentListener() {
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				validacionDireccion();
+			}
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				validacionDireccion();
+			}
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				validacionDireccion();
+				
+			}
+			
+		});
+		
+		
+		
 	}
 	
 	public boolean validacionFormulario() {
@@ -202,7 +329,6 @@ public class FormularioRegistro extends JFrame {
 		
 		if(campoNombre.getText().trim().isEmpty()) {
 			mostrarError(lblErrorNombre, "Este campo es OBLIGATORIO");
-			return false;
 		}
 		
 		if(campoApellido.getText().trim().isEmpty()) {
@@ -234,11 +360,82 @@ public class FormularioRegistro extends JFrame {
 			mostrarError(lblErrorTelefono, "Este campo es OBLIGATORIO");
 			return false;
 		}
-		
-		
-		
 		return true;
 		
+	}
+	
+	public boolean validacionNombre() {
+		if(campoNombre.getText().trim().isEmpty()) {
+			mostrarError(lblErrorNombre, "Este campo es OBLIGATORIO");
+			return false;
+		}
+		
+		if(campoNombre.getText().trim().length() <-3) {
+			lblErrorNombre.setText("Es necesario llenar este campo");
+		}
+		lblErrorNombre.setText("");
+		return true;
+	}
+	
+	public boolean validacionApellido() {
+		if(campoApellido.getText().trim().isEmpty()) {
+			mostrarError(lblErrorApellido, "Este campo es OBLIGATORIO");
+			return false;
+		}
+		
+		if(campoApellido.getText().trim().length() <-3) {
+			lblErrorApellido.setText("Es necesario llenar este campo");
+		}
+		lblErrorApellido.setText("");
+		return true;
+	}
+	
+	public boolean validacionCorreo() {
+		if(campoCorreo.getText().trim().isEmpty()) {
+			mostrarError(lblErrorCorreo, "Este campo es OBLIGATORIO");
+			return false;
+		}
+		if(campoCorreo.getText().trim().length() <-3) {
+			lblErrorCorreo.setText("Es necesario llenar este campo");
+		}
+		lblErrorCorreo.setText("");
+		return true;
+	}
+	
+	public boolean validacionCiudadEstado() {
+		if(campoCiudadEstado.getText().trim().isEmpty()) {
+			mostrarError(lblErrorCiudadEstado, "Este campo es OBLIGATORIO");
+			return false;
+		}
+		if(campoCiudadEstado.getText().trim().length() <-3) {
+			lblErrorCiudadEstado.setText("Es necesario llenar este campo");
+		}
+		lblErrorCiudadEstado.setText("");
+		return true;
+	}
+	
+	public boolean validacionTelefono() {
+		if(campoTelefono.getText().trim().isEmpty()) {
+			mostrarError(lblErrorTelefono, "Este campo es OBLIGATORIO");
+			return false;
+		}
+		if(campoTelefono.getText().trim().length() <-3) {
+			lblErrorTelefono.setText("Es necesario llenar este campo");
+		}
+		lblErrorTelefono.setText("");
+		return true;
+	}
+	
+	public boolean validacionDireccion() {
+		if(campoDireccion.getText().trim().isEmpty()) {
+			mostrarError(lblErrorDireccion, "Este campo es OBLIGATORIO");
+			return false;
+		}
+		if(campoDireccion.getText().trim().length() <-3) {
+			lblErrorDireccion.setText("Es necesario llenar este campo");
+		}
+		lblErrorDireccion.setText("");
+		return true;
 	}
 	
 	

@@ -21,7 +21,7 @@ public class LoginVentana extends JFrame {
 		Image myIcon = tk.getImage("src/image/logoventana1.png");
 		setIconImage(myIcon);
 
-		LoginVista panelito = new LoginVista();
+		LoginVista panelito = new LoginVista(this);
 		add(panelito);
 		
 		setVisible(true);

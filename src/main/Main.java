@@ -3,6 +3,9 @@ package main;
 import views.FormularioRegistro;
 import views.LoginVentana;
 import views.LoginVista;
+import views.MainVentana;
+import views.FormularioRegistro;
+import views.MetodoPagoVentana;
 
 import javax.swing.UIManager;
 
@@ -22,6 +25,12 @@ public class Main {
 		//LoginVentana ventanita = new LoginVentana();
 		
 		FormularioRegistro registro = new FormularioRegistro();
+		
+		//MetodoPagoVentana metodoPago = new MetodoPagoVentana();
+		
+		//MainVentana main = new MainVentana();
+		
+		
 		
 		
 	}

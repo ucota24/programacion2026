@@ -28,9 +28,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JFrame;
 
 public class LoginVista extends JPanel {
 	
+	LoginVentana loginVentana;
+
 	public BufferedImage imagen;
 	JTextField correoElectronico;
 	JPasswordField contrasena;
@@ -38,41 +41,23 @@ public class LoginVista extends JPanel {
 	JLabel textoErrorCorreo;
 	JLabel textoErrorContrasena;
 
-    public LoginVista() {
+    public LoginVista(LoginVentana loginVentana) {
+    	
+    	this.loginVentana = loginVentana;
     setBackground(new Color(245, 245, 245));  /*240, 248, 255 Azul claro*/   /*245, 245, 245 blanco*/ //30, 30, 30 negro
     	setLayout(new BorderLayout());
-    	//fondoLogin();
     inicializarComponentes();
     bordePanel();
     }
     
-     /* public void fondoLogin () {
-    	try {
-            imagen = ImageIO.read(new File("src/image/fondologin.jpg"));
-        } catch (IOException e) {
-            System.out.println("No se encontró la imagen.");
-        }
-    }
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D) g;
-        if (imagen != null) {
-            g2.drawImage(imagen, 0, 0, getWidth(), getHeight(), null);
-        }
-    } */
-    
     
     public void inicializarComponentes() {
-        //add(tituloPagina(), BorderLayout.NORTH);
 
         JPanel panelCentro = new JPanel(new BorderLayout());
-        //panelCentro.setOpaque(false);
         panelCentro.setBackground(new Color(245, 245, 245));
-        //panelCentro.add(imagenPanel(),BorderLayout.EAST);
         
         JPanel panelCampos = new JPanel();
         panelCampos.setLayout(new BoxLayout(panelCampos, BoxLayout.Y_AXIS));
-        //panelCampos.setOpaque(false);
         panelCampos.setBackground(new Color(245, 245, 245));
         panelCampos.add(Box.createVerticalStrut(95));
         panelCampos.add(ingresarCorreo());
@@ -86,19 +71,30 @@ public class LoginVista extends JPanel {
     
     public JPanel boton() {
     	JPanel panel = new JPanel(new BorderLayout());
-    	//panel.setOpaque(false);
         panel.setBackground(new Color(245, 245, 245));
 
-        JPanel panelBoton = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        //panelBoton.setOpaque(false);
+        JPanel panelBoton = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
         panelBoton.setBackground(new Color(245, 245, 245));
         JButton boton = new JButton("INGRESAR");
         boton.setFont(new Font("Segoe UI", Font.BOLD, 12));
         boton.setPreferredSize(new Dimension(120, 40));
-        panelBoton.add(boton);
         panel.setBorder(BorderFactory.createEmptyBorder(0, 0, 40, 0));
 
         panel.add(panelBoton, BorderLayout.CENTER);
+        
+        JButton botonRegistro = new JButton("REGISTRATE");
+        botonRegistro.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        botonRegistro.setPreferredSize(new Dimension(120, 40));
+        panel.setBorder(BorderFactory.createEmptyBorder(0, 0, 40, 0));
+
+        panel.add(panelBoton, BorderLayout.CENTER);
+        
+        panelBoton.add(botonRegistro);
+        botonRegistro.addActionListener(e -> abrirRegistro());
+        
+        panelBoton.add(boton);
+
+
 
         /*boton.addActionListener(new ActionListener() {
 			
@@ -112,19 +108,29 @@ public class LoginVista extends JPanel {
         boton.addActionListener(e -> alertaLogin());
         
         return panel;
+        
     }
     
     public void alertaLogin() {
     		if(validacionLogin(correoElectronico.getText(), String.valueOf(contrasena.getPassword()))) {
     			JOptionPane.showMessageDialog(this, 
-    					"Se inicio Sesion", "Sesion Iniciada", JOptionPane.INFORMATION_MESSAGE);
+    					"Se inicio Sesion!", "Sesion Iniciada", JOptionPane.INFORMATION_MESSAGE);
+    			
+    			new FormularioRegistro();
+    			loginVentana.dispose();
     		}
     }
     
+    public void abrirRegistro() {
+    		new FormularioRegistro();
+    		loginVentana.dispose();
+    	
+    }
+    
+   
     public JPanel ingresarCorreo() {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        //panel.setOpaque(false);
         panel.setBackground(new Color(245, 245, 245));
 
         JLabel textoCorreo = new JLabel("Correo electronico");
@@ -154,7 +160,6 @@ public class LoginVista extends JPanel {
     public JPanel ingresarContrasena() {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        //panel.setOpaque(false);
         panel.setBackground(new Color(245, 245, 245));
 
         JLabel textoContrasena = new JLabel("Contraseña");
