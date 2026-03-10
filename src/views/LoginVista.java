@@ -35,6 +35,7 @@ public class LoginVista extends JPanel {
 	LoginVentana loginVentana;
 
 	public BufferedImage imagen;
+	
 	JTextField correoElectronico;
 	JPasswordField contrasena;
 	
@@ -44,10 +45,10 @@ public class LoginVista extends JPanel {
     public LoginVista(LoginVentana loginVentana) {
     	
     	this.loginVentana = loginVentana;
-    setBackground(new Color(245, 245, 245));  /*240, 248, 255 Azul claro*/   /*245, 245, 245 blanco*/ //30, 30, 30 negro
+    	setBackground(new Color(245, 245, 245));  /*240, 248, 255 Azul claro*/   /*245, 245, 245 blanco*/ //30, 30, 30 negro
     	setLayout(new BorderLayout());
-    inicializarComponentes();
-    bordePanel();
+    	inicializarComponentes();
+    	bordePanel();
     }
     
     
@@ -93,22 +94,10 @@ public class LoginVista extends JPanel {
         botonRegistro.addActionListener(e -> abrirRegistro());
         
         panelBoton.add(boton);
-
-
-
-        /*boton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null,"Se inicio sesion", 
-						"Sesion Iniciada", JOptionPane.INFORMATION_MESSAGE);
-			}
-		});*/
         
         boton.addActionListener(e -> alertaLogin());
         
         return panel;
-        
     }
     
     public void alertaLogin() {
@@ -124,10 +113,8 @@ public class LoginVista extends JPanel {
     public void abrirRegistro() {
     		new FormularioRegistro();
     		loginVentana.dispose();
-    	
     }
     
-   
     public JPanel ingresarCorreo() {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -192,13 +179,11 @@ public class LoginVista extends JPanel {
     public void mostrarErrorCorreo(String message) {
 		textoErrorCorreo.setText(message);
 		textoErrorCorreo.setVisible(true);
-		
     }
     
     public void mostrarErrorContrasena(String message) {
 		textoErrorContrasena.setText(message);    	
 		textoErrorContrasena.setVisible(true);
-	
     }
 
     public void reinicioMensajeError() {

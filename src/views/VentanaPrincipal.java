@@ -1,5 +1,7 @@
 package views;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JFrame;
@@ -7,14 +9,19 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-public class MainVentana extends JFrame {
+public class VentanaPrincipal extends JFrame {
 	
-	public MainVentana() {
+	public VentanaPrincipal() {
 		
 		setSize(500,500);
 		setTitle("SneakerShop");
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		Image myIcon = tk.getImage("src/image/logoventana1.png");
+		setIconImage(myIcon);
+		
 		setMenu();
 		setVisible(true);
 		

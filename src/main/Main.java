@@ -3,7 +3,7 @@ package main;
 import views.FormularioRegistro;
 import views.LoginVentana;
 import views.LoginVista;
-import views.MainVentana;
+import views.VentanaPrincipal;
 import views.FormularioRegistro;
 import views.MetodoPagoVentana;
 
@@ -24,11 +24,11 @@ public class Main {
 
 		//LoginVentana ventanita = new LoginVentana();
 		
-		FormularioRegistro registro = new FormularioRegistro();
+		//FormularioRegistro registro = new FormularioRegistro();
 		
 		//MetodoPagoVentana metodoPago = new MetodoPagoVentana();
 		
-		//MainVentana main = new MainVentana();
+		VentanaPrincipal main = new VentanaPrincipal();
 		
 		
 		

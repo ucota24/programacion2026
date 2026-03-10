@@ -148,7 +148,6 @@ public class FormularioRegistro extends JFrame {
 		encabezadoForm.add(subtitulo);
 		
 		return encabezadoForm;
-		
 	}
 	
 	public JPanel boton() {
@@ -168,7 +167,6 @@ public class FormularioRegistro extends JFrame {
 				new LoginVentana();
 				dispose();
 			}
-			
 		});
 
         JButton registrar = new JButton("Aceptar");
@@ -183,11 +181,7 @@ public class FormularioRegistro extends JFrame {
         				"Has sido Registrado!", "Bienvenid@", javax.swing.JOptionPane.INFORMATION_MESSAGE);
         		}
         });
-        
-        
         boton.add(cancelar);
-        
-        
         boton.add(registrar);
         return boton;
     }
@@ -198,28 +192,21 @@ public class FormularioRegistro extends JFrame {
 		label.setForeground(Color.RED);
 		label.setHorizontalAlignment(SwingConstants.LEFT);
 		label.setText("");
-	
 	return label;
 	
 	}
 	
-	public void mostrarError(JLabel errorLabel, String mensaje) {
-		errorLabel.setText(mensaje);
-		errorLabel.setVisible(true);
-	}
-	
 	public void limpiarErrores() {
-		//lblErrorNombre.setText("");
-        //lblErrorApellido.setText("");
-        //lblErrorCorreo.setText("");
-        //lblErrorCiudadEstado.setText("");
+		lblErrorNombre.setText("");
+        lblErrorApellido.setText("");
+        lblErrorCorreo.setText("");
+        lblErrorCiudadEstado.setText("");
         lblErrorDireccion.setText("");
         lblErrorFNacimiento.setText("");
         lblErrorTelefono.setText("");
 	}
 	
 	public void assignListeners() {
-		
 		campoNombre.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
 			public void removeUpdate(DocumentEvent e) {
@@ -247,9 +234,7 @@ public class FormularioRegistro extends JFrame {
 			@Override
 			public void changedUpdate(DocumentEvent e) {
 				validacionApellido();
-				
 			}
-			
 		});
 		
 		campoCorreo.getDocument().addDocumentListener(new DocumentListener() {
@@ -264,9 +249,7 @@ public class FormularioRegistro extends JFrame {
 			@Override
 			public void changedUpdate(DocumentEvent e) {
 				validacionCorreo();
-				
 			}
-			
 		});
 		
 		campoCiudadEstado.getDocument().addDocumentListener(new DocumentListener() {
@@ -281,9 +264,7 @@ public class FormularioRegistro extends JFrame {
 			@Override
 			public void changedUpdate(DocumentEvent e) {
 				validacionCiudadEstado();
-				
 			}
-			
 		});
 		
 		campoTelefono.getDocument().addDocumentListener(new DocumentListener() {
@@ -298,11 +279,8 @@ public class FormularioRegistro extends JFrame {
 			@Override
 			public void changedUpdate(DocumentEvent e) {
 				validacionTelefono();
-				
 			}
-			
 		});
-		
 		campoDireccion.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
 			public void insertUpdate(DocumentEvent e) {
@@ -315,127 +293,131 @@ public class FormularioRegistro extends JFrame {
 			@Override
 			public void changedUpdate(DocumentEvent e) {
 				validacionDireccion();
-				
 			}
-			
 		});
 		
-		
-		
+		campoFNacimiento.getDocument().addDocumentListener(new DocumentListener() {
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				validacionFNacimiento();
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				validacionFNacimiento();				
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				validacionFNacimiento();				
+			}
+		});
 	}
 	
 	public boolean validacionFormulario() {
 		limpiarErrores();
+		boolean validacion = true;
 		
-		if(campoNombre.getText().trim().isEmpty()) {
-			mostrarError(lblErrorNombre, "Este campo es OBLIGATORIO");
-		}
+		if(!validacionNombre())
+			validacion = false;
 		
-		if(campoApellido.getText().trim().isEmpty()) {
-			mostrarError(lblErrorApellido, "Este campo es OBLIGATORIO");
-			return false;
-		}
+		if(!validacionApellido())
+			validacion = false;
 		
-		if(campoCorreo.getText().trim().isEmpty()) {
-			mostrarError(lblErrorCorreo, "Este campo es OBLIGATORIO");
-			return false;
-		}
+		if(!validacionCorreo())
+			validacion = false;
 		
-		if(campoCiudadEstado.getText().trim().isEmpty()) {
-			mostrarError(lblErrorCiudadEstado, "Este campo es OBLIGATORIO");
-			return false;
-		}
+		if(!validacionCiudadEstado())
+			validacion = false;
 		
-		if(campoDireccion.getText().trim().isEmpty()) {
-			mostrarError(lblErrorDireccion, "Este campo es OBLIGATORIO");
-			return false;
-		}
+		if(!validacionTelefono())
+			validacion = false;
 		
-		if(campoFNacimiento.getText().trim().isEmpty()) {
-			mostrarError(lblErrorFNacimiento, "Este campo es OBLIGATORIO");
-			return false;
-		}
+		if(!validacionDireccion())
+			validacion = false;
 		
-		if(campoTelefono.getText().trim().isEmpty()) {
-			mostrarError(lblErrorTelefono, "Este campo es OBLIGATORIO");
-			return false;
+		if(!validacionFNacimiento())
+			validacion = false;
+		
+		if (validacion) {
+			JOptionPane.showMessageDialog(this, "Registro exitoso");
 		}
 		return true;
-		
 	}
 	
 	public boolean validacionNombre() {
-		if(campoNombre.getText().trim().isEmpty()) {
-			mostrarError(lblErrorNombre, "Este campo es OBLIGATORIO");
+		lblErrorNombre.setText("");
+		if (campoNombre.getText().trim().isEmpty()) {
+            lblErrorNombre.setText("Este campo es OBLIGATORIO");
+            return false;
+		}
+		if(campoNombre.getText().trim().length() < 3) {
+			lblErrorNombre.setText("Minimo 3 caracteres");
 			return false;
 		}
 		
-		if(campoNombre.getText().trim().length() <-3) {
-			lblErrorNombre.setText("Es necesario llenar este campo");
-		}
-		lblErrorNombre.setText("");
 		return true;
 	}
 	
 	public boolean validacionApellido() {
-		if(campoApellido.getText().trim().isEmpty()) {
-			mostrarError(lblErrorApellido, "Este campo es OBLIGATORIO");
+		lblErrorApellido.setText("");
+		if (campoApellido.getText().trim().isEmpty()) {
+            lblErrorApellido.setText("Este campo es OBLIGATORIO");
+            return false;
+		}
+		if(campoApellido.getText().trim().length() < 3) {
+			lblErrorApellido.setText("Minimo 3 caracteres");
 			return false;
 		}
-		
-		if(campoApellido.getText().trim().length() <-3) {
-			lblErrorApellido.setText("Es necesario llenar este campo");
-		}
-		lblErrorApellido.setText("");
 		return true;
 	}
 	
 	public boolean validacionCorreo() {
-		if(campoCorreo.getText().trim().isEmpty()) {
-			mostrarError(lblErrorCorreo, "Este campo es OBLIGATORIO");
-			return false;
-		}
-		if(campoCorreo.getText().trim().length() <-3) {
-			lblErrorCorreo.setText("Es necesario llenar este campo");
-		}
 		lblErrorCorreo.setText("");
+		if (campoCorreo.getText().trim().isEmpty()) {
+            lblErrorCorreo.setText("Este campo es OBLIGATORIO");
+            return false;
+		}
+		if (!campoCorreo.getText().contains("@")) {
+            lblErrorCorreo.setText("Correo inválido");
+            return false;
+		}
 		return true;
 	}
 	
 	public boolean validacionCiudadEstado() {
-		if(campoCiudadEstado.getText().trim().isEmpty()) {
-			mostrarError(lblErrorCiudadEstado, "Este campo es OBLIGATORIO");
-			return false;
-		}
-		if(campoCiudadEstado.getText().trim().length() <-3) {
-			lblErrorCiudadEstado.setText("Es necesario llenar este campo");
-		}
 		lblErrorCiudadEstado.setText("");
+		if (campoCiudadEstado.getText().trim().isEmpty()) {
+            lblErrorCiudadEstado.setText("Este campo es OBLIGATORIO");
+            return false;
+		}
 		return true;
 	}
 	
 	public boolean validacionTelefono() {
-		if(campoTelefono.getText().trim().isEmpty()) {
-			mostrarError(lblErrorTelefono, "Este campo es OBLIGATORIO");
-			return false;
-		}
-		if(campoTelefono.getText().trim().length() <-3) {
-			lblErrorTelefono.setText("Es necesario llenar este campo");
-		}
 		lblErrorTelefono.setText("");
+		if (campoTelefono.getText().trim().isEmpty()) {
+            lblErrorTelefono.setText("Este campo es OBLIGATORIO");
+            return false;
+		}
 		return true;
 	}
 	
 	public boolean validacionDireccion() {
-		if(campoDireccion.getText().trim().isEmpty()) {
-			mostrarError(lblErrorDireccion, "Este campo es OBLIGATORIO");
-			return false;
+		if (campoDireccion.getText().trim().isEmpty()) {
+            lblErrorDireccion.setText("Este campo es OBLIGATORIO");
+            return false;
 		}
-		if(campoDireccion.getText().trim().length() <-3) {
-			lblErrorDireccion.setText("Es necesario llenar este campo");
-		}
-		lblErrorDireccion.setText("");
 		return true;
+	}
+	
+	public boolean validacionFNacimiento() {
+		 if (campoFNacimiento.getText().trim().isEmpty()) {
+	            lblErrorFNacimiento.setText("Este campo es OBLIGATORIO");
+	            return false;
+	        }
+	        return true;
 	}
 	
 	
