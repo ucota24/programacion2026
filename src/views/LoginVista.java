@@ -2,6 +2,7 @@ package views;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -10,6 +11,8 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -73,6 +76,25 @@ public class LoginVista extends JPanel {
     public JPanel boton() {
     	JPanel panel = new JPanel(new BorderLayout());
         panel.setBackground(new Color(245, 245, 245));
+        
+        JLabel lblRegistro = new JLabel("Crear Cuenta");
+		lblRegistro.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		lblRegistro.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+			}
+			
+			public void mouseEntered(MouseEvent e) {
+				lblRegistro.setForeground(Color.GREEN);
+			}
+			
+			public void mouseExited(MouseEvent e) {
+				lblRegistro.setForeground(Color.BLACK);
+			}
+		});
+		
+		panel.add(lblRegistro);
+        
+        
 
         JPanel panelBoton = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
         panelBoton.setBackground(new Color(245, 245, 245));
@@ -83,7 +105,7 @@ public class LoginVista extends JPanel {
 
         panel.add(panelBoton, BorderLayout.CENTER);
         
-        JButton botonRegistro = new JButton("REGISTRATE");
+       /* JButton botonRegistro = new JButton("REGISTRATE");
         botonRegistro.setFont(new Font("Segoe UI", Font.BOLD, 12));
         botonRegistro.setPreferredSize(new Dimension(120, 40));
         panel.setBorder(BorderFactory.createEmptyBorder(0, 0, 40, 0));
@@ -91,7 +113,7 @@ public class LoginVista extends JPanel {
         panel.add(panelBoton, BorderLayout.CENTER);
         
         panelBoton.add(botonRegistro);
-        botonRegistro.addActionListener(e -> abrirRegistro());
+        botonRegistro.addActionListener(e -> abrirRegistro()); */
         
         panelBoton.add(boton);
         
