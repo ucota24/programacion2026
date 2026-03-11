@@ -77,31 +77,32 @@ public class LoginVista extends JPanel {
     	JPanel panel = new JPanel(new BorderLayout());
         panel.setBackground(new Color(245, 245, 245));
         
-        JLabel lblRegistro = new JLabel("Crear Cuenta");
+        JLabel lblRegistro = new JLabel("¿No tienes cuenta? \nCrea una ya mismo!");
+        lblRegistro.setFont(new Font("Segoe UI", Font.ITALIC, 12));
 		lblRegistro.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		lblRegistro.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
+				abrirRegistro();
 			}
-			
 			public void mouseEntered(MouseEvent e) {
 				lblRegistro.setForeground(Color.GREEN);
 			}
-			
 			public void mouseExited(MouseEvent e) {
 				lblRegistro.setForeground(Color.BLACK);
 			}
 		});
 		
-		panel.add(lblRegistro);
-        
-        
+		JPanel panelRegistro = new JPanel(new FlowLayout(FlowLayout.RIGHT, 5, -1));
+		panelRegistro.setBackground(new Color(245, 245, 245));
+		panelRegistro.add(lblRegistro);
 
         JPanel panelBoton = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
         panelBoton.setBackground(new Color(245, 245, 245));
+        
         JButton boton = new JButton("INGRESAR");
         boton.setFont(new Font("Segoe UI", Font.BOLD, 12));
         boton.setPreferredSize(new Dimension(120, 40));
-        panel.setBorder(BorderFactory.createEmptyBorder(0, 0, 40, 0));
+        panel.setBorder(BorderFactory.createEmptyBorder(0, 0, 45, 0));
 
         panel.add(panelBoton, BorderLayout.CENTER);
         
@@ -109,15 +110,15 @@ public class LoginVista extends JPanel {
         botonRegistro.setFont(new Font("Segoe UI", Font.BOLD, 12));
         botonRegistro.setPreferredSize(new Dimension(120, 40));
         panel.setBorder(BorderFactory.createEmptyBorder(0, 0, 40, 0));
-
         panel.add(panelBoton, BorderLayout.CENTER);
-        
         panelBoton.add(botonRegistro);
         botonRegistro.addActionListener(e -> abrirRegistro()); */
         
         panelBoton.add(boton);
-        
         boton.addActionListener(e -> alertaLogin());
+        
+        panel.add(panelBoton, BorderLayout.CENTER);
+        panel.add(panelRegistro, BorderLayout.SOUTH);
         
         return panel;
     }
@@ -127,7 +128,7 @@ public class LoginVista extends JPanel {
     			JOptionPane.showMessageDialog(this, 
     					"Se inicio Sesion!", "Sesion Iniciada", JOptionPane.INFORMATION_MESSAGE);
     			
-    			new FormularioRegistro();
+    			new VentanaPrincipal();
     			loginVentana.dispose();
     		}
     }
