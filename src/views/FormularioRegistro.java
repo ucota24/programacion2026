@@ -51,7 +51,7 @@ public class FormularioRegistro extends JFrame {
 	public JLabel lblErrorTelefono;
 
 	public FormularioRegistro() {
-		setSize(600,480);
+		setSize(600,500);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setLocation(100,100);
 		setResizable(true);
@@ -106,8 +106,8 @@ public class FormularioRegistro extends JFrame {
 		
 		assignListeners();
 
-		JPanel panelComponentes = new JPanel(new GridLayout(0,2,15,10));
-		panelComponentes.setBorder(BorderFactory.createEmptyBorder(10,20, 40, 20));
+		JPanel panelComponentes = new JPanel(new GridLayout(0, 2, 15, 6));
+		panelComponentes.setBorder(BorderFactory.createEmptyBorder(10, 20, 40, 20));
 		
 		panelComponentes.add(campo("Nombre(s)", campoNombre, lblErrorNombre));
 	    panelComponentes.add(campo("Apellido(s)", campoApellido, lblErrorApellido));
@@ -138,6 +138,7 @@ public class FormularioRegistro extends JFrame {
 
 	    field.setFont(new Font("Segoe UI", Font.PLAIN, 13));
 	    field.setAlignmentX(Component.LEFT_ALIGNMENT);
+	    field.setPreferredSize(new Dimension(250,35));
 	    errorLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
 	    panel.add(lbl);
@@ -206,11 +207,11 @@ public class FormularioRegistro extends JFrame {
     }
 	
 	public JLabel errorLabel() {
-		JLabel label = new JLabel();
+		JLabel label = new JLabel(" ");
 		label.setFont(new Font("Arial",Font.ITALIC, 12));
 		label.setForeground(Color.RED);
 		label.setHorizontalAlignment(SwingConstants.LEFT);
-		label.setText("");
+		label.setPreferredSize(new Dimension(200, 15));
 	return label;
 	}
 	
