@@ -11,6 +11,8 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -126,7 +128,7 @@ public class LoginVista extends JPanel {
     public void alertaLogin() {
     		if(validacionLogin(correoElectronico.getText(), String.valueOf(contrasena.getPassword()))) {
     			JOptionPane.showMessageDialog(this, 
-    					"Se inicio Sesion!", "Sesion Iniciada", JOptionPane.INFORMATION_MESSAGE);
+    					"Sesion Iniciada!", "Iniciar Sesion", JOptionPane.INFORMATION_MESSAGE);
     			
     			new VentanaPrincipal();
     			loginVentana.dispose();
@@ -156,6 +158,16 @@ public class LoginVista extends JPanel {
         correoElectronico.setMaximumSize(new Dimension(270, 35));
         correoElectronico.setAlignmentX(CENTER_ALIGNMENT);
         panel.add(correoElectronico);
+        
+        correoElectronico.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					alertaLogin();
+				}
+			}
+		});
 
         textoErrorCorreo = new JLabel();
         textoErrorCorreo.setFont(new Font("Arial", Font.PLAIN + Font.ITALIC, 12));
@@ -188,6 +200,16 @@ public class LoginVista extends JPanel {
         contrasena.setMaximumSize(new Dimension(270, 35));
         contrasena.setAlignmentX(CENTER_ALIGNMENT);
         panel.add(contrasena);
+        
+        contrasena.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					alertaLogin();
+				}
+			}
+		});
 
         textoErrorContrasena = new JLabel();
         textoErrorContrasena.setFont(new Font("Arial", Font.PLAIN + Font.ITALIC, 12));

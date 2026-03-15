@@ -10,6 +10,9 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -49,7 +52,7 @@ public class FormularioRegistro extends JFrame {
 
 	public FormularioRegistro() {
 		setSize(600,480);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setLocation(100,100);
 		setResizable(true);
 		setTitle("SneakerShop");
@@ -59,13 +62,29 @@ public class FormularioRegistro extends JFrame {
 		Image myIcon = tk.getImage("src/image/logoventana1.png");
 		setIconImage(myIcon);
 		
+		addWindowListener(new java.awt.event.WindowAdapter() {
+	        @Override
+	        public void windowClosing(java.awt.event.WindowEvent e) {
+	            int opcion = JOptionPane.showConfirmDialog(FormularioRegistro.this,
+	                "¿Estas seguro de que quieres salir? \nSe perderan los datos!",
+	                "Alerta",JOptionPane.YES_NO_OPTION
+	            );
+	            if (opcion == JOptionPane.YES_OPTION) {
+	                dispose();
+	            }
+	        }
+	        @Override
+	        public void windowOpened(java.awt.event.WindowEvent e) {
+	            campoNombre.requestFocusInWindow();
+	        }
+	    });
+		
 		inicializarComponentes();
 		
 		setVisible(true);
 	}
 	
 	public void inicializarComponentes() {
-		
 		JPanel encabezadoForm = encabezadoForm();
 		add(encabezadoForm, BorderLayout.NORTH);
 		
@@ -193,7 +212,6 @@ public class FormularioRegistro extends JFrame {
 		label.setHorizontalAlignment(SwingConstants.LEFT);
 		label.setText("");
 	return label;
-	
 	}
 	
 	public void limpiarErrores() {
@@ -297,7 +315,6 @@ public class FormularioRegistro extends JFrame {
 		});
 		
 		campoFNacimiento.getDocument().addDocumentListener(new DocumentListener() {
-
 			@Override
 			public void insertUpdate(DocumentEvent e) {
 				validacionFNacimiento();
@@ -311,6 +328,109 @@ public class FormularioRegistro extends JFrame {
 			@Override
 			public void changedUpdate(DocumentEvent e) {
 				validacionFNacimiento();				
+			}
+		});
+		
+		campoNombre.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				campoNombre.setForeground(Color.BLACK);
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				campoNombre.setForeground(Color.GRAY);
+			}
+		});
+		campoNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+		    @Override
+		    public void keyTyped(KeyEvent e) {
+		    	char c = e.getKeyChar();
+				if(Character.isDigit(c) || (!Character.isAlphabetic(c) && c != ' ')) {
+					e.consume();
+		        }
+				if(campoNombre.getText().length() >= 20) {
+					e.consume();
+				}
+		    }
+		});
+ 
+		campoApellido.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				campoApellido.setForeground(Color.BLACK);
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				campoApellido.setForeground(Color.GRAY);
+			}
+		});
+		
+		campoApellido.addKeyListener(new java.awt.event.KeyAdapter() {
+		    @Override
+		    public void keyTyped(KeyEvent e) {
+		    	char c = e.getKeyChar();
+				if(Character.isDigit(c) || (!Character.isAlphabetic(c) && c != ' ')) {
+					e.consume();
+		        }
+				if(campoApellido.getText().length() >= 20) {
+					e.consume();
+				}
+		    }
+		});
+ 
+		campoCorreo.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				campoCorreo.setForeground(Color.BLACK);
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				campoCorreo.setForeground(Color.GRAY);
+			}
+		});
+ 
+		campoCiudadEstado.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				campoCiudadEstado.setForeground(Color.BLACK);
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				campoCiudadEstado.setForeground(Color.GRAY);
+			}
+		});
+ 
+		campoDireccion.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				campoDireccion.setForeground(Color.BLACK);
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				campoDireccion.setForeground(Color.GRAY);
+			}
+		});
+ 
+		campoFNacimiento.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				campoFNacimiento.setForeground(Color.BLACK);
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				campoFNacimiento.setForeground(Color.GRAY);
+			}
+		});
+ 
+		campoTelefono.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				campoTelefono.setForeground(Color.BLACK);
+			}
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				campoTelefono.setForeground(Color.GRAY);
 			}
 		});
 	}
@@ -419,6 +539,7 @@ public class FormularioRegistro extends JFrame {
 	        }
 	        return true;
 	}
+	
 	
 	
 

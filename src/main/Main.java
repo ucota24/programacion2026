@@ -22,9 +22,9 @@ public class Main {
 		
 		//UIManager.put(" ", AppFont.normal());
 
-		LoginVentana ventanita = new LoginVentana();
+		//LoginVentana ventanita = new LoginVentana();
 		
-		//FormularioRegistro registro = new FormularioRegistro();
+		FormularioRegistro registro = new FormularioRegistro();
 		
 		//MetodoPagoVentana metodoPago = new MetodoPagoVentana();
 		
