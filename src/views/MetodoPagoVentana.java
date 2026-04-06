@@ -40,7 +40,7 @@ public class MetodoPagoVentana extends JFrame {
 
 	public MetodoPagoVentana() {
 		setSize(400, 480);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setResizable(true);
 		setTitle("SneakerShop");
 		setLocationRelativeTo(null);

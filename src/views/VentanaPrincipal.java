@@ -9,19 +9,26 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.UIManager;
+
+import com.formdev.flatlaf.FlatLightLaf;
 
 public class VentanaPrincipal extends JFrame {
 	
 	public VentanaPrincipal() {
 		
 		setSize(800,500);
-		setTitle("SneakerShop");
+		setTitle("                                                                                                     "
+				+ "SneakerShop");
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		Image myIcon = tk.getImage("src/image/logoventana1.png");
 		setIconImage(myIcon);
+		
+		FlatLightLaf.setup();
+		UIManager.put("TitlePane.menuBarEmbedded", false); 
 		
 		setMenu();
 		setVisible(true);
@@ -37,15 +44,22 @@ public class VentanaPrincipal extends JFrame {
 		hombre.setMnemonic(KeyEvent.VK_H);
 		mb.add(hombre);
 
-		hombre.add(new JMenuItem("Ropa"));
 		hombre.add(new JMenuItem("Tenis"));
+		hombre.add(new JMenuItem("Ropa"));
 		
 		JMenu mujer = new JMenu("Mujer");
 		mujer.setMnemonic(KeyEvent.VK_M);
 		mb.add(mujer);
 
-		mujer.add(new JMenuItem("Ropa"));
 		mujer.add(new JMenuItem("Tenis"));
+		mujer.add(new JMenuItem("Ropa"));
+		
+		JMenu ninos = new JMenu("Niños");
+		ninos.setMnemonic(KeyEvent.VK_N);
+		mb.add(ninos);
+
+		ninos.add(new JMenuItem("Tenis"));
+		ninos.add(new JMenuItem("Ropa"));
 		
 		mb.add(Box.createHorizontalGlue());
 		
@@ -54,8 +68,12 @@ public class VentanaPrincipal extends JFrame {
 
 		cuenta.add(new JMenuItem("Perfil"));
 		cuenta.add(new JMenuItem("Mis Pedidos"));
-		cuenta.add(new JMenuItem("Metodo de Pago"));
 		
+		JMenuItem metodoPago = new JMenuItem("Metodo de Pago");
+		metodoPago.addActionListener(e -> {
+		    new MetodoPagoVentana();
+		});
+		cuenta.add(metodoPago);
 		
 }
 	

@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 public class LoginVentana extends JFrame {
 	
 	public LoginVentana() {
-		setSize(600,480);
+		setSize(450,480);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocation(100,100);
 		setResizable(true);
