@@ -226,7 +226,7 @@ public class FormularioRegistro extends JFrame {
 		lblErrorNombre.setText("");
         lblErrorApellido.setText("");
         lblErrorCorreo.setText("");
-        lblErrorContrasena.setText(" ");
+        lblErrorContrasena.setText("");
         lblErrorCiudadEstado.setText("");
         lblErrorDireccion.setText("");
         lblErrorFNacimiento.setText("");

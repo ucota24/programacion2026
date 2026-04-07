@@ -26,6 +26,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
+import exceptions.InvalidPasswordException;
+import exceptions.InvalidUserException;
 import utils.PlaceholderPasswordField;
 import utils.PlaceholderTextField;
 
@@ -150,12 +152,20 @@ public class LoginVista extends JPanel {
     }
     
     public void alertaLogin() {
+    	
+    	try {
     		if(validacionLogin(correoElectronico.getText(), String.valueOf(contrasena.getPassword()))) {
     			JOptionPane.showMessageDialog(this, 
     					"Sesion Iniciada!", "Iniciar Sesion", JOptionPane.INFORMATION_MESSAGE);
     			
     			new VentanaPrincipal();
     			loginVentana.dispose();
+    		}
+    } catch (InvalidUserException ex) {
+    			mostrarErrorCorreo("Datos incorrectos");
+    			
+    		} catch (InvalidPasswordException ex) {
+    			mostrarErrorContrasena("Datos incorrectos");
     		}
     }
     
@@ -265,19 +275,25 @@ public class LoginVista extends JPanel {
 		textoErrorContrasena.setText(" ");
     }
 
-    public boolean validacionLogin(String email, String password) {
+    public boolean validacionLogin(String email, String password) throws InvalidUserException, InvalidPasswordException {
 		reinicioMensajeError();
-	
+
 		if (email.trim().isEmpty()) {
 			mostrarErrorCorreo("El correo electronico es OBLIGATORIO");
 			return false;
 		}
-	
+		if (!email.trim().isEmpty() && !email.trim().equals("ucota@gmail.com")) {
+			mostrarErrorCorreo("El correo electronico es OBLIGATORIO");
+			throw new InvalidUserException("El correo no coincide");
+		}	
 		if (password.trim().isEmpty()) {
 			mostrarErrorContrasena("La contraseña es OBLIGATORIA");
 			return false;
 		}
-		
+		if (!password.trim().isEmpty() && !email.trim().equals("1234")) {
+			mostrarErrorContrasena("La contraseña es OBLIGATORIA");
+			throw new InvalidPasswordException("La contraseña no coincide");
+		}
 		return true;
     }
     
