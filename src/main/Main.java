@@ -7,6 +7,8 @@ import views.VentanaPrincipal;
 import views.FormularioRegistro;
 import views.MetodoPagoVentana;
 
+import java.awt.Color;
+
 import javax.swing.UIManager;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
@@ -23,6 +25,7 @@ public class Main {
 		UIManager.put("Button.arc", 8); // bordes redondeados en los botones
 		UIManager.put("Component.focusWidth", 1);
 		UIManager.put("Component.innerFocusWidth", 0);
+		UIManager.put("Component.focusColor", new Color(17, 17, 17)); //color del borde del campo
 		
 		//UIManager.put(" ", AppFont.normal());
 

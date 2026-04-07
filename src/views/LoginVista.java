@@ -25,6 +25,10 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
+
+import utils.PlaceholderPasswordField;
+import utils.PlaceholderTextField;
+
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -65,7 +69,7 @@ public class LoginVista extends JPanel {
         panelTitulo.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 0));
 
         JLabel titulo = new JLabel("SneakerShop");
-        titulo.setFont(new Font("Segoe UI", Font.BOLD, 22));
+        titulo.setFont(new Font("Trebuchet MS", Font.BOLD, 22));
         titulo.setAlignmentX(CENTER_ALIGNMENT);
 
         JLabel subtitulo = new JLabel("Bienvenid@");
@@ -167,17 +171,16 @@ public class LoginVista extends JPanel {
         panel.setPreferredSize(new Dimension(270, 80));
         panel.setMaximumSize(new Dimension(270, 80));
         
-
-        JLabel textoCorreo = new JLabel("Correo electronico");
-        textoCorreo.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        textoCorreo.setForeground(Color.BLACK);
-        textoCorreo.setAlignmentX(LEFT_ALIGNMENT);
-        panel.add(textoCorreo);
+        ImageIcon iconoOriginal = new ImageIcon("src/image/imagenIconoCorreo.png");
+        Image imagenEscalada = iconoOriginal.getImage().getScaledInstance(24, 24, Image.SCALE_SMOOTH);
+        JLabel iconoCorreo = new JLabel(new ImageIcon(imagenEscalada));
+        iconoCorreo.setAlignmentX(LEFT_ALIGNMENT);
+        panel.add(iconoCorreo);
         
         panel.add(Box.createVerticalStrut(5));
 
-        correoElectronico = new JTextField();
-        correoElectronico.setFont(new Font("Arial", Font.PLAIN, 15));
+        correoElectronico = new PlaceholderTextField("usuario@correo.com");
+        correoElectronico.setFont(new Font("Calibri", Font.PLAIN, 15));
         correoElectronico.setMaximumSize(new Dimension(270, 35));
         correoElectronico.setPreferredSize(new Dimension(270, 35));
         correoElectronico.setAlignmentX(LEFT_ALIGNMENT);
@@ -193,8 +196,9 @@ public class LoginVista extends JPanel {
 			}
 		});
 
+        panel.add(Box.createVerticalStrut(2));
         textoErrorCorreo = new JLabel(" ");
-        textoErrorCorreo.setFont(new Font("Arial", Font.PLAIN + Font.ITALIC, 12));
+        textoErrorCorreo.setFont(new Font("Calibri", Font.PLAIN + Font.ITALIC, 12));
         textoErrorCorreo.setForeground(Color.RED);
         textoErrorCorreo.setAlignmentX(LEFT_ALIGNMENT);
         //textoErrorCorreo.setVisible(false);
@@ -210,17 +214,15 @@ public class LoginVista extends JPanel {
         panel.setPreferredSize(new Dimension(270, 80));
         panel.setMaximumSize(new Dimension(270, 80));
 
-        JLabel textoContrasena = new JLabel("Contraseña");
-        textoContrasena.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        textoContrasena.setForeground(Color.BLACK);
-
-
-        textoContrasena.setAlignmentX(LEFT_ALIGNMENT);
-        panel.add(textoContrasena);
+        ImageIcon iconoOriginal = new ImageIcon("src/image/imagenCandado.png");
+        Image imagenEscalada = iconoOriginal.getImage().getScaledInstance(18, 18, Image.SCALE_SMOOTH);
+        JLabel iconoContrasena = new JLabel(new ImageIcon(imagenEscalada));
+        iconoContrasena.setAlignmentX(LEFT_ALIGNMENT);
+        panel.add(iconoContrasena);
         
         panel.add(Box.createVerticalStrut(5));
 
-        contrasena = new JPasswordField();
+        contrasena = new PlaceholderPasswordField("Contraseña");
         contrasena.setFont(new Font("Arial", Font.PLAIN, 15));
         contrasena.setMaximumSize(new Dimension(270, 35));
         contrasena.setPreferredSize(new Dimension(270, 35));
@@ -236,9 +238,10 @@ public class LoginVista extends JPanel {
 				}
 			}
 		});
-
+        
+        panel.add(Box.createVerticalStrut(2));
         textoErrorContrasena = new JLabel(" ");
-        textoErrorContrasena.setFont(new Font("Arial", Font.PLAIN + Font.ITALIC, 12));
+        textoErrorContrasena.setFont(new Font("Calibri", Font.PLAIN + Font.ITALIC, 12));
         textoErrorContrasena.setForeground(Color.RED);
         textoErrorContrasena.setAlignmentX(LEFT_ALIGNMENT);
         //textoErrorContrasena.setVisible(false);

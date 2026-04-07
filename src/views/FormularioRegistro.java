@@ -23,6 +23,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
@@ -37,6 +38,7 @@ public class FormularioRegistro extends JFrame {
 	public JTextField campoNombre;
 	public JTextField campoApellido;
 	public JTextField campoCorreo;
+	public JPasswordField campoContrasena;
 	public JTextField campoCiudadEstado;
 	public JTextField campoDireccion;
 	public JTextField campoFNacimiento;
@@ -45,6 +47,7 @@ public class FormularioRegistro extends JFrame {
 	public JLabel lblErrorNombre;
 	public JLabel lblErrorApellido;
 	public JLabel lblErrorCorreo;
+	public JLabel lblErrorContrasena;
 	public JLabel lblErrorCiudadEstado;
 	public JLabel lblErrorDireccion;
 	public JLabel lblErrorFNacimiento;
@@ -92,6 +95,7 @@ public class FormularioRegistro extends JFrame {
 		campoApellido = new JTextField();
 		campoCiudadEstado = new JTextField();
 		campoCorreo = new JTextField();
+		campoContrasena = new JPasswordField();
 		campoDireccion = new JTextField();
 		campoFNacimiento = new JTextField();
 		campoTelefono = new JTextField();
@@ -99,6 +103,7 @@ public class FormularioRegistro extends JFrame {
 		lblErrorApellido = errorLabel();
 		lblErrorCiudadEstado = errorLabel();
 		lblErrorCorreo = errorLabel();
+		lblErrorContrasena = errorLabel();
 		lblErrorNombre = errorLabel();
 		lblErrorFNacimiento = errorLabel();
 		lblErrorTelefono = errorLabel();
@@ -112,6 +117,7 @@ public class FormularioRegistro extends JFrame {
 		panelComponentes.add(campo("Nombre(s)", campoNombre, lblErrorNombre));
 	    panelComponentes.add(campo("Apellido(s)", campoApellido, lblErrorApellido));
 	    panelComponentes.add(campo("Correo Electronico", campoCorreo, lblErrorCorreo));
+	    panelComponentes.add(campo("Contraseña", campoContrasena, lblErrorContrasena));
 	    panelComponentes.add(campo("Ciudad / Estado", campoCiudadEstado, lblErrorCiudadEstado));
         panelComponentes.add(campo("Direccion", campoDireccion, lblErrorDireccion));
 	    panelComponentes.add(campo("Fecha de Nacimiento", campoFNacimiento, lblErrorFNacimiento));
@@ -139,6 +145,7 @@ public class FormularioRegistro extends JFrame {
 	    field.setFont(new Font("Segoe UI", Font.PLAIN, 13));
 	    field.setAlignmentX(Component.LEFT_ALIGNMENT);
 	    field.setPreferredSize(new Dimension(250,35));
+	    field.setMinimumSize(new Dimension(250, 35));
 	    errorLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
 	    panel.add(lbl);
@@ -219,6 +226,7 @@ public class FormularioRegistro extends JFrame {
 		lblErrorNombre.setText("");
         lblErrorApellido.setText("");
         lblErrorCorreo.setText("");
+        lblErrorContrasena.setText(" ");
         lblErrorCiudadEstado.setText("");
         lblErrorDireccion.setText("");
         lblErrorFNacimiento.setText("");
@@ -269,6 +277,21 @@ public class FormularioRegistro extends JFrame {
 			public void changedUpdate(DocumentEvent e) {
 				validacionCorreo();
 			}
+		});
+
+		campoContrasena.getDocument().addDocumentListener(new DocumentListener() {
+		    @Override
+		    public void insertUpdate(DocumentEvent e) {
+		        validacionContrasena();
+		    }
+		    @Override
+		    public void removeUpdate(DocumentEvent e) {
+		        validacionContrasena();
+		    }
+		    @Override
+		    public void changedUpdate(DocumentEvent e) {
+		        validacionContrasena();
+		    }
 		});
 		
 		campoCiudadEstado.getDocument().addDocumentListener(new DocumentListener() {
@@ -389,6 +412,17 @@ public class FormularioRegistro extends JFrame {
 				campoCorreo.setForeground(Color.GRAY);
 			}
 		});
+		
+		campoContrasena.addFocusListener(new FocusAdapter() {
+		    @Override
+		    public void focusGained(FocusEvent e) {
+		        campoContrasena.setForeground(Color.BLACK);
+		    }
+		    @Override
+		    public void focusLost(FocusEvent e) {
+		        campoContrasena.setForeground(Color.GRAY);
+		    }
+		});
  
 		campoCiudadEstado.addFocusListener(new FocusAdapter() {
 			@Override
@@ -449,6 +483,9 @@ public class FormularioRegistro extends JFrame {
 		if(!validacionCorreo())
 			validacion = false;
 		
+		if (!validacionContrasena())
+		    validacion = false;
+		
 		if(!validacionCiudadEstado())
 			validacion = false;
 		
@@ -505,6 +542,22 @@ public class FormularioRegistro extends JFrame {
             return false;
 		}
 		return true;
+	}
+	
+	public boolean validacionContrasena() {
+	    lblErrorContrasena.setText("");
+	    
+	    String contrasena = String.valueOf(campoContrasena.getPassword());
+	    
+	    if (contrasena.trim().isEmpty()) {
+	        lblErrorContrasena.setText("Este campo es OBLIGATORIO");
+	        return false;
+	    }
+	    if (contrasena.trim().length() < 8) {
+	        lblErrorContrasena.setText("Minimo 8 caracteres");
+	        return false;
+	    }
+	    return true;
 	}
 	
 	public boolean validacionCiudadEstado() {
