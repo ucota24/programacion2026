@@ -162,10 +162,10 @@ public class LoginVista extends JPanel {
     			loginVentana.dispose();
     		}
     } catch (InvalidUserException ex) {
-    			mostrarErrorCorreo("Datos incorrectos");
+    			mostrarErrorCorreo(ex.getMessage());
     			
     		} catch (InvalidPasswordException ex) {
-    			mostrarErrorContrasena("Datos incorrectos");
+    			mostrarErrorContrasena(ex.getMessage());
     		}
     }
     
@@ -283,15 +283,13 @@ public class LoginVista extends JPanel {
 			return false;
 		}
 		if (!email.trim().isEmpty() && !email.trim().equals("ucota@gmail.com")) {
-			mostrarErrorCorreo("El correo electronico es OBLIGATORIO");
-			throw new InvalidUserException("El correo no coincide");
+			throw new InvalidUserException("El correo electronico no coincide");
 		}	
 		if (password.trim().isEmpty()) {
 			mostrarErrorContrasena("La contraseña es OBLIGATORIA");
 			return false;
 		}
-		if (!password.trim().isEmpty() && !email.trim().equals("1234")) {
-			mostrarErrorContrasena("La contraseña es OBLIGATORIA");
+		if (!password.trim().isEmpty() && !password.trim().equals("1234")) {
 			throw new InvalidPasswordException("La contraseña no coincide");
 		}
 		return true;
