@@ -30,6 +30,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import controllers.RegistroController;
 
 import views.Ventana;
 
@@ -52,6 +53,9 @@ public class FormularioRegistro extends JFrame {
 	public JLabel lblErrorDireccion;
 	public JLabel lblErrorFNacimiento;
 	public JLabel lblErrorTelefono;
+	
+	public JButton btnRegistrar;
+	public JButton btnCancelar;
 
 	public FormularioRegistro() {
 		setSize(600,500);
@@ -83,7 +87,7 @@ public class FormularioRegistro extends JFrame {
 	    });
 		
 		inicializarComponentes();
-		
+		new RegistroController(this);		
 		setVisible(true);
 	}
 	
@@ -178,41 +182,24 @@ public class FormularioRegistro extends JFrame {
 	}
 	
 	public JPanel boton() {
-        JPanel boton = new JPanel(new FlowLayout(FlowLayout.RIGHT, 30, 10));
-        boton.setBorder(BorderFactory.createMatteBorder(2, 0, 0, 0, Color.BLACK));
+	    JPanel boton = new JPanel(new FlowLayout(FlowLayout.RIGHT, 30, 10));
+	    boton.setBorder(BorderFactory.createMatteBorder(2, 0, 0, 0, Color.BLACK));
 
-        JButton cancelar = new JButton("Cancelar");
-        cancelar.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        cancelar.setPreferredSize(new Dimension(120, 40)); 
-        		
-        cancelar.addActionListener(e -> {
-			
-			int option = JOptionPane.showConfirmDialog(this, 
-					"¿Estas seguro de que quieres regresar? \nSe perderan los datos!");
-			
-			if(option == JOptionPane.YES_OPTION) {
-				new Ventana();
-				dispose();
-			}
-		});
+	    btnCancelar = new JButton("Cancelar");
+	    btnCancelar.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+	    btnCancelar.setPreferredSize(new Dimension(120, 40));
 
-        JButton registrar = new JButton("Aceptar");
-        registrar.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        registrar.setPreferredSize(new Dimension(120, 40));
-        registrar.setBackground(Color.GRAY);
-        registrar.setForeground(Color.WHITE);
-        
-        registrar.addActionListener(e -> {
-        	if (validacionFormulario()) {
-        		javax.swing.JOptionPane.showMessageDialog(this, 
-        				"Has sido Registrado!", "Bienvenid@", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-        		}
-        });
-        boton.add(cancelar);
-        boton.add(registrar);
-        return boton;
-    }
-	
+	    btnRegistrar = new JButton("Aceptar");
+	    btnRegistrar.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+	    btnRegistrar.setPreferredSize(new Dimension(120, 40));
+	    btnRegistrar.setBackground(Color.GRAY);
+	    btnRegistrar.setForeground(Color.WHITE);
+
+	    boton.add(btnCancelar);
+	    boton.add(btnRegistrar);
+	    return boton;
+	}
+
 	public JLabel errorLabel() {
 		JLabel label = new JLabel(" ");
 		label.setFont(new Font("Arial",Font.ITALIC, 12));
@@ -594,6 +581,37 @@ public class FormularioRegistro extends JFrame {
 	        return true;
 	}
 	
+	// Getters
+	public String getNombre()       { return campoNombre.getText(); }
+	public String getApellido()     { return campoApellido.getText(); }
+	public String getCorreo()       { return campoCorreo.getText(); }
+	public String getContrasena()   { return String.valueOf(campoContrasena.getPassword()); }
+	public String getCiudadEstado() { return campoCiudadEstado.getText(); }
+	public String getDireccion()    { return campoDireccion.getText(); }
+	public String getFNacimiento()  { return campoFNacimiento.getText(); }
+	public String getTelefono()     { return campoTelefono.getText(); }
+	public JFrame getVentana()      { return this; }
+
+	// Mostrar errores
+	public void mostrarErrorNombre(String msg)     { lblErrorNombre.setText(msg); }
+	public void mostrarErrorApellido(String msg)   { lblErrorApellido.setText(msg); }
+	public void mostrarErrorCorreo(String msg)     { lblErrorCorreo.setText(msg); }
+	public void mostrarErrorContrasena(String msg) { lblErrorContrasena.setText(msg); }
+	public void mostrarErrorCiudad(String msg)     { lblErrorCiudadEstado.setText(msg); }
+	public void mostrarErrorDireccion(String msg)  { lblErrorDireccion.setText(msg); }
+	public void mostrarErrorFecha(String msg)      { lblErrorFNacimiento.setText(msg); }
+	public void mostrarErrorTelefono(String msg)   { lblErrorTelefono.setText(msg); }
+
+	public void reinicioMensajeError() {
+	    lblErrorNombre.setText("");
+	    lblErrorApellido.setText("");
+	    lblErrorCorreo.setText("");
+	    lblErrorContrasena.setText("");
+	    lblErrorCiudadEstado.setText("");
+	    lblErrorDireccion.setText("");
+	    lblErrorFNacimiento.setText("");
+	    lblErrorTelefono.setText("");
+	}
 	
 	
 

@@ -1,34 +1,29 @@
 package main;
 
-import views.FormularioRegistro;
-import views.Ventana;
-import views.LoginView;
-import views.VentanaPrincipal;
-import views.FormularioRegistro;
-import views.MetodoPagoVentana;
-
+import java.awt.Color;
 import javax.swing.UIManager;
-
+import views.Ventana;
 
 public class Main {
 
-	public static void main(String[] args) {
-		
-		FlatLightLaf.setup();
-		
+    public static void main(String[] args) {
+        
+        FlatLightLaf.setup();
+        UIManager.put("TextComponent.arc", 8);
+        UIManager.put("Button.arc", 8);
+        UIManager.put("Component.focusWidth", 1);
+        UIManager.put("Component.innerFocusWidth", 0);
+        UIManager.put("Component.focusColor", new Color(17, 17, 17));
+        
 		//UIManager.put(" ", AppFont.normal());
 
-		Ventana ventanita = new Ventana();
+        
+      //FormularioRegistro registro = new FormularioRegistro();
 		
-		//FormularioRegistro registro = new FormularioRegistro();
-		
-		//MetodoPagoVentana metodoPago = new MetodoPagoVentana();
-		
-		//VentanaPrincipal main = new VentanaPrincipal();
-		
-		
-		
-		
-	}
+      		//MetodoPagoVentana metodoPago = new MetodoPagoVentana();
+      		
+      		//VentanaPrincipal main = new VentanaPrincipal();
 
+        new Ventana();
+    }
 }
