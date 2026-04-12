@@ -1,4 +1,4 @@
-package views;
+package vista;
 
 import java.awt.Image;
 import java.awt.Toolkit;

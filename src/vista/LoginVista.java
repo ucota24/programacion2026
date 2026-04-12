@@ -1,4 +1,4 @@
-package views;
+package vista;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -6,40 +6,24 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.border.Border;
-import javax.swing.border.TitledBorder;
 
-import exceptions.InvalidPasswordException;
-import exceptions.InvalidUserException;
 import utils.PlaceholderPasswordField;
 import utils.PlaceholderTextField;
 
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JFrame;
 
 public class LoginVista extends JPanel {
 	
@@ -47,8 +31,10 @@ public class LoginVista extends JPanel {
 	public BufferedImage imagen;
 	JTextField correoElectronico;
 	JPasswordField contrasena;
-	JLabel textoErrorCorreo;
-	JLabel textoErrorContrasena;
+	private JLabel textoErrorCorreo;
+    private JLabel textoErrorContrasena;
+    private JLabel lblRegistro;
+    private JButton botonIngresar;
 
     public LoginVista(LoginVentana loginVentana) {
     	
@@ -59,8 +45,43 @@ public class LoginVista extends JPanel {
     	bordePanel();
     }
     
-    
-    public void inicializarComponentes() {
+    public LoginVentana getLoginVentana() {
+		return loginVentana;
+	}
+
+	public JTextField getCampoCorreoElectronico() {
+		return correoElectronico;
+	}
+
+	public JPasswordField getCampoContrasena() {
+		return contrasena;
+	}
+
+	public JLabel getTextoErrorCorreo() {
+		return textoErrorCorreo;
+	}
+	
+	public JLabel getTextoErrorContrasena() {
+		return textoErrorContrasena;
+	}
+	
+	public JLabel getLblRegistro() {
+		return lblRegistro;
+	}
+
+	public JButton getBotonIngresar() {
+		return botonIngresar;
+	}
+	
+	public String getCorreo() {
+		return correoElectronico.getText();
+	}
+	
+	public String getContrasena() {
+		return String.valueOf(contrasena.getPassword());
+	}
+
+	public void inicializarComponentes() {
 
         JPanel panelCentro = new JPanel(new BorderLayout());
         panelCentro.setBackground(new Color(249, 250, 251));
@@ -108,13 +129,10 @@ public class LoginVista extends JPanel {
     	JPanel panel = new JPanel(new BorderLayout());
         panel.setBackground(new Color(249, 250, 251));
         
-        JLabel lblRegistro = new JLabel("¿No tienes cuenta? \nCrea una ya mismo!");
+        lblRegistro = new JLabel("¿No tienes cuenta? \nCrea una ya mismo!");
         lblRegistro.setFont(new Font("Segoe UI", Font.ITALIC, 12));
 		lblRegistro.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		lblRegistro.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				abrirRegistro();
-			}
 			public void mouseEntered(MouseEvent e) {
 				lblRegistro.setForeground(new Color(107, 114, 128));
 			}
@@ -130,48 +148,22 @@ public class LoginVista extends JPanel {
         JPanel panelBoton = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 25));
         panelBoton.setBackground(new Color(249, 250, 251));
         
-        JButton boton = new JButton("INGRESAR");
-        boton.setFont(new Font("Segoe UI", Font.BOLD, 13));
-        boton.setPreferredSize(new Dimension(170, 40));
-        boton.setBackground(new Color(17, 17, 17));
-        boton.setForeground(Color.WHITE);
-        boton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        boton.setFocusPainted(false);
-        boton.setBorderPainted(false);
-        boton.setOpaque(true);
+        botonIngresar = new JButton("INGRESAR");
+        botonIngresar.setFont(new Font("Segoe UI", Font.BOLD, 13));
+        botonIngresar.setPreferredSize(new Dimension(170, 40));
+        botonIngresar.setBackground(new Color(17, 17, 17));
+        botonIngresar.setForeground(Color.WHITE);
+        botonIngresar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        botonIngresar.setFocusPainted(false);
+        botonIngresar.setBorderPainted(false);
+        botonIngresar.setOpaque(true);
 
         panel.add(panelBoton, BorderLayout.CENTER);
-        
-        panelBoton.add(boton);
-        boton.addActionListener(e -> alertaLogin());
-        
+        panelBoton.add(botonIngresar);
         panel.add(panelBoton, BorderLayout.CENTER);
         panel.add(panelRegistro, BorderLayout.SOUTH);
         
         return panel;
-    }
-    
-    public void alertaLogin() {
-    	
-    	try {
-    		if(validacionLogin(correoElectronico.getText(), String.valueOf(contrasena.getPassword()))) {
-    			JOptionPane.showMessageDialog(this, 
-    					"Sesion Iniciada!", "Iniciar Sesion", JOptionPane.INFORMATION_MESSAGE);
-    			
-    			new VentanaPrincipal();
-    			loginVentana.dispose();
-    		}
-    } catch (InvalidUserException ex) {
-    			mostrarErrorCorreo(ex.getMessage());
-    			
-    		} catch (InvalidPasswordException ex) {
-    			mostrarErrorContrasena(ex.getMessage());
-    		}
-    }
-    
-    public void abrirRegistro() {
-    		new FormularioRegistro();
-    		loginVentana.dispose();
     }
     
     public JPanel ingresarCorreo() {
@@ -196,22 +188,12 @@ public class LoginVista extends JPanel {
         correoElectronico.setAlignmentX(LEFT_ALIGNMENT);
         panel.add(correoElectronico);
         
-        correoElectronico.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				
-				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-					alertaLogin();
-				}
-			}
-		});
-
         panel.add(Box.createVerticalStrut(2));
+        
         textoErrorCorreo = new JLabel(" ");
         textoErrorCorreo.setFont(new Font("Calibri", Font.PLAIN + Font.ITALIC, 12));
         textoErrorCorreo.setForeground(Color.RED);
         textoErrorCorreo.setAlignmentX(LEFT_ALIGNMENT);
-        //textoErrorCorreo.setVisible(false);
         panel.add(textoErrorCorreo);
 
         return panel;
@@ -238,23 +220,11 @@ public class LoginVista extends JPanel {
         contrasena.setPreferredSize(new Dimension(270, 35));
         contrasena.setAlignmentX(LEFT_ALIGNMENT);
         panel.add(contrasena);
-        
-        contrasena.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				
-				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-					alertaLogin();
-				}
-			}
-		});
-        
         panel.add(Box.createVerticalStrut(2));
         textoErrorContrasena = new JLabel(" ");
         textoErrorContrasena.setFont(new Font("Calibri", Font.PLAIN + Font.ITALIC, 12));
         textoErrorContrasena.setForeground(Color.RED);
         textoErrorContrasena.setAlignmentX(LEFT_ALIGNMENT);
-        //textoErrorContrasena.setVisible(false);
         panel.add(textoErrorContrasena);
 
         return panel;
@@ -262,37 +232,15 @@ public class LoginVista extends JPanel {
     
     public void mostrarErrorCorreo(String message) {
 		textoErrorCorreo.setText(message);
-		//textoErrorCorreo.setVisible(true);
     }
     
     public void mostrarErrorContrasena(String message) {
 		textoErrorContrasena.setText(message);    	
-		//textoErrorContrasena.setVisible(true);
     }
 
     public void reinicioMensajeError() {
 		textoErrorCorreo.setText(" ");
 		textoErrorContrasena.setText(" ");
-    }
-
-    public boolean validacionLogin(String email, String password) throws InvalidUserException, InvalidPasswordException {
-		reinicioMensajeError();
-
-		if (email.trim().isEmpty()) {
-			mostrarErrorCorreo("El correo electronico es OBLIGATORIO");
-			return false;
-		}
-		if (!email.trim().isEmpty() && !email.trim().equals("ucota@gmail.com")) {
-			throw new InvalidUserException("El correo electronico no coincide");
-		}	
-		if (password.trim().isEmpty()) {
-			mostrarErrorContrasena("La contraseña es OBLIGATORIA");
-			return false;
-		}
-		if (!password.trim().isEmpty() && !password.trim().equals("1234")) {
-			throw new InvalidPasswordException("La contraseña no coincide");
-		}
-		return true;
     }
     
     public void bordePanel() {

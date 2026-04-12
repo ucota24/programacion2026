@@ -1,4 +1,4 @@
-package views;
+package vista;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -9,7 +9,6 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
-import views.LoginVentana;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -25,6 +24,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+
+import vista.LoginVentana;
 
 public class MetodoPagoVentana extends JFrame {
 	

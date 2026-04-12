@@ -1,13 +1,14 @@
-package views;
-
-import views.FormularioRegistro;
+package vista;
 
 import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
 
+import vista.FormularioRegistro;
 
 public class LoginVentana extends JFrame {
+	
+	private LoginVista loginVista;
 	
 	public LoginVentana() {
 		setSize(450,480);
@@ -21,11 +22,15 @@ public class LoginVentana extends JFrame {
 		Image myIcon = tk.getImage("src/image/logoventana1.png");
 		setIconImage(myIcon);
 
-		LoginVista panelito = new LoginVista(this);
-		add(panelito);
+		loginVista = new LoginVista(this);
+		add(loginVista);
 		
 		setVisible(true);
 		
+	}
+	
+	public LoginVista getLoginVista() {
+		return loginVista;
 	}
 	
 	

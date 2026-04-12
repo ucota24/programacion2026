@@ -1,12 +1,5 @@
 package main;
 
-import views.FormularioRegistro;
-import views.LoginVentana;
-import views.LoginVista;
-import views.VentanaPrincipal;
-import views.FormularioRegistro;
-import views.MetodoPagoVentana;
-
 import java.awt.Color;
 
 import javax.swing.UIManager;
@@ -15,6 +8,13 @@ import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.FlatLightLaf;
+
+import controllers.LoginController;
+import vista.FormularioRegistro;
+import vista.LoginVentana;
+import vista.LoginVista;
+import vista.MetodoPagoVentana;
+import vista.VentanaPrincipal;
 
 public class Main {
 
@@ -30,6 +30,7 @@ public class Main {
 		//UIManager.put(" ", AppFont.normal());
 
 		LoginVentana ventanita = new LoginVentana();
+		new LoginController(ventanita.getLoginVista());
 		
 		//FormularioRegistro registro = new FormularioRegistro();
 		

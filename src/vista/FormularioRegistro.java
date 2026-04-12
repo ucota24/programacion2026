@@ -1,4 +1,4 @@
-package views;
+package vista;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -31,7 +31,7 @@ import javax.swing.SwingConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import views.LoginVentana;
+import vista.LoginVentana;
 
 public class FormularioRegistro extends JFrame {
 	
@@ -199,7 +199,7 @@ public class FormularioRegistro extends JFrame {
         JButton registrar = new JButton("Aceptar");
         registrar.setFont(new Font("Segoe UI", Font.PLAIN, 13));
         registrar.setPreferredSize(new Dimension(120, 40));
-        registrar.setBackground(Color.GRAY);
+        registrar.setBackground(new Color(17, 17, 17));
         registrar.setForeground(Color.WHITE);
         
         registrar.addActionListener(e -> {
@@ -501,7 +501,7 @@ public class FormularioRegistro extends JFrame {
 		if (validacion) {
 			JOptionPane.showMessageDialog(this, "Registro exitoso");
 		}
-		return true;
+		return validacion;
 	}
 	
 	public boolean validacionNombre() {
@@ -579,6 +579,7 @@ public class FormularioRegistro extends JFrame {
 	}
 	
 	public boolean validacionDireccion() {
+		lblErrorDireccion.setText("");
 		if (campoDireccion.getText().trim().isEmpty()) {
             lblErrorDireccion.setText("Este campo es OBLIGATORIO");
             return false;
@@ -587,6 +588,7 @@ public class FormularioRegistro extends JFrame {
 	}
 	
 	public boolean validacionFNacimiento() {
+		lblErrorFNacimiento.setText("");
 		 if (campoFNacimiento.getText().trim().isEmpty()) {
 	            lblErrorFNacimiento.setText("Este campo es OBLIGATORIO");
 	            return false;
