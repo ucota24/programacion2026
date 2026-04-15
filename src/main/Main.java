@@ -1,8 +1,20 @@
 package main;
 
 import java.awt.Color;
+
 import javax.swing.UIManager;
-import views.Ventana;
+
+import com.formdev.flatlaf.FlatDarculaLaf;
+import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.formdev.flatlaf.FlatLightLaf;
+
+import controllers.LoginController;
+import vista.FormularioRegistro;
+import vista.LoginVentana;
+import vista.LoginVista;
+import vista.MetodoPagoVentana;
+import vista.VentanaPrincipal;
 
 public class Main {
 
@@ -16,14 +28,15 @@ public class Main {
         UIManager.put("Component.focusColor", new Color(17, 17, 17));
         
 		//UIManager.put(" ", AppFont.normal());
-
         
-      //FormularioRegistro registro = new FormularioRegistro();
+        LoginVentana ventanita = new LoginVentana();
+		new LoginController(ventanita.getLoginVista());
+        
+        //FormularioRegistro registro = new FormularioRegistro();
 		
-      		//MetodoPagoVentana metodoPago = new MetodoPagoVentana();
+      	//MetodoPagoVentana metodoPago = new MetodoPagoVentana();
       		
-      		//VentanaPrincipal main = new VentanaPrincipal();
+      	//VentanaPrincipal main = new VentanaPrincipal();
 
-        new Ventana();
     }
 }

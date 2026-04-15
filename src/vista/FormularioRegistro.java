@@ -31,6 +31,7 @@ import javax.swing.SwingConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import controllers.RegistroController;
 import vista.LoginVentana;
 
 public class FormularioRegistro extends JFrame {
@@ -52,6 +53,9 @@ public class FormularioRegistro extends JFrame {
 	public JLabel lblErrorDireccion;
 	public JLabel lblErrorFNacimiento;
 	public JLabel lblErrorTelefono;
+	
+	private JButton botonRegistrar;
+	private JButton botonCancelar;
 
 	public FormularioRegistro() {
 		setSize(600,500);
@@ -65,28 +69,52 @@ public class FormularioRegistro extends JFrame {
 		Image myIcon = tk.getImage("src/image/logoventana1.png");
 		setIconImage(myIcon);
 		
-		addWindowListener(new java.awt.event.WindowAdapter() {
-	        @Override
-	        public void windowClosing(java.awt.event.WindowEvent e) {
-	            int opcion = JOptionPane.showConfirmDialog(FormularioRegistro.this,
-	                "¿Estas seguro de que quieres salir? \nSe perderan los datos!",
-	                "Alerta",JOptionPane.YES_NO_OPTION
-	            );
-	            if (opcion == JOptionPane.YES_OPTION) {
-	                dispose();
-	            }
-	        }
-	        @Override
-	        public void windowOpened(java.awt.event.WindowEvent e) {
-	            campoNombre.requestFocusInWindow();
-	        }
-	    });
-		
 		inicializarComponentes();
+		new RegistroController(this);
 		
 		setVisible(true);
 	}
 	
+	public JTextField getCampoNombre() {
+		return campoNombre;
+	}
+
+	public JTextField getCampoApellido() {
+		return campoApellido;
+	}
+
+	public JTextField getCampoCorreo() {
+		return campoCorreo;
+	}
+	
+	public JPasswordField getCampoContrasena() {
+		return campoContrasena;
+	}
+
+	public JTextField getCampoCiudadEstado() {
+		return campoCiudadEstado;
+	}
+
+	public JTextField getCampoDireccion() {
+		return campoDireccion;
+	}
+
+	public JTextField getCampoFNacimiento() {
+		return campoFNacimiento;
+	}
+	
+	public JTextField getCampoTelefono() {
+		return campoTelefono;
+	}
+	
+	public JButton getBotonRegistrar() {
+		return botonRegistrar;
+	}
+	
+	public JButton getBotonCancelar() {
+		return botonCancelar;
+	}
+
 	public void inicializarComponentes() {
 		JPanel encabezadoForm = encabezadoForm();
 		add(encabezadoForm, BorderLayout.NORTH);
@@ -109,8 +137,9 @@ public class FormularioRegistro extends JFrame {
 		lblErrorTelefono = errorLabel();
 		lblErrorDireccion = errorLabel();
 		
-		assignListeners();
-
+		asignarFocusListeners();
+        asignarKeyListeners();
+				
 		JPanel panelComponentes = new JPanel(new GridLayout(0, 2, 15, 6));
 		panelComponentes.setBorder(BorderFactory.createEmptyBorder(10, 20, 40, 20));
 		
@@ -181,35 +210,18 @@ public class FormularioRegistro extends JFrame {
         JPanel boton = new JPanel(new FlowLayout(FlowLayout.RIGHT, 30, 10));
         boton.setBorder(BorderFactory.createMatteBorder(2, 0, 0, 0, Color.BLACK));
 
-        JButton cancelar = new JButton("Cancelar");
-        cancelar.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        cancelar.setPreferredSize(new Dimension(120, 40)); 
+        botonCancelar = new JButton("Cancelar");
+        botonCancelar.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        botonCancelar.setPreferredSize(new Dimension(120, 40)); 
         		
-        cancelar.addActionListener(e -> {
-			
-			int option = JOptionPane.showConfirmDialog(this, 
-					"¿Estas seguro de que quieres regresar? \nSe perderan los datos!");
-			
-			if(option == JOptionPane.YES_OPTION) {
-				new LoginVentana();
-				dispose();
-			}
-		});
-
-        JButton registrar = new JButton("Aceptar");
-        registrar.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        registrar.setPreferredSize(new Dimension(120, 40));
-        registrar.setBackground(new Color(17, 17, 17));
-        registrar.setForeground(Color.WHITE);
+        botonRegistrar = new JButton("Aceptar");
+        botonRegistrar.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        botonRegistrar.setPreferredSize(new Dimension(120, 40));
+        botonRegistrar.setBackground(new Color(17, 17, 17));
+        botonRegistrar.setForeground(Color.WHITE);
         
-        registrar.addActionListener(e -> {
-        	if (validacionFormulario()) {
-        		javax.swing.JOptionPane.showMessageDialog(this, 
-        				"Has sido Registrado!", "Bienvenid@", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-        		}
-        });
-        boton.add(cancelar);
-        boton.add(registrar);
+        boton.add(botonCancelar);
+        boton.add(botonRegistrar);
         return boton;
     }
 	
@@ -219,11 +231,11 @@ public class FormularioRegistro extends JFrame {
 		label.setForeground(Color.RED);
 		label.setHorizontalAlignment(SwingConstants.LEFT);
 		label.setPreferredSize(new Dimension(200, 15));
-	return label;
+		return label;
 	}
 	
 	public void limpiarErrores() {
-		lblErrorNombre.setText("");
+        lblErrorNombre.setText("");
         lblErrorApellido.setText("");
         lblErrorCorreo.setText("");
         lblErrorContrasena.setText("");
@@ -231,372 +243,47 @@ public class FormularioRegistro extends JFrame {
         lblErrorDireccion.setText("");
         lblErrorFNacimiento.setText("");
         lblErrorTelefono.setText("");
-	}
+    }
 	
-	public void assignListeners() {
-		campoNombre.getDocument().addDocumentListener(new DocumentListener() {
-			@Override
-			public void removeUpdate(DocumentEvent e) {
-				validacionNombre();
-			}
-			@Override
-			public void insertUpdate(DocumentEvent e) {
-				validacionNombre();
-			}
-			@Override
-			public void changedUpdate(DocumentEvent e) {
-				validacionNombre();
-			}
-		});
-		
-		campoApellido.getDocument().addDocumentListener(new DocumentListener() {
-			@Override
-			public void insertUpdate(DocumentEvent e) {
-				validacionApellido();
-			}
-			@Override
-			public void removeUpdate(DocumentEvent e) {
-				validacionApellido();
-			}
-			@Override
-			public void changedUpdate(DocumentEvent e) {
-				validacionApellido();
-			}
-		});
-		
-		campoCorreo.getDocument().addDocumentListener(new DocumentListener() {
-			@Override
-			public void insertUpdate(DocumentEvent e) {
-				validacionCorreo();
-			}
-			@Override
-			public void removeUpdate(DocumentEvent e) {
-				validacionCorreo();
-			}
-			@Override
-			public void changedUpdate(DocumentEvent e) {
-				validacionCorreo();
-			}
-		});
-
-		campoContrasena.getDocument().addDocumentListener(new DocumentListener() {
-		    @Override
-		    public void insertUpdate(DocumentEvent e) {
-		        validacionContrasena();
-		    }
-		    @Override
-		    public void removeUpdate(DocumentEvent e) {
-		        validacionContrasena();
-		    }
-		    @Override
-		    public void changedUpdate(DocumentEvent e) {
-		        validacionContrasena();
-		    }
-		});
-		
-		campoCiudadEstado.getDocument().addDocumentListener(new DocumentListener() {
-			@Override
-			public void insertUpdate(DocumentEvent e) {
-				validacionCiudadEstado();
-			}
-			@Override
-			public void removeUpdate(DocumentEvent e) {
-				validacionCiudadEstado();
-			}
-			@Override
-			public void changedUpdate(DocumentEvent e) {
-				validacionCiudadEstado();
-			}
-		});
-		
-		campoTelefono.getDocument().addDocumentListener(new DocumentListener() {
-			@Override
-			public void insertUpdate(DocumentEvent e) {
-				validacionTelefono();
-			}
-			@Override
-			public void removeUpdate(DocumentEvent e) {
-				validacionTelefono();
-			}
-			@Override
-			public void changedUpdate(DocumentEvent e) {
-				validacionTelefono();
-			}
-		});
-		campoDireccion.getDocument().addDocumentListener(new DocumentListener() {
-			@Override
-			public void insertUpdate(DocumentEvent e) {
-				validacionDireccion();
-			}
-			@Override
-			public void removeUpdate(DocumentEvent e) {
-				validacionDireccion();
-			}
-			@Override
-			public void changedUpdate(DocumentEvent e) {
-				validacionDireccion();
-			}
-		});
-		
-		campoFNacimiento.getDocument().addDocumentListener(new DocumentListener() {
-			@Override
-			public void insertUpdate(DocumentEvent e) {
-				validacionFNacimiento();
-			}
-
-			@Override
-			public void removeUpdate(DocumentEvent e) {
-				validacionFNacimiento();				
-			}
-
-			@Override
-			public void changedUpdate(DocumentEvent e) {
-				validacionFNacimiento();				
-			}
-		});
-		
-		campoNombre.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				campoNombre.setForeground(Color.BLACK);
-			}
-			@Override
-			public void focusLost(FocusEvent e) {
-				campoNombre.setForeground(Color.GRAY);
-			}
-		});
-		campoNombre.addKeyListener(new java.awt.event.KeyAdapter() {
-		    @Override
-		    public void keyTyped(KeyEvent e) {
-		    	char c = e.getKeyChar();
-				if(Character.isDigit(c) || (!Character.isAlphabetic(c) && c != ' ')) {
-					e.consume();
-		        }
-				if(campoNombre.getText().length() >= 20) {
-					e.consume();
-				}
-		    }
-		});
+	private void asignarFocusListeners() {
+        JTextField[] campos = {
+            campoNombre, campoApellido, campoCorreo,
+            campoCiudadEstado, campoDireccion, campoFNacimiento, campoTelefono
+        };
+        for (JTextField campo : campos) {
+            campo.addFocusListener(new FocusAdapter() {
+                @Override public void focusGained(FocusEvent e) { 
+                	((JTextField) e.getSource()).setForeground(Color.BLACK); 
+                	}
+                @Override public void focusLost(FocusEvent e) { 
+                	((JTextField) e.getSource()).setForeground(Color.GRAY); 
+                	}
+            });
+        }
+        campoContrasena.addFocusListener(new FocusAdapter() {
+            @Override public void focusGained(FocusEvent e) { 
+            	campoContrasena.setForeground(Color.BLACK); 
+            	}
+            @Override public void focusLost(FocusEvent e) { 
+            	campoContrasena.setForeground(Color.GRAY); 
+            }
+        });
+    }
  
-		campoApellido.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				campoApellido.setForeground(Color.BLACK);
-			}
-			@Override
-			public void focusLost(FocusEvent e) {
-				campoApellido.setForeground(Color.GRAY);
-			}
-		});
-		
-		campoApellido.addKeyListener(new java.awt.event.KeyAdapter() {
-		    @Override
-		    public void keyTyped(KeyEvent e) {
-		    	char c = e.getKeyChar();
-				if(Character.isDigit(c) || (!Character.isAlphabetic(c) && c != ' ')) {
-					e.consume();
-		        }
-				if(campoApellido.getText().length() >= 20) {
-					e.consume();
-				}
-		    }
-		});
- 
-		campoCorreo.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				campoCorreo.setForeground(Color.BLACK);
-			}
-			@Override
-			public void focusLost(FocusEvent e) {
-				campoCorreo.setForeground(Color.GRAY);
-			}
-		});
-		
-		campoContrasena.addFocusListener(new FocusAdapter() {
-		    @Override
-		    public void focusGained(FocusEvent e) {
-		        campoContrasena.setForeground(Color.BLACK);
-		    }
-		    @Override
-		    public void focusLost(FocusEvent e) {
-		        campoContrasena.setForeground(Color.GRAY);
-		    }
-		});
- 
-		campoCiudadEstado.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				campoCiudadEstado.setForeground(Color.BLACK);
-			}
-			@Override
-			public void focusLost(FocusEvent e) {
-				campoCiudadEstado.setForeground(Color.GRAY);
-			}
-		});
- 
-		campoDireccion.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				campoDireccion.setForeground(Color.BLACK);
-			}
-			@Override
-			public void focusLost(FocusEvent e) {
-				campoDireccion.setForeground(Color.GRAY);
-			}
-		});
- 
-		campoFNacimiento.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				campoFNacimiento.setForeground(Color.BLACK);
-			}
-			@Override
-			public void focusLost(FocusEvent e) {
-				campoFNacimiento.setForeground(Color.GRAY);
-			}
-		});
- 
-		campoTelefono.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				campoTelefono.setForeground(Color.BLACK);
-			}
-			
-			@Override
-			public void focusLost(FocusEvent e) {
-				campoTelefono.setForeground(Color.GRAY);
-			}
-		});
-	}
-	
-	public boolean validacionFormulario() {
-		limpiarErrores();
-		boolean validacion = true;
-		
-		if(!validacionNombre())
-			validacion = false;
-		
-		if(!validacionApellido())
-			validacion = false;
-		
-		if(!validacionCorreo())
-			validacion = false;
-		
-		if (!validacionContrasena())
-		    validacion = false;
-		
-		if(!validacionCiudadEstado())
-			validacion = false;
-		
-		if(!validacionTelefono())
-			validacion = false;
-		
-		if(!validacionDireccion())
-			validacion = false;
-		
-		if(!validacionFNacimiento())
-			validacion = false;
-		
-		if (validacion) {
-			JOptionPane.showMessageDialog(this, "Registro exitoso");
-		}
-		return validacion;
-	}
-	
-	public boolean validacionNombre() {
-		lblErrorNombre.setText("");
-		if (campoNombre.getText().trim().isEmpty()) {
-            lblErrorNombre.setText("Este campo es OBLIGATORIO");
-            return false;
-		}
-		if(campoNombre.getText().trim().length() < 3) {
-			lblErrorNombre.setText("Minimo 3 caracteres");
-			return false;
-		}
-		
-		return true;
-	}
-	
-	public boolean validacionApellido() {
-		lblErrorApellido.setText("");
-		if (campoApellido.getText().trim().isEmpty()) {
-            lblErrorApellido.setText("Este campo es OBLIGATORIO");
-            return false;
-		}
-		if(campoApellido.getText().trim().length() < 3) {
-			lblErrorApellido.setText("Minimo 3 caracteres");
-			return false;
-		}
-		return true;
-	}
-	
-	public boolean validacionCorreo() {
-		lblErrorCorreo.setText("");
-		if (campoCorreo.getText().trim().isEmpty()) {
-            lblErrorCorreo.setText("Este campo es OBLIGATORIO");
-            return false;
-		}
-		if (!campoCorreo.getText().contains("@")) {
-            lblErrorCorreo.setText("Correo inválido");
-            return false;
-		}
-		return true;
-	}
-	
-	public boolean validacionContrasena() {
-	    lblErrorContrasena.setText("");
-	    
-	    String contrasena = String.valueOf(campoContrasena.getPassword());
-	    
-	    if (contrasena.trim().isEmpty()) {
-	        lblErrorContrasena.setText("Este campo es OBLIGATORIO");
-	        return false;
-	    }
-	    if (contrasena.trim().length() < 8) {
-	        lblErrorContrasena.setText("Minimo 8 caracteres");
-	        return false;
-	    }
-	    return true;
-	}
-	
-	public boolean validacionCiudadEstado() {
-		lblErrorCiudadEstado.setText("");
-		if (campoCiudadEstado.getText().trim().isEmpty()) {
-            lblErrorCiudadEstado.setText("Este campo es OBLIGATORIO");
-            return false;
-		}
-		return true;
-	}
-	
-	public boolean validacionTelefono() {
-		lblErrorTelefono.setText("");
-		if (campoTelefono.getText().trim().isEmpty()) {
-            lblErrorTelefono.setText("Este campo es OBLIGATORIO");
-            return false;
-		}
-		return true;
-	}
-	
-	public boolean validacionDireccion() {
-		lblErrorDireccion.setText("");
-		if (campoDireccion.getText().trim().isEmpty()) {
-            lblErrorDireccion.setText("Este campo es OBLIGATORIO");
-            return false;
-		}
-		return true;
-	}
-	
-	public boolean validacionFNacimiento() {
-		lblErrorFNacimiento.setText("");
-		 if (campoFNacimiento.getText().trim().isEmpty()) {
-	            lblErrorFNacimiento.setText("Este campo es OBLIGATORIO");
-	            return false;
-	        }
-	        return true;
-	}
+    private void asignarKeyListeners() {
+        for (JTextField campo : new JTextField[]{campoNombre, campoApellido}) {
+            campo.addKeyListener(new java.awt.event.KeyAdapter() {
+                @Override
+                public void keyTyped(KeyEvent e) {
+                    char c = e.getKeyChar();
+                    if (Character.isDigit(c) || (!Character.isAlphabetic(c) && c != ' '))
+                        e.consume();
+                    if (((JTextField) e.getSource()).getText().length() >= 20)
+                        e.consume();
+                }
+            });
+        }
+    }
 	
 	
-	
-
 }
