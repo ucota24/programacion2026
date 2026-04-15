@@ -1,5 +1,9 @@
 package models;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Usuario {
 	
 	private String nombre;
@@ -23,6 +27,7 @@ public class Usuario {
 	public Usuario(String nombre, String apellido, String correo, String contrasena, 
 			String direccion, String fecha_Nacimiento, String telefono, String ciudadEstado) {
 		super();
+		this.nombre = nombre;
 		this.apellido = apellido;
         this.correo = correo;
         this.contrasena = contrasena;
@@ -94,6 +99,39 @@ public class Usuario {
 
 	public void setCiudadEstado(String ciudadEstado) {
 		this.ciudadEstado = ciudadEstado;
+	}
+	
+	public String toString() {
+	    return "Nombre: " + nombre + "\nApellido: " + apellido + "\nCorreo: " + correo 
+	        + "\nContraseña: " + contrasena + "\nCiudad / Estado: " + ciudadEstado + "Direccion: " + direccion 
+	        + "Fecha de Nacimiento: " + fecha_Nacimiento + "Telfono: " + telefono;
+	}
+
+	public String toCsv() {
+		return nombre + "," + apellido + "," + correo + "," + contrasena + "," + ciudadEstado 
+				+ "," + direccion + "," + fecha_Nacimiento + "," + telefono;
+	}
+	
+	public static Usuario fromCsv(String userData) {
+		String data[] = userData.split(",");
+		
+		String nombre = data[0];
+		String apellido = data[1];
+	    String correo = data[2];
+	    String contrasena = data[3];
+	    String ciudadEstado = data[4];
+	    String direccion = data[5];
+	    String fecha_Nacimiento = data[6];
+	    String telefono = data[7];
+	    
+	    List<String> languages = new ArrayList<String>();
+	    
+	    if(data.length > 5) {
+	    	languages = Arrays.asList(data[5].split("\\|"));
+	    }
+	    
+	    return new Usuario(nombre, apellido, correo, contrasena, ciudadEstado, direccion, fecha_Nacimiento, telefono);
+		
 	}
 	
 	

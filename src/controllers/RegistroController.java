@@ -2,11 +2,14 @@ package controllers;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import models.Usuario;
+import repositorio.UsuarioRepositorio;
 import vista.FormularioRegistro;
 import vista.LoginVentana;
 import vista.VentanaPrincipal;
@@ -34,10 +37,31 @@ public class RegistroController {
 
     	vista.getBotonRegistrar().addActionListener(e -> {
             if (validacionFormulario()) {
+            	
+            	Usuario usuario = new Usuario(
+                        vista.campoNombre.getText().trim(),
+                        vista.campoApellido.getText().trim(),
+                        vista.campoCorreo.getText().trim(),
+                        String.valueOf(vista.campoContrasena.getPassword()),
+                        vista.campoDireccion.getText().trim(),
+                        vista.campoFNacimiento.getText().trim(),
+                        vista.campoTelefono.getText().trim(),
+                        vista.campoCiudadEstado.getText().trim()
+                    );
+                UsuarioRepositorio repositorio = new UsuarioRepositorio();
+                try {
+                	repositorio.save(usuario);
                 javax.swing.JOptionPane.showMessageDialog(vista,
                         "Has sido Registrado!", "Bienvenid@", JOptionPane.INFORMATION_MESSAGE);
                 this.vista.dispose();
-                new VentanaPrincipal();
+                
+                VentanaPrincipal ventana = new VentanaPrincipal();
+                new PrincipalController(ventana);
+                
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(vista, 
+                            "Error al guardar: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
     		

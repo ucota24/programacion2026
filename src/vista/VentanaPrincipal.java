@@ -15,6 +15,8 @@ import com.formdev.flatlaf.FlatLightLaf;
 
 public class VentanaPrincipal extends JFrame {
 	
+	public JMenuItem verUsuarios;
+	
 	public VentanaPrincipal() {
 		
 		setSize(800,500);
@@ -75,7 +77,14 @@ public class VentanaPrincipal extends JFrame {
 		});
 		cuenta.add(metodoPago);
 		
+		verUsuarios = new JMenuItem("Ver Usuarios");
+		cuenta.add(verUsuarios);
+		
 }
+	
+	public JMenuItem getVerUsuarios() {
+	    return verUsuarios;
+	}
 	
 
 	
