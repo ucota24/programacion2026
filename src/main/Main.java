@@ -10,6 +10,7 @@ import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 
 import controllers.LoginController;
+import controllers.PrincipalController;
 import vista.FormularioRegistro;
 import vista.LoginVentana;
 import vista.LoginVista;
@@ -29,14 +30,15 @@ public class Main {
         
 		//UIManager.put(" ", AppFont.normal());
         
-        LoginVentana ventanita = new LoginVentana();
-		new LoginController(ventanita.getLoginVista());
+        /*LoginVentana ventanita = new LoginVentana();
+		new LoginController(ventanita.getLoginVista()); */
         
         //FormularioRegistro registro = new FormularioRegistro();
 		
       	//MetodoPagoVentana metodoPago = new MetodoPagoVentana();
       		
-      	//VentanaPrincipal main = new VentanaPrincipal();
+        VentanaPrincipal main = new VentanaPrincipal();
+        new PrincipalController(main);
 
     }
 }

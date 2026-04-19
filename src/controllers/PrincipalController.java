@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 
 import models.Usuario;
 import repositorio.UsuarioRepositorio;
+import tablemodels.UsuarioTableModel;
 import vista.LoginVentana;
 import vista.VentanaPrincipal;
 
@@ -16,25 +17,36 @@ public class PrincipalController {
 
 	 private VentanaPrincipal vista;
 	 
-	 public PrincipalController(VentanaPrincipal view) {
-	        this.vista = view;
+	 public PrincipalController(VentanaPrincipal vista) {
+	        this.vista = vista;
 	        registrarListeners();
 	    }
 	 
 	 public void registrarListeners() {
-	        vista.verUsuarios.addActionListener(e -> {
-	            UsuarioRepositorio repositorio = new UsuarioRepositorio();
-	            try {
-	                List<Usuario> usuarios = repositorio.getUsers();
-	                for (Usuario u : usuarios) {
-	                    System.out.println(u);
-	                    System.out.println("----------------");
-	                }
-	            } catch (Exception ex) {
-	                JOptionPane.showMessageDialog(vista, ex.getMessage());
-	            }
-	        });
+	        
+	        vista.botonUsuarios.addActionListener(e -> verUsuarios());
+	        
+	        vista.botonInicio.addActionListener(e -> vista.mostrarVista(VentanaPrincipal.INICIO));
 	    }
+	 
+	 private void verUsuarios() {
+			UsuarioRepositorio repositorio = new UsuarioRepositorio();
+			
+			try {
+				List<Usuario> usuarios = repositorio.getUsuarios();
+				
+				UsuarioTableModel model = new UsuarioTableModel(usuarios);
+				
+				vista.usuariosPanel.setTableModel(model);
+				
+				vista.mostrarVista(VentanaPrincipal.USUARIOS);
+				
+			}catch (IOException ex) {
+				JOptionPane.showMessageDialog(vista, ex.getMessage());
+			}
+	 }
+	 
+	 
 
 	 /*public void handleClose() {
 	        int opcion = JOptionPane.showConfirmDialog(vista, 
@@ -45,5 +57,6 @@ public class PrincipalController {
 	            vista.dispose();
 	        }
 	    }*/
-	
+	 
+	 
 }

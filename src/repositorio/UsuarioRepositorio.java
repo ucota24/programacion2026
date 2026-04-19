@@ -26,7 +26,7 @@ public class UsuarioRepositorio {
 		
 	}
 	
-	public List<Usuario> getUsers() throws IOException {
+	public List<Usuario> getUsuarios() throws IOException {
 		
 		List<Usuario> users = new ArrayList<Usuario>();
 		

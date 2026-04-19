@@ -1,21 +1,37 @@
 package vista;
 
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 
 import javax.swing.Box;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.UIManager;
 
 import com.formdev.flatlaf.FlatLightLaf;
 
 public class VentanaPrincipal extends JFrame {
 	
+	public static final String INICIO = "INICIO";
+	public static final String USUARIOS = "USUARIOS";
+	
 	public JMenuItem verUsuarios;
+	
+	public JButton botonUsuarios;
+	public JButton botonInicio;
+	public UsuarioVista usuariosPanel;
+	
+	private CardLayout cardLayout;
+	private JPanel container;
 	
 	public VentanaPrincipal() {
 		
@@ -35,7 +51,44 @@ public class VentanaPrincipal extends JFrame {
 		setMenu();
 		setVisible(true);
 		
+		crearNavbar();
+		crearVistas();
+		
 	}
+	
+	public void crearNavbar() {
+		JPanel navbar = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		
+		botonInicio = new JButton("Inicio");
+		botonUsuarios = new JButton("Usuarios");
+		
+		navbar.add(botonInicio);
+		navbar.add(botonUsuarios);
+		
+		add(navbar, BorderLayout.NORTH);
+	}
+	
+	private void crearVistas() {
+		cardLayout = new CardLayout();
+		container = new JPanel(cardLayout);
+		
+		JPanel inicioPanel = new JPanel();
+		inicioPanel.add(new JLabel("Bienvenido al Sistema"));
+		
+		usuariosPanel = new UsuarioVista();
+		
+		container.add(inicioPanel, INICIO);
+		container.add(usuariosPanel, USUARIOS);
+		
+		add(container, BorderLayout.CENTER);
+		
+	}
+	
+	public void mostrarVista(String vista) {
+		cardLayout.show(container, vista);
+	}
+	
+	
 	
 	public void setMenu() {
 		
@@ -77,15 +130,7 @@ public class VentanaPrincipal extends JFrame {
 		});
 		cuenta.add(metodoPago);
 		
-		verUsuarios = new JMenuItem("Ver Usuarios");
-		cuenta.add(verUsuarios);
-		
 }
-	
-	public JMenuItem getVerUsuarios() {
-	    return verUsuarios;
-	}
-	
 
 	
 
