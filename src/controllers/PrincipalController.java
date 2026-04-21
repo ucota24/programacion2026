@@ -30,7 +30,10 @@ public class PrincipalController {
 	    }
 	 
 	 private void verUsuarios() {
-			UsuarioRepositorio repositorio = new UsuarioRepositorio();
+		 
+		 UsuarioController controller = new UsuarioController(vista.usuariosPanel);
+		 
+		 UsuarioRepositorio repositorio = new UsuarioRepositorio();
 			
 			try {
 				List<Usuario> usuarios = repositorio.getUsuarios();
