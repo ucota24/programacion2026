@@ -59,9 +59,9 @@ public class UsuarioRepositorio {
 	    actualizarTodo(usuarios);
 	}
 
-	public void actualizar(int index, Usuario updatedUsuario) throws IOException {
+	public void actualizar(int index, Usuario actualizarUsuario) throws IOException {
 	    List<Usuario> usuarios = getUsuarios();
-	    usuarios.set(index, updatedUsuario);
+	    usuarios.set(index, actualizarUsuario);
 	    actualizarTodo(usuarios);
 	}
 	

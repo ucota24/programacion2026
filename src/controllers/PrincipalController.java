@@ -16,6 +16,7 @@ import vista.VentanaPrincipal;
 public class PrincipalController {
 
 	 private VentanaPrincipal vista;
+	 private UsuarioController uController;
 	 
 	 public PrincipalController(VentanaPrincipal vista) {
 	        this.vista = vista;
@@ -30,24 +31,24 @@ public class PrincipalController {
 	    }
 	 
 	 private void verUsuarios() {
-		 
-		 UsuarioController controller = new UsuarioController(vista.usuariosPanel);
-		 
-		 UsuarioRepositorio repositorio = new UsuarioRepositorio();
-			
-			try {
-				List<Usuario> usuarios = repositorio.getUsuarios();
-				
-				UsuarioTableModel model = new UsuarioTableModel(usuarios);
-				
-				vista.usuariosPanel.setTableModel(model);
-				
-				vista.mostrarVista(VentanaPrincipal.USUARIOS);
-				
-			}catch (IOException ex) {
-				JOptionPane.showMessageDialog(vista, ex.getMessage());
-			}
-	 }
+
+		    UsuarioRepositorio repositorio = new UsuarioRepositorio();
+
+		    try {
+		        List<Usuario> usuarios = repositorio.getUsuarios();
+		        UsuarioTableModel model = new UsuarioTableModel(usuarios);
+		        vista.usuariosPanel.setTableModel(model);
+
+		        if (uController == null) {
+		        	uController = new UsuarioController(vista.usuariosPanel, vista, repositorio, model);
+		        }
+
+		        vista.mostrarVista(VentanaPrincipal.USUARIOS);
+
+		    } catch (IOException ex) {
+		        JOptionPane.showMessageDialog(vista, ex.getMessage());
+		    }
+		}
 	 
 	 
 

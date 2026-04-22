@@ -11,7 +11,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
+import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -23,13 +23,14 @@ public class UsuarioFormDialog extends JDialog {
 	private JTextField txtNombre;
     private JTextField txtApellido;
     private JTextField txtCorreo;
+    private JPasswordField txtContrasena;
     private JTextField txtCiudadEstado;
     private JTextField txtDireccion;
     private JTextField txtFechaNacimiento;
     private JTextField txtTelefono;
 
-    private JButton botonGuardar;
-    private JButton botonCancelar;
+    public JButton botonGuardar;
+    public JButton botonCancelar;
 
     private Usuario usuario;
     
@@ -40,14 +41,26 @@ public class UsuarioFormDialog extends JDialog {
     	super(parent, true);
     	this.usuario = usuario;
     	
-    	setSize(400, 500);
+    	setSize(400, 550);
         setLocationRelativeTo(parent);
         setLayout(new BorderLayout());
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         
         add(createTitlePanel(), BorderLayout.NORTH);
-        add(createButtonPanel(), BorderLayout.SOUTH);
         add(createFormPanel(), BorderLayout.CENTER);
+        add(createButtonPanel(), BorderLayout.SOUTH);
+        
+        
+        if (usuario != null) {
+            txtNombre.setText(usuario.getNombre());
+            txtApellido.setText(usuario.getApellido());
+            txtCorreo.setText(usuario.getCorreo());
+            txtContrasena.setText(usuario.getContrasena());
+            txtCiudadEstado.setText(usuario.getCiudadEstado());
+            txtDireccion.setText(usuario.getDireccion());
+            txtFechaNacimiento.setText(usuario.getFecha_Nacimiento());
+            txtTelefono.setText(usuario.getTelefono());
+        }
     }
     
     public JPanel createTitlePanel() {
@@ -66,7 +79,11 @@ public class UsuarioFormDialog extends JDialog {
         panel.add(botonGuardar);
         panel.add(botonCancelar);
         
-        //btnSave.addActionListener(e -> save());
+        botonGuardar.addActionListener(e -> {
+            guardar = true;
+            dispose();
+        });
+        
         botonCancelar.addActionListener(e -> dispose());
         
         return panel;
@@ -81,6 +98,7 @@ public class UsuarioFormDialog extends JDialog {
         txtNombre = new JTextField();
         txtApellido = new JTextField();
         txtCorreo = new JTextField();
+        txtContrasena = new JPasswordField();
         txtCiudadEstado = new JTextField();
         txtDireccion = new JTextField();
         txtFechaNacimiento = new JTextField();
@@ -89,6 +107,7 @@ public class UsuarioFormDialog extends JDialog {
         panel.add(createField("Nombre:", txtNombre));
         panel.add(createField("Apellido:", txtApellido));
         panel.add(createField("Correo Electronico:", txtCorreo));
+        panel.add(createField("Contraseña:", txtContrasena));
         panel.add(createField("Ciudad / Estado:", txtCiudadEstado));
         panel.add(createField("Direccion:", txtDireccion));
         panel.add(createField("Fecha Nacimiento:", txtFechaNacimiento));
@@ -122,21 +141,26 @@ public class UsuarioFormDialog extends JDialog {
         return panel;
         
     }
+    
+    public Usuario getUsuarioFromForm() {
+        return new Usuario(txtNombre.getText(),
+        		txtApellido.getText(),
+        		txtCorreo.getText(),
+        		new String(txtContrasena.getPassword()),
+        		txtCiudadEstado.getText(),
+        		txtDireccion.getText(),
+        		txtFechaNacimiento.getText(),
+        		txtTelefono.getText());
+    }
+    
+    public boolean isGuardar() {
+        return guardar;
+    }
 	
 	
 
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
     
 }
