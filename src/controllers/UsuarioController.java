@@ -78,7 +78,25 @@ public class UsuarioController {
 	
 	private void eliminar() {
 		
-    }
+	    int fila = vista.getSelectedRow();
+
+	    if (fila < 0) {
+	        JOptionPane.showMessageDialog(vista, "Selecciona un usuario para eliminar");
+	        return;
+	    }
+
+	    int confirmar = JOptionPane.showConfirmDialog(vista,
+	        "¿Estás seguro de que quieres eliminar este usuario?", "Confirmar", JOptionPane.YES_NO_OPTION);
+
+	    if (confirmar == JOptionPane.YES_OPTION) {
+	        try {
+	            repositorio.eliminar(fila);
+	            model.setUsuarios(repositorio.getUsuarios());
+	        } catch (IOException ex) {
+	            JOptionPane.showMessageDialog(vista, "Error al eliminar" + ex.getMessage());
+	        }
+	    }
+	}
 
 	
 	
