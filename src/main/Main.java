@@ -31,7 +31,7 @@ public class Main {
 		//UIManager.put(" ", AppFont.normal());
         
         /*LoginVentana ventanita = new LoginVentana();
-		new LoginController(ventanita.getLoginVista()); */
+		new LoginController(ventanita.getLoginVista());*/
         
         //FormularioRegistro registro = new FormularioRegistro();
 		
@@ -41,4 +41,5 @@ public class Main {
         new PrincipalController(main);
 
     }
+
 }
