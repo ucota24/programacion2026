@@ -35,8 +35,9 @@ public class VentanaPrincipal extends JFrame {
 	
 	public VentanaPrincipal() {
 		
-		setSize(800,500);
-		setTitle("                                                                                                     "
+		setSize(1100,500);
+		setTitle("                         "
+				+ "                                                                                                               "
 				+ "SneakerShop");
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

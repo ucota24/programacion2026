@@ -1,0 +1,64 @@
+[ {
+  "nombre" : "Uriel",
+  "apellido" : "Cota",
+  "correo" : "uscotap@gmail.com",
+  "contrasena" : "12345678",
+  "direccion" : "Pisos Picados",
+  "fecha_Nacimiento" : "29/06/2005",
+  "telefono" : "612 666 9999",
+  "ciudadEstado" : "La Paz B.C.S."
+}, {
+  "nombre" : "Mario",
+  "apellido" : "Cardenas",
+  "correo" : "armandocadenas@gmail.com",
+  "contrasena" : "88888888",
+  "direccion" : "Señorio de la Sal",
+  "fecha_Nacimiento" : "09/02/2001",
+  "telefono" : "612 777 0000",
+  "ciudadEstado" : "Los Mochis / Sinaloa"
+}, {
+  "nombre" : "Jaimico",
+  "apellido" : "Ventana",
+  "correo" : "jaimicowindow@gmail.com",
+  "contrasena" : "87654321",
+  "direccion" : "Conductos Cambia",
+  "fecha_Nacimiento" : "09/06/2001",
+  "telefono" : "612 000 9999",
+  "ciudadEstado" : "Culiacan / Sinaloa"
+}, {
+  "nombre" : "Javier",
+  "apellido" : "Ramirez",
+  "correo" : "JRaminez@hotmail.com",
+  "contrasena" : "12121212",
+  "direccion" : "Parque Placentero",
+  "fecha_Nacimiento" : "09/06/2003",
+  "telefono" : "612 555 6665",
+  "ciudadEstado" : "Los Cabos / BCS"
+}, {
+  "nombre" : "Jose",
+  "apellido" : "Perez",
+  "correo" : "Perez39@hotmail.com",
+  "contrasena" : "12345678",
+  "direccion" : "Señorio de la Sal",
+  "fecha_Nacimiento" : "07/08/1999",
+  "telefono" : "612 221 2122",
+  "ciudadEstado" : "La Paz / BCS"
+}, {
+  "nombre" : "Pepe",
+  "apellido" : "Pecas",
+  "correo" : "PicaPapas@gmail.com",
+  "contrasena" : "12345678",
+  "direccion" : "Conductos Cambia",
+  "fecha_Nacimiento" : "08/09/1965",
+  "telefono" : "612 912 8212",
+  "ciudadEstado" : "Monterrey / Nuevo Leon"
+}, {
+  "nombre" : "Estrella",
+  "apellido" : "Luna",
+  "correo" : "EsLuna@gmail.com",
+  "contrasena" : "123456789876",
+  "direccion" : "Conductos Cambiantes",
+  "fecha_Nacimiento" : "09/09/2001",
+  "telefono" : "612 777 2221",
+  "ciudadEstado" : "La Paz / B.C.S."
+} ]

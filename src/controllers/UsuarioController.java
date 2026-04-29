@@ -86,7 +86,7 @@ public class UsuarioController {
 	    }
 
 	    int confirmar = JOptionPane.showConfirmDialog(vista,
-	        "¿Estás seguro de que quieres eliminar este usuario?", "Confirmar", JOptionPane.YES_NO_OPTION);
+	        "¿Estás seguro de que quieres eliminar este usuario?", "Alerta", JOptionPane.YES_NO_OPTION);
 
 	    if (confirmar == JOptionPane.YES_OPTION) {
 	        try {

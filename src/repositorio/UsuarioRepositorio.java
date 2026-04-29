@@ -2,6 +2,7 @@ package repositorio;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -11,46 +12,40 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import models.Usuario;
 
 public class UsuarioRepositorio {
 	
-	private final String FILE = "src/files/usuario.csv";
+	private final String FILE = "src/files/usuario.json";
+	private ObjectMapper mapper = new ObjectMapper();
 	
 	public void save(Usuario usuario) throws IOException {
-		
-		try(BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(FILE, true), StandardCharsets.UTF_8))) {
-			writer.write(usuario.toCsv());
-			writer.newLine();
-		}
+		List<Usuario> usuarios = getUsuarios();
+        usuarios.add(usuario);
+        actualizarTodo(usuarios);
 		
 	}
 	
 	public List<Usuario> getUsuarios() throws IOException {
 		
-		List<Usuario> users = new ArrayList<Usuario>();
+		File file = new File(FILE);
 		
-		try (BufferedReader reader = new BufferedReader(new FileReader(FILE))) {
-			String line;
-			
-			while((line = reader.readLine()) != null) {
-				Usuario usuario = Usuario.fromCsv(line);
-				users.add(usuario);
-			}
-		}
+		if (!file.exists() || file.length() == 0) {
+            return new ArrayList<>();
+        }
 		
-		return users;
+        return mapper.readValue(
+        		file, 
+        		new TypeReference<List<Usuario>>() {}
+        );
 		
 	}
 	
 	public void actualizarTodo(List<Usuario> usuarios) throws IOException {
-	    try (BufferedWriter writer = new BufferedWriter(
-	            new OutputStreamWriter(new FileOutputStream(FILE), StandardCharsets.UTF_8))) {
-	        for (Usuario usuario : usuarios) {
-	            writer.write(usuario.toCsv());
-	            writer.newLine();
-	        }
-	    }
+		mapper.writerWithDefaultPrettyPrinter().writeValue(new File(FILE), usuarios);
 	}
 
 	public void eliminar(int index) throws IOException {
