@@ -1,5 +1,7 @@
 package controllers;
 
+import java.awt.Desktop;
+import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JFrame;
@@ -7,6 +9,7 @@ import javax.swing.JOptionPane;
 
 import models.Usuario;
 import repositorio.UsuarioRepositorio;
+import servicios.ExportarPDF;
 import tablemodels.UsuarioTableModel;
 import vista.UsuarioFormDialog;
 import vista.UsuarioVista;
@@ -17,6 +20,7 @@ public class UsuarioController {
 	private UsuarioRepositorio repositorio;
 	private UsuarioTableModel model;
 	private JFrame parentFrame;
+	private ExportarPDF exportarPDF;
 	
 	public UsuarioController(UsuarioVista vista, JFrame parentFrame, UsuarioRepositorio repositorio, UsuarioTableModel model) {
 		
@@ -24,6 +28,7 @@ public class UsuarioController {
 		this.parentFrame = parentFrame;
 		this.repositorio = repositorio;
 		this.model = model;
+		this.exportarPDF = new ExportarPDF();
 
 		registrarListeners();
 	}
@@ -33,6 +38,7 @@ public class UsuarioController {
 		vista.getBotonAgregar().addActionListener(e -> agregar());
 		vista.getBotonEditar().addActionListener(e -> editar());
 		vista.getBotonEliminar().addActionListener(e -> eliminar());
+		vista.getBotonPDF().addActionListener(e -> generarPdf());
 	}
 
 	private void agregar() {
@@ -98,7 +104,25 @@ public class UsuarioController {
 	    }
 	}
 
-	
-	
+	private void generarPdf() {
+	    File file = vista.selectPdfFile();
+
+	    if (file == null) {
+	        return;
+	    }
+
+	    try {
+	        exportarPDF.exportarUsuarios(repositorio.getUsuarios(), file);
+	        if (Desktop.isDesktopSupported()) {
+	            Desktop.getDesktop().open(file);
+	        }
+	    } catch (Exception ex) {
+	        ex.printStackTrace();
+	        JOptionPane.showMessageDialog(vista, "Error al exportar");
+	    }
+	    
+	}
 	
 }
+
+

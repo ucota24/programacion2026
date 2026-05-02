@@ -5,13 +5,16 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.io.File;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 
@@ -24,6 +27,7 @@ public class UsuarioVista extends JPanel{
 	private JButton botonEditar;
 	private JButton botonAgregar;
 	private JButton botonEliminar;
+	private JButton botonPDF;
 	
 	public UsuarioVista() {
 		setLayout(new BorderLayout());
@@ -37,10 +41,12 @@ public class UsuarioVista extends JPanel{
         botonAgregar = new JButton("Agregar");
         botonEditar = new JButton("Editar");
         botonEliminar = new JButton("Eliminar");
+        botonPDF = new JButton("Exportar PDF");
 
         panelButtons.add(botonAgregar);
         panelButtons.add(botonEditar);
         panelButtons.add(botonEliminar);
+        panelButtons.add(botonPDF);
         
         add(panelButtons, BorderLayout.NORTH);
         add(new JScrollPane(table), BorderLayout.CENTER);
@@ -110,6 +116,34 @@ public class UsuarioVista extends JPanel{
         
 	}
 	
+	public File selectPdfFile() {
+	    String path = System.getProperty("user.home");
+	    JFileChooser chooser = new JFileChooser(path);
+
+	    chooser.setSelectedFile(new File("reporte-usuarios.pdf"));
+
+	    chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+	    chooser.setAcceptAllFileFilterUsed(false);
+
+	    FileNameExtensionFilter filter = new FileNameExtensionFilter("Documentos PDF", "pdf");
+	    chooser.addChoosableFileFilter(filter);
+	    chooser.setFileFilter(filter);
+
+	    int option = chooser.showDialog(this, "Exportar PDF de usuarios");
+
+	    if (option != JFileChooser.APPROVE_OPTION) {
+	        return null;
+	    }
+
+	    File file = chooser.getSelectedFile();
+
+	    if (!file.getName().toLowerCase().endsWith(".pdf")) {
+	        file = new File(file.getAbsolutePath() + ".pdf");
+	    }
+
+	    return file;
+	}
+	
 	public JTable getTable() {
 		return table;
 	}
@@ -125,10 +159,16 @@ public class UsuarioVista extends JPanel{
     public JButton getBotonEliminar() {
         return botonEliminar;
     }
+    
+    public JButton getBotonPDF() {
+        return botonPDF;
+    }
 	
     public int getSelectedRow() {
     	return table.getSelectedRow();
     }
+    
+    
 	
 	
 
