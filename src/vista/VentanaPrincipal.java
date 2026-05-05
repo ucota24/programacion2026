@@ -37,12 +37,10 @@ public class VentanaPrincipal extends JFrame {
 	
 	public VentanaPrincipal() {
 		
-		setSize(1100,500);
-		setTitle("                         "
-				+ "                                                                                                               "
-				+ "SneakerShop");
+		setSize(1200,500);
+		setTitle("SneakerShop");
 		setLocationRelativeTo(null);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		Image myIcon = tk.getImage("src/image/logoventana1.png");
@@ -98,6 +96,16 @@ public class VentanaPrincipal extends JFrame {
 		JMenuBar mb = new JMenuBar();
 		setJMenuBar(mb);
 		
+		JMenu ajustes = new JMenu("Ajustes");
+		mb.add(ajustes);
+		
+		JMenuItem tamanio = new JMenuItem("Ventana original");
+		tamanio.addActionListener(e -> {
+		    setSize(1200, 500);
+		    setLocationRelativeTo(null);
+		});
+		ajustes.add(tamanio);
+		
 		JMenu hombre = new JMenu("Hombre");
 		hombre.setMnemonic(KeyEvent.VK_H);
 		mb.add(hombre);
@@ -149,7 +157,14 @@ public class VentanaPrincipal extends JFrame {
 		tema.add(temaOscuro);
 		cuenta.add(tema);
 		
-		
+	}
+	
+	public void setWindowSize(int width, int height) {
+		setSize(width, height);
+	}
+	
+	public void setWindowLocation(int x, int y) {
+		setLocation(x, y);
 	}
 
 	
