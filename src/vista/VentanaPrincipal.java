@@ -19,6 +19,8 @@ import javax.swing.UIManager;
 
 import com.formdev.flatlaf.FlatLightLaf;
 
+import utils.GestorTema;
+
 public class VentanaPrincipal extends JFrame {
 	
 	public static final String INICIO = "INICIO";
@@ -46,7 +48,7 @@ public class VentanaPrincipal extends JFrame {
 		Image myIcon = tk.getImage("src/image/logoventana1.png");
 		setIconImage(myIcon);
 		
-		FlatLightLaf.setup();
+		//FlatLightLaf.setup();
 		UIManager.put("TitlePane.menuBarEmbedded", false); 
 		
 		setMenu();
@@ -131,8 +133,32 @@ public class VentanaPrincipal extends JFrame {
 		});
 		cuenta.add(metodoPago);
 		
-}
+		JMenu tema = new JMenu("Cambiar tema");
 
+		JMenuItem temaClaro = new JMenuItem("Claro");
+		temaClaro.addActionListener(e -> {
+		    GestorTema.apply("light");
+		});
+
+		JMenuItem temaOscuro = new JMenuItem("Oscuro");
+		temaOscuro.addActionListener(e -> {
+		    GestorTema.apply("dark");
+		});
+
+		tema.add(temaClaro);
+		tema.add(temaOscuro);
+		cuenta.add(tema);
+		
+		
+	}
+
+	
+	
+	
+	
+	
+	
+	
 	
 
 }

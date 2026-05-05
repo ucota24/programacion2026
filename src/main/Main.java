@@ -11,6 +11,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 
 import controllers.LoginController;
 import controllers.PrincipalController;
+import utils.GestorTema;
 import vista.FormularioRegistro;
 import vista.LoginVentana;
 import vista.LoginVista;
@@ -21,7 +22,8 @@ public class Main {
 
     public static void main(String[] args) {
         
-        FlatLightLaf.setup();
+        //FlatLightLaf.setup();
+        GestorTema.applySavedTheme();
         UIManager.put("TextComponent.arc", 8); // bordes redondeados en los campos
         UIManager.put("Button.arc", 8); // bordes redondeados en los botones
         UIManager.put("Component.focusWidth", 1);
@@ -35,10 +37,10 @@ public class Main {
         
         //FormularioRegistro registro = new FormularioRegistro();
 		
-      	MetodoPagoVentana metodoPago = new MetodoPagoVentana();
+      	//MetodoPagoVentana metodoPago = new MetodoPagoVentana();
       		
-        /*VentanaPrincipal main = new VentanaPrincipal();
-        new PrincipalController(main);*/
+        VentanaPrincipal main = new VentanaPrincipal();
+        new PrincipalController(main);
 
     }
 
