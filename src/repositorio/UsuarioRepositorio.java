@@ -19,7 +19,7 @@ import models.Usuario;
 
 public class UsuarioRepositorio {
 	
-	private final String FILE = "src/files/usuario.json";
+	private final String FILE = "." + File.separator + "data" + File.separator + "usuarios.json";
 	private ObjectMapper mapper = new ObjectMapper();
 	
 	public void save(Usuario usuario) throws IOException {
@@ -33,6 +33,8 @@ public class UsuarioRepositorio {
 		
 		File file = new File(FILE);
 		
+		file.getParentFile().mkdirs();
+		
 		if (!file.exists() || file.length() == 0) {
             return new ArrayList<>();
         }
@@ -45,7 +47,10 @@ public class UsuarioRepositorio {
 	}
 	
 	public void actualizarTodo(List<Usuario> usuarios) throws IOException {
-		mapper.writerWithDefaultPrettyPrinter().writeValue(new File(FILE), usuarios);
+		File file = new File(FILE);
+		file.getParentFile().mkdir();
+		
+	    mapper.writeValue(file, usuarios);
 	}
 
 	public void eliminar(int index) throws IOException {
