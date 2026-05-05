@@ -35,10 +35,10 @@ public class Main {
         
         //FormularioRegistro registro = new FormularioRegistro();
 		
-      	//MetodoPagoVentana metodoPago = new MetodoPagoVentana();
+      	MetodoPagoVentana metodoPago = new MetodoPagoVentana();
       		
-        VentanaPrincipal main = new VentanaPrincipal();
-        new PrincipalController(main);
+        /*VentanaPrincipal main = new VentanaPrincipal();
+        new PrincipalController(main);*/
 
     }
 

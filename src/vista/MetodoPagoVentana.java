@@ -40,7 +40,7 @@ public class MetodoPagoVentana extends JFrame {
 	public ButtonGroup grupoMetodo;
 
 	public MetodoPagoVentana() {
-		setSize(400, 480);
+		setSize(400, 500);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setResizable(true);
 		setTitle("SneakerShop");
@@ -95,10 +95,10 @@ public class MetodoPagoVentana extends JFrame {
 
 		JPanel encabezadoMP = new JPanel();
 		encabezadoMP.setLayout(new BoxLayout(encabezadoMP, BoxLayout.Y_AXIS));
-		encabezadoMP.setBorder(BorderFactory.createEmptyBorder(10, 15, 12, 40));
+		encabezadoMP.setBorder(BorderFactory.createEmptyBorder(25, 15, 12, 40));
 
-		JLabel titulo = new JLabel("Metodo de Pago");
-		titulo.setFont(new Font("Arial", Font.BOLD, 23));
+		JLabel titulo = new JLabel("Metodo de pago");
+		titulo.setFont(new Font("Segoe UI", Font.BOLD, 23));
 		titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
 		encabezadoMP.add(titulo);
 
@@ -112,11 +112,11 @@ public class MetodoPagoVentana extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-		JLabel lbl = new JLabel("                              Selecciona un metodo");
+		/*JLabel lbl = new JLabel("                              Selecciona un metodo");
 		lbl.setFont(new Font("Segoe UI", Font.BOLD, 13));
 		lbl.setAlignmentX(Component.LEFT_ALIGNMENT);
 		panel.add(lbl);
-		panel.add(Box.createVerticalStrut(8));
+		panel.add(Box.createVerticalStrut(8));*/
 
 		JPanel opcionesPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 0));
 		opcionesPanel.add(rbMasterCard);
