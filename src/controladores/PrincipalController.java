@@ -1,4 +1,4 @@
-package controllers;
+package controladores;
 
 import java.awt.Dimension;
 import java.awt.Point;

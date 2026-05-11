@@ -1,4 +1,4 @@
-package controllers;
+package controladores;
 
 import java.awt.Desktop;
 import java.io.File;

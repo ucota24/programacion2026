@@ -9,8 +9,9 @@ import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 
-import controllers.LoginController;
-import controllers.PrincipalController;
+import controladores.LoginController;
+import controladores.MetodoPagoController;
+import controladores.PrincipalController;
 import utils.GestorTema;
 import vista.FormularioRegistro;
 import vista.LoginVentana;
@@ -37,10 +38,10 @@ public class Main {
         
         //FormularioRegistro registro = new FormularioRegistro();
 		
-      	//MetodoPagoVentana metodoPago = new MetodoPagoVentana();
+      	MetodoPagoVentana metodoPago = new MetodoPagoVentana();
       		
-        VentanaPrincipal main = new VentanaPrincipal();
-        new PrincipalController(main);
+        /*VentanaPrincipal main = new VentanaPrincipal();
+        new PrincipalController(main);*/
 
     }
 
