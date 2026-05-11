@@ -14,13 +14,15 @@ import java.util.List;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 import models.Usuario;
 
 public class UsuarioRepositorio {
 	
 	private final String FILE = "." + File.separator + "data" + File.separator + "usuarios.json";
-	private ObjectMapper mapper = new ObjectMapper();
+	private ObjectMapper mapper = new ObjectMapper()
+	        .enable(SerializationFeature.INDENT_OUTPUT);
 	
 	public void save(Usuario usuario) throws IOException {
 		List<Usuario> usuarios = getUsuarios();

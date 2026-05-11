@@ -55,7 +55,9 @@ public class LoginController {
     				JOptionPane.showMessageDialog(vista.getLoginVentana(), 
         					"Sesion Iniciada!", "Iniciar Sesion", JOptionPane.INFORMATION_MESSAGE);
     				
-                new VentanaPrincipal();
+    				VentanaPrincipal ventana = new VentanaPrincipal();
+    				ventana.botonUsuarios.setVisible(false);
+    				new PrincipalController(ventana);
                 vista.getLoginVentana().dispose();
             }
         } catch (InvalidUserException ex) {

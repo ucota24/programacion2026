@@ -33,12 +33,12 @@ public class Main {
         
 		//UIManager.put(" ", AppFont.normal());
         
-        /*LoginVentana ventanita = new LoginVentana();
-		new LoginController(ventanita.getLoginVista());*/
+        LoginVentana ventanita = new LoginVentana();
+		new LoginController(ventanita.getLoginVista());
         
         //FormularioRegistro registro = new FormularioRegistro();
 		
-      	MetodoPagoVentana metodoPago = new MetodoPagoVentana();
+      	//MetodoPagoVentana metodoPago = new MetodoPagoVentana();
       		
         /*VentanaPrincipal main = new VentanaPrincipal();
         new PrincipalController(main);*/
