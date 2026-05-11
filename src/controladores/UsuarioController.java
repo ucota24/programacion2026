@@ -13,6 +13,8 @@ import servicios.ExportarPDF;
 import tablemodels.UsuarioTableModel;
 import vista.UsuarioFormDialog;
 import vista.UsuarioVista;
+import excepciones.UsuarioDuplicadoException;
+
 
 public class UsuarioController {
 	
@@ -51,6 +53,9 @@ public class UsuarioController {
 	            Usuario nuevo = form.getUsuarioFromForm();
 	            repositorio.save(nuevo);
 	            model.setUsuarios(repositorio.getUsuarios());
+	            
+	        } catch (UsuarioDuplicadoException ex) {
+	            JOptionPane.showMessageDialog(vista, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 	            
 	        } catch (IOException ex) {
 	            JOptionPane.showMessageDialog(vista, "Error al guardar" + ex.getMessage());

@@ -16,6 +16,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
+import excepciones.UsuarioDuplicadoException;
 import models.Usuario;
 
 public class UsuarioRepositorio {
@@ -24,8 +25,15 @@ public class UsuarioRepositorio {
 	private ObjectMapper mapper = new ObjectMapper()
 	        .enable(SerializationFeature.INDENT_OUTPUT);
 	
-	public void save(Usuario usuario) throws IOException {
+	public void save(Usuario usuario) throws IOException, UsuarioDuplicadoException {
 		List<Usuario> usuarios = getUsuarios();
+		
+		for (Usuario u : usuarios) {
+	        if (u.getCorreo().equals(usuario.getCorreo())) {
+	            throw new UsuarioDuplicadoException("El correo " + usuario.getCorreo() + " ya esta registrado");
+	        }
+	    }
+		
         usuarios.add(usuario);
         actualizarTodo(usuarios);
 		

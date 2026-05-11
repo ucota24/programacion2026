@@ -35,6 +35,10 @@ public class MetodoPagoController {
         
         vista.getBotonCancelar().addActionListener(e -> cerrarVentana());
         
+        vista.rbMasterCard.addActionListener(e -> vista.lblErrorMetodoPago.setText(""));
+        vista.rbMercadoPago.addActionListener(e -> vista.lblErrorMetodoPago.setText(""));
+        vista.rbPayPal.addActionListener(e -> vista.lblErrorMetodoPago.setText(""));
+        
         vista.campoNombreTarjeta.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
 			public void removeUpdate(DocumentEvent e) {

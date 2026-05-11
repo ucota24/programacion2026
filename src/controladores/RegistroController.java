@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import excepciones.UsuarioDuplicadoException;
 import models.Usuario;
 import repositorio.UsuarioRepositorio;
 import vista.FormularioRegistro;
@@ -43,10 +44,10 @@ public class RegistroController {
                         vista.campoApellido.getText().trim(),
                         vista.campoCorreo.getText().trim(),
                         String.valueOf(vista.campoContrasena.getPassword()),
+                        vista.campoCiudadEstado.getText().trim(),
                         vista.campoDireccion.getText().trim(),
                         vista.campoFNacimiento.getText().trim(),
-                        vista.campoTelefono.getText().trim(),
-                        vista.campoCiudadEstado.getText().trim()
+                        vista.campoTelefono.getText().trim()
                     );
                 UsuarioRepositorio repositorio = new UsuarioRepositorio();
                 try {
@@ -56,7 +57,11 @@ public class RegistroController {
                 this.vista.dispose();
                 
                 VentanaPrincipal ventana = new VentanaPrincipal();
+                //ventana.botonUsuarios.setVisible(false);
                 new PrincipalController(ventana);
+                
+                } catch (UsuarioDuplicadoException ex) {
+                    vista.lblErrorCorreo.setText("Este correo ya esta registrado");
                 
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(vista, 
