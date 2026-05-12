@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import excepciones.InvalidPasswordException;
 import excepciones.InvalidUserException;
 import models.Usuario;
+import repositorio.LoginRepositorio;
 import vista.FormularioRegistro;
 import vista.LoginVista;
 import vista.VentanaPrincipal;
@@ -17,9 +18,11 @@ import vista.VentanaPrincipal;
 public class LoginController {
 	
 	private LoginVista vista;
+	private LoginRepositorio loginRepositorio;
 	
 	public LoginController(LoginVista vista) {
 		this.vista = vista;
+		this.loginRepositorio = new LoginRepositorio();
 		registrarListeners();
 	}
 	
@@ -47,52 +50,36 @@ public class LoginController {
     }
 	
 	private void alertaLogin() {
-        Usuario usuario = new Usuario(vista.getCorreo(),vista.getContrasena()
-        );
-
-        try {
-    			if(validacionLogin(usuario)) {
-    				JOptionPane.showMessageDialog(vista.getLoginVentana(), 
-        					"Sesion Iniciada!", "Iniciar Sesion", JOptionPane.INFORMATION_MESSAGE);
-    				
-    				VentanaPrincipal ventana = new VentanaPrincipal();
-    				ventana.botonUsuarios.setVisible(false);
-    				new PrincipalController(ventana);
-                vista.getLoginVentana().dispose();
-            }
-        } catch (InvalidUserException ex) {
-        		vista.mostrarErrorCorreo(ex.getMessage());
-
-		} catch (InvalidPasswordException ex) {
-			vista.mostrarErrorContrasena(ex.getMessage());
-        }
-    }
-	
-	private boolean validacionLogin(Usuario usuario)
-            throws InvalidUserException, InvalidPasswordException {
-
 		vista.reinicioMensajeError();
-        boolean valido = true;
-
-        if (usuario.getCorreo().trim().isEmpty()) {
-        		vista.mostrarErrorCorreo("El correo electronico es OBLIGATORIO");
-            return false;
+		
+		String correo = vista.getCorreo();
+        String contrasena = vista.getContrasena();
+        
+        if (correo.trim().isEmpty()) {
+            vista.mostrarErrorCorreo("El correo electronico es OBLIGATORIO");
+            return;
         }
 
-        if (!usuario.getCorreo().trim().isEmpty() && !usuario.getCorreo().equals("ucota@gmail.com")) {
-            throw new InvalidUserException("El correo no coincide");
+        if (contrasena.trim().isEmpty()) {
+            vista.mostrarErrorContrasena("La contraseña es OBLIGATORIA");
+            return;
+        }
+
+        Usuario usuario = loginRepositorio.login(correo, contrasena);
+
+        if (usuario == null) {
+            vista.mostrarErrorContrasena("Datos ingresados incorrectos");
+            return;
         }
         
-        if (usuario.getContrasena().trim().isEmpty()) {
-            vista.mostrarErrorContrasena("La contraseña es OBLIGATORIA");
-            return false;
-        }
-
-        if (!usuario.getContrasena().trim().isEmpty() && !usuario.getContrasena().equals("1234")) {
-            throw new InvalidPasswordException("La contraseña no coincide");
-        }
-
-        return valido;
+        JOptionPane.showMessageDialog(vista.getLoginVentana(), 
+                "Sesion Iniciada!", "Iniciar Sesion", JOptionPane.INFORMATION_MESSAGE);
+        
+        VentanaPrincipal ventana = new VentanaPrincipal();
+        ventana.botonUsuarios.setVisible(false);
+        new PrincipalController(ventana);
+        vista.getLoginVentana().dispose();
+        
     }
 
     private void abrirRegistro() {

@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Usuario {
 	
+	private int id;
 	private String nombre;
 	private String apellido;
 	private String correo;
@@ -19,7 +20,8 @@ public class Usuario {
 		
     }
 
-	public Usuario(String correo, String contrasena) {
+	public Usuario(int id,String correo, String contrasena) {
+		this.id = id;
 		this.correo = correo;
 		this.contrasena = contrasena;
 	}
@@ -35,6 +37,14 @@ public class Usuario {
         this.direccion = direccion;
         this.fecha_Nacimiento = fecha_Nacimiento;
         this.telefono = telefono;
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getNombre() {

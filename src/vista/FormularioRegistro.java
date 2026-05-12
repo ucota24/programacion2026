@@ -279,6 +279,17 @@ public class FormularioRegistro extends JFrame {
                 }
             });
         }
+        
+        for (JTextField campo : new JTextField[]{campoTelefono, campoFNacimiento}) {
+            campo.addKeyListener(new java.awt.event.KeyAdapter() {
+                @Override
+                public void keyTyped(KeyEvent e) {
+                    if (!Character.isDigit(e.getKeyChar()))
+                        e.consume();
+                }
+            });
+        }
+        
     }
 	
 	
