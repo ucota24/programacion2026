@@ -52,7 +52,7 @@ public class UsuarioController {
 	        try {
 	            Usuario nuevo = form.getUsuarioFromForm();
 	            repositorio.save(nuevo);
-	            model.setUsuarios(repositorio.getUsuarios());
+	            model.addRow(nuevo);
 	            
 	        } catch (UsuarioDuplicadoException ex) {
 	            JOptionPane.showMessageDialog(vista, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -80,9 +80,9 @@ public class UsuarioController {
 	            Usuario editado = form.getUsuarioFromForm();
 	            editado.setId(seleccionado.getId());
 	            repositorio.actualizar(seleccionado.getId(), editado);
-	            model.setUsuarios(repositorio.getUsuarios());
+	            model.updateRow(fila, editado);
 	            
-	        } catch (IOException ex) {
+	        } catch (Exception ex) {
 	            JOptionPane.showMessageDialog(vista,"Error al editar" + ex.getMessage());
 	        }
 	    }
@@ -101,12 +101,8 @@ public class UsuarioController {
 	        "¿Estás seguro de que quieres eliminar este usuario?", "Alerta", JOptionPane.YES_NO_OPTION);
 
 	    if (confirmar == JOptionPane.YES_OPTION) {
-	        try {
-	            repositorio.eliminar(model.getUsuarioAt(fila).getId());
-	            model.setUsuarios(repositorio.getUsuarios());
-	        } catch (IOException ex) {
-	            JOptionPane.showMessageDialog(vista, "Error al eliminar" + ex.getMessage());
-	        }
+	        repositorio.eliminar(model.getUsuarioAt(fila).getId());
+			model.removeRow(fila);
 	    }
 	}
 

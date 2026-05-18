@@ -56,7 +56,6 @@ public class UsuarioTableModel extends AbstractTableModel{
 		}
 		
 		return null;
-		
 	}
 	
 	public Usuario getUsuarioAt(int row) {
@@ -66,6 +65,22 @@ public class UsuarioTableModel extends AbstractTableModel{
 	public void setUsuarios(List<Usuario> usuarios) {
 	    this.usuarios = usuarios;
 	    fireTableDataChanged();
+	}
+	
+	public void removeRow(int row) {
+	    usuarios.remove(row);
+	    fireTableRowsDeleted(row, row);
+	}
+
+	public void addRow(Usuario usuario) {
+	    int row = usuarios.size();
+	    usuarios.add(usuario);
+	    fireTableRowsInserted(row, row);
+	}
+
+	public void updateRow(int row, Usuario usuario) {
+	    usuarios.set(row, usuario);
+	    fireTableRowsUpdated(row, row);
 	}
 
 }
