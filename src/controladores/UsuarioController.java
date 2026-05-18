@@ -78,7 +78,8 @@ public class UsuarioController {
 		if (form.isGuardar()) {
 	        try {
 	            Usuario editado = form.getUsuarioFromForm();
-	            repositorio.actualizar(fila, editado);
+	            editado.setId(seleccionado.getId());
+	            repositorio.actualizar(seleccionado.getId(), editado);
 	            model.setUsuarios(repositorio.getUsuarios());
 	            
 	        } catch (IOException ex) {
@@ -101,7 +102,7 @@ public class UsuarioController {
 
 	    if (confirmar == JOptionPane.YES_OPTION) {
 	        try {
-	            repositorio.eliminar(fila);
+	            repositorio.eliminar(model.getUsuarioAt(fila).getId());
 	            model.setUsuarios(repositorio.getUsuarios());
 	        } catch (IOException ex) {
 	            JOptionPane.showMessageDialog(vista, "Error al eliminar" + ex.getMessage());

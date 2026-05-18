@@ -150,7 +150,8 @@ public class UsuarioFormDialog extends JDialog {
         		txtCiudadEstado.getText(),
         		txtDireccion.getText(),
         		txtFechaNacimiento.getText(),
-        		txtTelefono.getText());
+        		txtTelefono.getText(),
+        		"ADMIN");
     }
     
     public boolean isGuardar() {

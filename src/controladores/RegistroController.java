@@ -48,7 +48,8 @@ public class RegistroController {
                         vista.campoCiudadEstado.getText().trim(),
                         vista.campoDireccion.getText().trim(),
                         vista.campoFNacimiento.getText().trim(),
-                        vista.campoTelefono.getText().trim()
+                        vista.campoTelefono.getText().trim(),
+                        "ADMIN"
                     );
                 UsuarioRepositorio repositorio = new UsuarioRepositorio();
                 try {

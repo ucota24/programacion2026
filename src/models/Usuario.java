@@ -28,7 +28,7 @@ public class Usuario {
 	}
 	
 	public Usuario(String nombre, String apellido, String correo, String contrasena, 
-			String ciudadEstado, String direccion, String fecha_Nacimiento, String telefono) {
+			String ciudadEstado, String direccion, String fecha_Nacimiento, String telefono, String rol) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -38,6 +38,20 @@ public class Usuario {
         this.direccion = direccion;
         this.fecha_Nacimiento = fecha_Nacimiento;
         this.telefono = telefono;
+        this.rol = rol;
+	}
+	
+	public Usuario(int id, String nombre, String apellido, String correo,String direccion, String fecha_Nacimiento, String telefono, 
+	        String ciudadEstado, String rol) {
+	    this.id = id;
+	    this.nombre = nombre;
+	    this.apellido = apellido;
+	    this.correo = correo;
+	    this.direccion = direccion;
+	    this.fecha_Nacimiento = fecha_Nacimiento;
+	    this.telefono = telefono;
+	    this.ciudadEstado = ciudadEstado;
+	    this.rol = rol;
 	}
 	
 	public String getRol() {
@@ -126,7 +140,7 @@ public class Usuario {
 	        + "Fecha de Nacimiento: " + fecha_Nacimiento + "Telfono: " + telefono;
 	}
 
-	public String toCsv() {
+	/*public String toCsv() {
 		return nombre + "," + apellido + "," + correo + "," + contrasena + "," + ciudadEstado 
 				+ "," + direccion + "," + fecha_Nacimiento + "," + telefono;
 	}
@@ -146,7 +160,7 @@ public class Usuario {
 	    
 	    return new Usuario(nombre, apellido, correo, contrasena, ciudadEstado, direccion, fecha_Nacimiento, telefono);
 		
-	}
+	}*/
 	
 	
 	

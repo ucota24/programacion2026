@@ -13,7 +13,7 @@ public class LoginRepositorio {
 	
 	public Usuario login(String correo, String contrasena) {
 
-        String sql = "SELECT id, correo, contrasena, nombre, rol, FROM usuarios WHERE correo = ? " /*AND contrasena = ?"*/;
+        String sql = "SELECT id, correo, contrasena, nombre, rol FROM usuarios WHERE correo = ? " /*AND contrasena = ?"*/;
 
         try (
             Connection conn = DatabaseConnection.getConnection();
