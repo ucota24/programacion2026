@@ -11,6 +11,7 @@ import excepciones.InvalidPasswordException;
 import excepciones.InvalidUserException;
 import models.Usuario;
 import repositorio.LoginRepositorio;
+import utils.Sesion;
 import vista.FormularioRegistro;
 import vista.LoginVista;
 import vista.VentanaPrincipal;
@@ -72,12 +73,18 @@ public class LoginController {
             return;
         }
         
-        JOptionPane.showMessageDialog(vista.getLoginVentana(), 
-                "Sesion Iniciada!", "Iniciar Sesion", JOptionPane.INFORMATION_MESSAGE);
+        Sesion.login(usuario);
+
+        if (Sesion.getRole().equals("ADMIN")) {
+            VentanaPrincipal ventana = new VentanaPrincipal();
+            ventana.botonUsuarios.setVisible(true);
+            new PrincipalController(ventana);
+        } else {
+            VentanaPrincipal ventana = new VentanaPrincipal();
+            ventana.botonUsuarios.setVisible(false);
+            new PrincipalController(ventana);
+        }
         
-        VentanaPrincipal ventana = new VentanaPrincipal();
-        ventana.botonUsuarios.setVisible(false);
-        new PrincipalController(ventana);
         vista.getLoginVentana().dispose();
         
     }

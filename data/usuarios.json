@@ -1,4 +1,6 @@
 [ {
+  "rol" : null,
+  "id" : 0,
   "nombre" : "Uriel",
   "apellido" : "Cota",
   "correo" : "uscotap@gmail.com",
@@ -8,6 +10,8 @@
   "telefono" : "612 666 9999",
   "ciudadEstado" : "La Paz B.C.S."
 }, {
+  "rol" : null,
+  "id" : 0,
   "nombre" : "Mario",
   "apellido" : "Cardenas",
   "correo" : "armandocadenas@gmail.com",
@@ -17,6 +21,8 @@
   "telefono" : "612 777 0000",
   "ciudadEstado" : "Los Mochis / Sinaloa"
 }, {
+  "rol" : null,
+  "id" : 0,
   "nombre" : "Jaimico",
   "apellido" : "Ventana",
   "correo" : "jaimicowindow@gmail.com",
@@ -26,6 +32,8 @@
   "telefono" : "612 000 9999",
   "ciudadEstado" : "Culiacan / Sinaloa"
 }, {
+  "rol" : null,
+  "id" : 0,
   "nombre" : "Javier",
   "apellido" : "Ramirez",
   "correo" : "JRaminez@hotmail.com",
@@ -35,6 +43,8 @@
   "telefono" : "612 555 6665",
   "ciudadEstado" : "Los Cabos / BCS"
 }, {
+  "rol" : null,
+  "id" : 0,
   "nombre" : "Jose",
   "apellido" : "Perez",
   "correo" : "Perez39@hotmail.com",
@@ -44,6 +54,8 @@
   "telefono" : "612 221 2122",
   "ciudadEstado" : "La Paz / BCS"
 }, {
+  "rol" : null,
+  "id" : 0,
   "nombre" : "Pepe",
   "apellido" : "Pecas",
   "correo" : "PicaPapas@gmail.com",
@@ -53,6 +65,8 @@
   "telefono" : "612 912 8212",
   "ciudadEstado" : "Monterrey / Nuevo Leon"
 }, {
+  "rol" : null,
+  "id" : 0,
   "nombre" : "Estrella",
   "apellido" : "Luna",
   "correo" : "EsLuna@gmail.com",
@@ -61,4 +75,26 @@
   "fecha_Nacimiento" : "09/09/2001",
   "telefono" : "612 777 2221",
   "ciudadEstado" : "La Paz / B.C.S."
+}, {
+  "rol" : null,
+  "id" : 0,
+  "nombre" : "Asus",
+  "apellido" : "Tuf",
+  "correo" : "gaming@gmail.com",
+  "contrasena" : "$2a$10$JpHWS9E2Fm3IXjY4M9UfruoGhy9kCSOMSY4UCtmLXZPaFI7.1/L8G",
+  "direccion" : "Parque Placentero",
+  "fecha_Nacimiento" : "06092003",
+  "telefono" : "6129991212",
+  "ciudadEstado" : "Los Mochis / Sinaloa"
+}, {
+  "rol" : null,
+  "id" : 0,
+  "nombre" : "mario",
+  "apellido" : "window",
+  "correo" : "armando@gmail.com",
+  "contrasena" : "$2a$10$HgVpgc61Ox1XrS1DVyVHw.a7PCLLLryJmtjKKWAq7zVeOsr.9kXOm",
+  "direccion" : "Señorio de la Sal",
+  "fecha_Nacimiento" : "09052003",
+  "telefono" : "6125669999",
+  "ciudadEstado" : "Los Mochis / Sinaloa"
 } ]

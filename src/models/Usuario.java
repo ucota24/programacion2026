@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Usuario {
 	
+	private String rol;
 	private int id;
 	private String nombre;
 	private String apellido;
@@ -37,6 +38,14 @@ public class Usuario {
         this.direccion = direccion;
         this.fecha_Nacimiento = fecha_Nacimiento;
         this.telefono = telefono;
+	}
+	
+	public String getRol() {
+	    return rol;
+	}
+
+	public void setRol(String rol) {
+	    this.rol = rol;
 	}
 	
 	public int getId() {

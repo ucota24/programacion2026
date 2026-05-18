@@ -14,6 +14,7 @@ import repositorio.UsuarioRepositorio;
 import vista.FormularioRegistro;
 import vista.LoginVentana;
 import vista.VentanaPrincipal;
+import utils.PasswordUtils;
 
 public class RegistroController {
 	
@@ -43,7 +44,7 @@ public class RegistroController {
                         vista.campoNombre.getText().trim(),
                         vista.campoApellido.getText().trim(),
                         vista.campoCorreo.getText().trim(),
-                        String.valueOf(vista.campoContrasena.getPassword()),
+                        utils.PasswordUtils.hashPassword(String.valueOf(vista.campoContrasena.getPassword())),
                         vista.campoCiudadEstado.getText().trim(),
                         vista.campoDireccion.getText().trim(),
                         vista.campoFNacimiento.getText().trim(),
@@ -57,7 +58,7 @@ public class RegistroController {
                 this.vista.dispose();
                 
                 VentanaPrincipal ventana = new VentanaPrincipal();
-                //ventana.botonUsuarios.setVisible(false);
+                ventana.botonUsuarios.setVisible(false);
                 new PrincipalController(ventana);
                 
                 } catch (UsuarioDuplicadoException ex) {
