@@ -107,7 +107,9 @@ public class UsuarioFormDialog extends JDialog {
         panel.add(createField("Nombre:", txtNombre));
         panel.add(createField("Apellido:", txtApellido));
         panel.add(createField("Correo Electronico:", txtCorreo));
-        panel.add(createField("Contraseña:", txtContrasena));
+        if (usuario == null) {
+            panel.add(createField("Contraseña:", txtContrasena));
+        }
         panel.add(createField("Ciudad / Estado:", txtCiudadEstado));
         panel.add(createField("Direccion:", txtDireccion));
         panel.add(createField("Fecha Nacimiento:", txtFechaNacimiento));
@@ -143,10 +145,14 @@ public class UsuarioFormDialog extends JDialog {
     }
     
     public Usuario getUsuarioFromForm() {
+    	
+        String contrasena = usuario != null ? usuario.getContrasena() : new String(txtContrasena.getPassword());
+
+    	
         return new Usuario(txtNombre.getText(),
         		txtApellido.getText(),
         		txtCorreo.getText(),
-        		new String(txtContrasena.getPassword()),
+        		contrasena,
         		txtCiudadEstado.getText(),
         		txtDireccion.getText(),
         		txtFechaNacimiento.getText(),
