@@ -50,7 +50,7 @@ public class RegistroController {
                         vista.campoDireccion.getText().trim(),
                         vista.campoFNacimiento.getText().trim(),
                         vista.campoTelefono.getText().trim(),
-                        "ADMIN"
+                        "USUARIO"
                     );
                 UsuarioRepositorio repositorio = new UsuarioRepositorio();
                 try {
@@ -61,7 +61,11 @@ public class RegistroController {
                 this.vista.dispose();
                 
                 VentanaPrincipal ventana = new VentanaPrincipal();
-                ventana.botonUsuarios.setVisible(false);
+                if (Sesion.getRole().equals("ADMIN")) {
+                	ventana.botonUsuarios.setVisible(true);
+                } else {
+                	ventana.botonUsuarios.setVisible(false);
+                }
                 new PrincipalController(ventana);
                 
                 } catch (UsuarioDuplicadoException ex) {
