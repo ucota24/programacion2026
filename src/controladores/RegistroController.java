@@ -15,6 +15,7 @@ import vista.FormularioRegistro;
 import vista.LoginVentana;
 import vista.VentanaPrincipal;
 import utils.PasswordUtils;
+import utils.Sesion;
 
 public class RegistroController {
 	
@@ -54,6 +55,7 @@ public class RegistroController {
                 UsuarioRepositorio repositorio = new UsuarioRepositorio();
                 try {
                 	repositorio.save(usuario);
+                	Sesion.login(usuario);
                 javax.swing.JOptionPane.showMessageDialog(vista,
                         "Has sido Registrado!", "Bienvenid@", JOptionPane.INFORMATION_MESSAGE);
                 this.vista.dispose();

@@ -40,7 +40,7 @@ public class UsuarioRepositorio {
 	    		+ "fecha_nacimiento, telefono, rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	    
 	    try (Connection connection = DatabaseConnection.getConnection(); 
-	    		PreparedStatement pst = connection.prepareStatement(sql)) {
+	    		PreparedStatement pst = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 	    	
 	    	pst.setString(1, usuario.getNombre());
 	    	pst.setString(2, usuario.getApellido());
@@ -52,6 +52,11 @@ public class UsuarioRepositorio {
 	    	pst.setString(8, usuario.getTelefono());
 	    	pst.setString(9, usuario.getRol());
 	    	pst.executeUpdate();
+	    	
+	    	ResultSet rs = pst.getGeneratedKeys();
+	        if (rs.next()) {
+	            usuario.setId(rs.getInt(1));
+	        }
 	    	
 	        } catch (SQLException e) {
 				e.printStackTrace();

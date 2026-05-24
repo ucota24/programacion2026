@@ -4,6 +4,9 @@ import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import models.MetodoPago;
+import repositorio.MetodoPagoRepositorio;
+import utils.Sesion;
 import vista.MetodoPagoVentana;
 
 public class MetodoPagoController {
@@ -27,6 +30,24 @@ public class MetodoPagoController {
         
         vista.getBotonAceptar().addActionListener(e -> {
             if (validacionFormulario()) {
+            	
+            	String tipo = "";
+                if (vista.rbMasterCard.isSelected()) tipo = "MasterCard";
+                else if (vista.rbMercadoPago.isSelected()) tipo = "MercadoPago";
+                else if (vista.rbPayPal.isSelected()) tipo = "PayPal";
+
+                MetodoPago metodoPago = new MetodoPago(
+                    tipo,
+                    vista.campoNombreTarjeta.getText().trim(),
+                    vista.campoNumeroTarjeta.getText().trim(),
+                    vista.campoFechaExpiracion.getText().trim(),
+                    vista.campoCVV.getText().trim(),
+                    Sesion.getCurrentUser().getId()
+                );
+
+                MetodoPagoRepositorio repositorio = new MetodoPagoRepositorio();
+                repositorio.save(metodoPago);
+                
                 JOptionPane.showMessageDialog(vista,
                         "Se ha registrado su metodo de pago!", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
                 vista.dispose();
@@ -156,8 +177,8 @@ public class MetodoPagoController {
 			vista.lblErrorNumeroTarjeta.setText("Este campo es OBLIGATORIO");
             return false;
 		}
-		if(vista.campoNumeroTarjeta.getText().trim().length() < 16) {
-			vista.lblErrorNumeroTarjeta.setText("Minimo 16 digitos");
+		if(vista.campoNumeroTarjeta.getText().trim().length() > 16) {
+			vista.lblErrorNumeroTarjeta.setText("Maximo 16 digitos");
 			return false;
 		}
 		
@@ -186,8 +207,8 @@ public class MetodoPagoController {
 			vista.lblErrorCampoCVV.setText("Este campo es OBLIGATORIO");
             return false;
 		}
-		if(vista.campoCVV.getText().trim().length() < 3) {
-			vista.lblErrorCampoCVV.setText("Minimo 3 caracteres");
+		if(vista.campoCVV.getText().trim().length() > 3) {
+			vista.lblErrorCampoCVV.setText("Maximo 3 caracteres");
 			return false;
 		}
 		
