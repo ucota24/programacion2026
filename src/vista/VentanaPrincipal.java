@@ -25,12 +25,17 @@ public class VentanaPrincipal extends JFrame {
 	
 	public static final String INICIO = "INICIO";
 	public static final String USUARIOS = "USUARIOS";
+	public static final String TENIS = "TENIS";
 	
 	public JMenuItem verUsuarios;
+	public JMenuItem hombreTenis;
+	public JMenuItem mujerTenis;
+	public JMenuItem ninosTenis;
 	
 	public JButton botonUsuarios;
 	public JButton botonInicio;
 	public UsuarioVista usuariosPanel;
+	public TenisVista tenisPanel;
 	
 	private CardLayout cardLayout;
 	private JPanel container;
@@ -77,9 +82,11 @@ public class VentanaPrincipal extends JFrame {
 		inicioPanel.add(new JLabel("Bienvenido al Sistema"));
 		
 		usuariosPanel = new UsuarioVista();
+		tenisPanel = new TenisVista();
 		
 		container.add(inicioPanel, INICIO);
 		container.add(usuariosPanel, USUARIOS);
+		container.add(tenisPanel, TENIS);
 		
 		add(container, BorderLayout.CENTER);
 		
@@ -110,22 +117,25 @@ public class VentanaPrincipal extends JFrame {
 		hombre.setMnemonic(KeyEvent.VK_H);
 		mb.add(hombre);
 
-		hombre.add(new JMenuItem("Tenis"));
-		hombre.add(new JMenuItem("Ropa"));
+		hombreTenis = new JMenuItem("Tenis");
+		hombre.add(hombreTenis);
+		//hombre.add(new JMenuItem("Ropa"));
 		
 		JMenu mujer = new JMenu("Mujer");
 		mujer.setMnemonic(KeyEvent.VK_M);
 		mb.add(mujer);
 
-		mujer.add(new JMenuItem("Tenis"));
-		mujer.add(new JMenuItem("Ropa"));
+		mujerTenis = new JMenuItem("Tenis");
+		mujer.add(mujerTenis);
+		//mujer.add(new JMenuItem("Ropa"));
 		
 		JMenu ninos = new JMenu("Niños");
 		ninos.setMnemonic(KeyEvent.VK_N);
 		mb.add(ninos);
 
-		ninos.add(new JMenuItem("Tenis"));
-		ninos.add(new JMenuItem("Ropa"));
+		ninosTenis = new JMenuItem("Tenis");
+		ninos.add(ninosTenis);
+		//ninos.add(new JMenuItem("Ropa"));
 		
 		mb.add(Box.createHorizontalGlue());
 		

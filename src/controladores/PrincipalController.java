@@ -34,6 +34,10 @@ public class PrincipalController {
 
 		vista.botonInicio.addActionListener(e -> vista.mostrarVista(VentanaPrincipal.INICIO));
 		
+		vista.hombreTenis.addActionListener(e -> verTenis("Hombre"));
+		vista.mujerTenis.addActionListener(e -> verTenis("Mujer"));
+		vista.ninosTenis.addActionListener(e -> verTenis("Niños"));
+		
 		vista.addWindowListener(new WindowAdapter() {
 	        @Override
 	        public void windowClosing(WindowEvent e) {
@@ -62,6 +66,11 @@ public class PrincipalController {
 		} catch (IOException ex) {
 			JOptionPane.showMessageDialog(vista, ex.getMessage());
 		}
+	}
+	
+	private void verTenis(String categoria) {
+		new TenisController(vista.tenisPanel, categoria);
+		vista.mostrarVista(VentanaPrincipal.TENIS);
 	}
 
 	private void saveWindowPreferences() {
