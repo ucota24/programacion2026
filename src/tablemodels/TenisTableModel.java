@@ -11,7 +11,7 @@ public class TenisTableModel extends AbstractTableModel {
 	private List<Tenis> tenis;
 
     private final String[] columns = {
-        "Nombre", "Marca", "Precio", "Talla", "Color", "Stock", "Tipo"
+        "Nombre", "Marca", "Precio", "Talla", "Color", "Stock"
     };
 
     public TenisTableModel(List<Tenis> tenis) {

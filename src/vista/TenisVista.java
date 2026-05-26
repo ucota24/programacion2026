@@ -1,14 +1,21 @@
 package vista;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
 
 import tablemodels.TenisTableModel;
+import utils.AppFont;
 
 public class TenisVista extends JPanel {
 	
@@ -24,6 +31,7 @@ public class TenisVista extends JPanel {
 
     private void inicializarComponentes() {
         tabla = new JTable();
+		styleTable();
         tabla.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tabla.setRowHeight(25);
 
@@ -42,6 +50,50 @@ public class TenisVista extends JPanel {
 
         add(panelBotones, BorderLayout.NORTH);
     }
+    
+    public void styleTable() {
+    	
+    	tabla.setRowHeight(35);
+    	tabla.setShowGrid(true);
+    	tabla.setGridColor(Color.BLACK);
+    	tabla.setBackground(Color.WHITE);
+    	tabla.setForeground(Color.BLACK);
+    	tabla.setFont(AppFont.normal());
+    	
+    	tabla.setSelectionBackground(new Color(245, 245, 245));
+    	tabla.setSelectionForeground(Color.BLACK);
+    	
+    	tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    	
+    	JTableHeader header = tabla.getTableHeader();
+    	header.setBackground(Color.GRAY);
+    	header.setForeground(Color.WHITE);
+    	header.setFont(AppFont.normal());
+    	header.setPreferredSize(new Dimension(0, 40));
+    	header.setReorderingAllowed(false);
+    
+    	tabla.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+    		@Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+                    boolean hasFocus, int row, int column) {
+ 
+                Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+ 
+                if (!isSelected) {
+                    if (row % 2 == 0) {
+                        c.setBackground(Color.WHITE);
+                    } else {
+                        c.setBackground(Color.WHITE);
+                    }
+                    c.setForeground(Color.BLACK);
+                }
+ 
+                return c;
+            }
+        });
+    		
+    }
+    	
 
     public JTable getTabla() { 
     	return tabla; 
