@@ -20,6 +20,7 @@ public class PrincipalController {
 
 	private VentanaPrincipal vista;
 	private UsuarioController uController;
+	private TenisController tenisController;
 
 	public PrincipalController(VentanaPrincipal vista) {
 		this.vista = vista;
@@ -69,8 +70,9 @@ public class PrincipalController {
 	}
 	
 	private void verTenis(String categoria) {
-		new TenisController(vista.tenisPanel, categoria);
-		vista.mostrarVista(VentanaPrincipal.TENIS);
+		if (tenisController == null) {
+	        tenisController = new TenisController(vista.tenisPanel, categoria, vista);
+	    }		vista.mostrarVista(VentanaPrincipal.TENIS);
 	}
 
 	private void saveWindowPreferences() {
