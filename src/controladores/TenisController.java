@@ -5,10 +5,15 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import models.MetodoPago;
+import models.Pedido;
 import models.Tenis;
+import repositorio.MetodoPagoRepositorio;
+import repositorio.PedidoRepositorio;
 import repositorio.TenisRepositorio;
 import tablemodels.TenisTableModel;
 import utils.Sesion;
+import vista.ComprarDialog;
 import vista.TenisFormDialog;
 import vista.TenisVista;
 
@@ -90,6 +95,41 @@ public class TenisController {
             JOptionPane.showMessageDialog(vista, "Selecciona un producto para comprar");
             return;
         }
+        
+        Tenis seleccionado = model.getTenisAt(fila);
+        if (seleccionado.getStock() <= 0) {
+            JOptionPane.showMessageDialog(vista, "Este producto no tiene stock disponible");
+            return;
+        }
+        
+        MetodoPagoRepositorio metodoPagoRepo = new MetodoPagoRepositorio();
+        List<MetodoPago> metodos = metodoPagoRepo.getByUsuario(Sesion.getCurrentUser().getId());
+        
+        if (metodos.isEmpty()) {
+            JOptionPane.showMessageDialog(vista, "No tienes un metodo de pago registrado");
+            return;
+        }
+        
+        ComprarDialog comprardialog = new ComprarDialog(parentFrame, seleccionado, metodos);
+        comprardialog.setVisible(true);
+        
+        if (comprardialog.isConfirmar()) {
+            MetodoPago metodoPago = metodos.get(comprardialog.getMetodoPagoSeleccionado());
+
+            PedidoRepositorio pedidoRepo = new PedidoRepositorio();
+            Pedido pedido = new Pedido(seleccionado.getPrecio(), Sesion.getCurrentUser().getId(), metodoPago.getId());
+            int idPedido = pedidoRepo.save(pedido);
+
+            pedidoRepo.saveDetalle(idPedido, seleccionado.getIdTenis(), 1, seleccionado.getPrecio());
+            pedidoRepo.actualizarStock(seleccionado.getIdTenis(), seleccionado.getStock() - 1);
+
+            seleccionado.setStock(seleccionado.getStock() - 1);
+            model.fireTableDataChanged();
+
+            JOptionPane.showMessageDialog(vista, "¡Compra realizada con exito!");
+        }
+        
+
     }
 
 }

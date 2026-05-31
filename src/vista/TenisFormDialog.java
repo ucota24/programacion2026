@@ -29,7 +29,6 @@ public class TenisFormDialog extends JDialog {
     private JComboBox<String> cbCategoria;
     private JComboBox<String> cbTipo;
     
-    
     public JButton botonGuardar;
     public JButton botonCancelar;
     
@@ -65,6 +64,7 @@ public class TenisFormDialog extends JDialog {
     public JPanel createTitlePanel() {
         JPanel panel = new JPanel();
         panel.add(new JLabel("Formulario de Tenis"));
+        
         return panel;
     }
     
@@ -118,6 +118,7 @@ public class TenisFormDialog extends JDialog {
         JScrollPane scroll = new JScrollPane(panel);
         scroll.setBorder(null);
         scroll.getVerticalScrollBar().setUnitIncrement(14);
+        
         return scroll;
     }
     
@@ -139,6 +140,7 @@ public class TenisFormDialog extends JDialog {
 
         panel.add(label);
         panel.add(field);
+        
         return panel;
     }
     
