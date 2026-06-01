@@ -70,7 +70,11 @@ public class PrincipalController {
 	}
 	
 	private void verTenis(String categoria) {
-	    tenisController = new TenisController(vista.tenisPanel, categoria, vista);
+		if (tenisController == null) {
+	        tenisController = new TenisController(vista.tenisPanel, categoria, vista);
+	    } else {
+	        tenisController.cambiarCategoria(categoria);
+	    }
 	    vista.mostrarVista(VentanaPrincipal.TENIS);
 	}
 

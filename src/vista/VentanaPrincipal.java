@@ -109,7 +109,7 @@ public class VentanaPrincipal extends JFrame {
 		JMenu ajustes = new JMenu("Ajustes");
 		mb.add(ajustes);
 		
-		JMenu tamanio = new JMenu("Ventana original");
+		JMenuItem tamanio = new JMenuItem("Ventana original");
 		tamanio.addActionListener(e -> {
 		    setSize(1200, 500);
 		    setLocationRelativeTo(null);

@@ -128,8 +128,12 @@ public class TenisController {
 
             JOptionPane.showMessageDialog(vista, "Compra realizada con exito!");
         }
-        
-
+   
+    }
+    
+    public void cambiarCategoria(String categoria) {
+        this.categoria = categoria;
+        cargarTenis();
     }
 
 }
