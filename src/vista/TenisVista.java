@@ -60,14 +60,14 @@ public class TenisVista extends JPanel {
     	tabla.setForeground(Color.BLACK);
     	tabla.setFont(AppFont.normal());
     	
-    	tabla.setSelectionBackground(new Color(245, 245, 245));
+    	tabla.setSelectionBackground(new Color(210, 210, 210));
     	tabla.setSelectionForeground(Color.BLACK);
     	
     	tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     	
     	JTableHeader header = tabla.getTableHeader();
-    	header.setBackground(Color.GRAY);
-    	header.setForeground(Color.WHITE);
+    	header.setBackground(new Color(241, 239, 232));
+    	header.setForeground(new Color(44, 44, 42));
     	header.setFont(AppFont.normal());
     	header.setPreferredSize(new Dimension(0, 40));
     	header.setReorderingAllowed(false);
@@ -81,9 +81,9 @@ public class TenisVista extends JPanel {
  
                 if (!isSelected) {
                     if (row % 2 == 0) {
-                        c.setBackground(Color.WHITE);
+                        c.setBackground(new Color(249, 250, 251));
                     } else {
-                        c.setBackground(Color.WHITE);
+                        c.setBackground(new Color(249, 250, 251));
                     }
                     c.setForeground(Color.BLACK);
                 }

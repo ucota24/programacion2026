@@ -69,7 +69,7 @@ public class UsuarioVista extends JPanel{
  
         JTableHeader header = table.getTableHeader();
         header.setBackground(new Color(44, 111, 80));
-        header.setForeground(Color.WHITE);
+        header.setForeground(Color.BLACK);
         header.setFont(AppFont.normal());
         header.setPreferredSize(new Dimension(0, 40));
         header.setReorderingAllowed(false);
@@ -85,7 +85,7 @@ public class UsuarioVista extends JPanel{
                     if (row % 2 == 0) {
                         c.setBackground(Color.WHITE);
                     } else {
-                        c.setBackground(new Color(245, 245, 245));
+                        c.setBackground(Color.WHITE);
                     }
                     c.setForeground(Color.BLACK);
                 }

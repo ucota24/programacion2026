@@ -37,13 +37,13 @@ public class PedidoRepositorio {
 	public void saveDetalle(int idPedido, int idTenis, int cantidad, double precioUnitario) {
         String sql = "INSERT INTO pedido_producto (idPedido, idTenis, cantidad, precio) VALUES (?, ?, ?, ?)";
 
-        try (Connection conn = DatabaseConnection.getConnection();
-            PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, idPedido);
-            stmt.setInt(2, idTenis);
-            stmt.setInt(3, cantidad);
-            stmt.setDouble(4, precioUnitario);
-            stmt.executeUpdate();
+        try (Connection connection = DatabaseConnection.getConnection();
+            PreparedStatement pst = connection.prepareStatement(sql)) {
+        	pst.setInt(1, idPedido);
+        	pst.setInt(2, idTenis);
+        	pst.setInt(3, cantidad);
+        	pst.setDouble(4, precioUnitario);
+        	pst.executeUpdate();
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -53,11 +53,11 @@ public class PedidoRepositorio {
 	public void actualizarStock(int idTenis, int nuevoStock) {
         String sql = "UPDATE tenis SET stock = ? WHERE idTenis = ?";
 
-        try (Connection conn = DatabaseConnection.getConnection();
-            PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, nuevoStock);
-            stmt.setInt(2, idTenis);
-            stmt.executeUpdate();
+        try (Connection connection = DatabaseConnection.getConnection();
+            PreparedStatement pst = connection.prepareStatement(sql)) {
+        	pst.setInt(1, nuevoStock);
+        	pst.setInt(2, idTenis);
+        	pst.executeUpdate();
 
         } catch (SQLException ex) {
             ex.printStackTrace();
