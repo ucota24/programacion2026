@@ -104,7 +104,7 @@ public class UsuarioRepositorio {
 	    	pst.setInt(1, id);
 	        int affectedRows = pst.executeUpdate();
 	        if (affectedRows > 0) {
-	        	System.out.println("Se elimino");
+	        	//System.out.println("Se elimino");
 	        	return true;
 	        }
 	        

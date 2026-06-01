@@ -64,6 +64,21 @@ public class PedidoRepositorio {
         }
     }
 	
+	public boolean tienePedidos(int idUsuario) {
+	    String sql = "SELECT COUNT(*) FROM pedido WHERE idUsuario = ?";
+	    try (Connection connection = DatabaseConnection.getConnection();
+	         PreparedStatement pst = connection.prepareStatement(sql)) {
+	    	pst.setInt(1, idUsuario);
+	        ResultSet rs = pst.executeQuery();
+	        if (rs.next()) {
+	            return rs.getInt(1) > 0;
+	        }
+	    } catch (SQLException ex) {
+	        ex.printStackTrace();
+	    }
+	    return false;
+	}
+	
 	
 
 }

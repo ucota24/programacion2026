@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import models.Usuario;
+import repositorio.PedidoRepositorio;
 import repositorio.UsuarioRepositorio;
 import servicios.ExportarPDF;
 import tablemodels.UsuarioTableModel;
@@ -94,6 +95,15 @@ public class UsuarioController {
 
 	    if (fila < 0) {
 	        JOptionPane.showMessageDialog(vista, "Selecciona un usuario para eliminar");
+	        return;
+	    }
+	    
+	    Usuario seleccionado = model.getUsuarioAt(fila);
+	    
+	    PedidoRepositorio pedidoRepo = new PedidoRepositorio();
+	    if (pedidoRepo.tienePedidos(seleccionado.getId())) {
+	        JOptionPane.showMessageDialog(vista, 
+	            "No se puede eliminar este usuario porque tiene pedidos pendientes");
 	        return;
 	    }
 
