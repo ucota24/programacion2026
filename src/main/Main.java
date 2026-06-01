@@ -35,15 +35,15 @@ public class Main {
         
 		//UIManager.put(" ", AppFont.normal());
         
-        /*LoginVentana ventanita = new LoginVentana();
-		new LoginController(ventanita.getLoginVista());*/
+        LoginVentana ventanita = new LoginVentana();
+		new LoginController(ventanita.getLoginVista());
         
         //FormularioRegistro registro = new FormularioRegistro();
 		
       	//MetodoPagoVentana metodoPago = new MetodoPagoVentana();
       		
         
-        Usuario usuarioPrueba = new Usuario();
+        /*Usuario usuarioPrueba = new Usuario();
         usuarioPrueba.setId(1);
         usuarioPrueba.setNombre("pepe");
         usuarioPrueba.setCorreo("pepexd@gmail.com");
@@ -51,7 +51,7 @@ public class Main {
         Sesion.login(usuarioPrueba);
         
         VentanaPrincipal main = new VentanaPrincipal();
-        new PrincipalController(main);
+        new PrincipalController(main);*/
 
     }
 

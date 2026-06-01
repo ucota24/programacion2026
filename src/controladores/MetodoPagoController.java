@@ -177,8 +177,8 @@ public class MetodoPagoController {
 			vista.lblErrorNumeroTarjeta.setText("Este campo es OBLIGATORIO");
             return false;
 		}
-		if(vista.campoNumeroTarjeta.getText().trim().length() > 16) {
-			vista.lblErrorNumeroTarjeta.setText("Maximo 16 digitos");
+		if(vista.campoNumeroTarjeta.getText().trim().length() < 16) {
+			vista.lblErrorNumeroTarjeta.setText("Minimo 16 digitos");
 			return false;
 		}
 		
@@ -193,7 +193,7 @@ public class MetodoPagoController {
             return false;
 		}
 		if(vista.campoFechaExpiracion.getText().trim().length() < 3) {
-			vista.lblErrorFechaExpiracion.setText("Minimo 5 digitos");
+			vista.lblErrorFechaExpiracion.setText("Minimo 4 digitos");
 			return false;
 		}
 		

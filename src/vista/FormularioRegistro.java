@@ -290,6 +290,43 @@ public class FormularioRegistro extends JFrame {
             });
         }
         
+        campoFNacimiento.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                String texto = campoFNacimiento.getText();
+                if (!Character.isDigit(e.getKeyChar())) {
+                    e.consume();
+                    return;
+                }
+                if (texto.length() >= 10) {
+                    e.consume();
+                    return;
+                }
+                if (texto.length() == 2 || texto.length() == 5) {
+                    campoFNacimiento.setText(texto + "/");
+                }
+            }
+        });
+        
+        campoTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                if (campoTelefono.getText().length() >= 10)
+                    e.consume();
+            }
+        });
+        
+        campoCiudadEstado.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (Character.isDigit(c) || (!Character.isAlphabetic(c) && c != ' '))
+                    e.consume();
+                if (campoCiudadEstado.getText().length() >= 40)
+                    e.consume();
+            }
+        });
+        
     }
 	
 	

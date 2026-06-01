@@ -296,19 +296,34 @@ public class RegistroController {
 	
 	public boolean validacionTelefono() {
 		vista.lblErrorTelefono.setText("");
+	    String telefono = vista.campoTelefono.getText().trim();
+
 		if (vista.campoTelefono.getText().trim().isEmpty()) {
 			vista.lblErrorTelefono.setText("Este campo es OBLIGATORIO");
             return false;
 		}
+		
+		if (telefono.length() < 10) {
+	        vista.lblErrorTelefono.setText("Minimo 10 digitos");
+	        return false;
+	    }
+	    
 		return true;
 	}
 	
 	public boolean validacionDireccion() {
 		vista.lblErrorDireccion.setText("");
+		String direccion = vista.campoDireccion.getText().trim();
+		
 		if (vista.campoDireccion.getText().trim().isEmpty()) {
 			vista.lblErrorDireccion.setText("Este campo es OBLIGATORIO");
             return false;
 		}
+		
+		if (direccion.length() < 10) {
+	        vista.lblErrorDireccion.setText("Ingresa una direccion completa");
+	        return false;
+	    }
 		return true;
 	}
 	
