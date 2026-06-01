@@ -77,11 +77,11 @@ public class LoginController {
 
         if (Sesion.getRole().equals("ADMIN")) {
             VentanaPrincipal ventana = new VentanaPrincipal();
-            ventana.botonUsuarios.setVisible(true);
+            ventana.admUsuarios.setVisible(true);
             new PrincipalController(ventana);
         } else {
             VentanaPrincipal ventana = new VentanaPrincipal();
-            ventana.botonUsuarios.setVisible(false);
+            ventana.admUsuarios.setVisible(false);
             new PrincipalController(ventana);
         }
         

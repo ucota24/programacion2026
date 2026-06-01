@@ -126,7 +126,7 @@ public class TenisController {
             seleccionado.setStock(seleccionado.getStock() - 1);
             model.fireTableDataChanged();
 
-            JOptionPane.showMessageDialog(vista, "¡Compra realizada con exito!");
+            JOptionPane.showMessageDialog(vista, "Compra realizada con exito!");
         }
         
 

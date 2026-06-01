@@ -31,9 +31,9 @@ public class PrincipalController {
 
 	public void registrarListeners() {
 
-		vista.botonUsuarios.addActionListener(e -> verUsuarios());
+		vista.admUsuarios.addActionListener(e -> verUsuarios());
 
-		vista.botonInicio.addActionListener(e -> vista.mostrarVista(VentanaPrincipal.INICIO));
+		//vista.botonInicio.addActionListener(e -> vista.mostrarVista(VentanaPrincipal.INICIO));
 		
 		vista.hombreTenis.addActionListener(e -> verTenis("Hombre"));
 		vista.mujerTenis.addActionListener(e -> verTenis("Mujer"));
@@ -70,9 +70,8 @@ public class PrincipalController {
 	}
 	
 	private void verTenis(String categoria) {
-		if (tenisController == null) {
-	        tenisController = new TenisController(vista.tenisPanel, categoria, vista);
-	    }		vista.mostrarVista(VentanaPrincipal.TENIS);
+	    tenisController = new TenisController(vista.tenisPanel, categoria, vista);
+	    vista.mostrarVista(VentanaPrincipal.TENIS);
 	}
 
 	private void saveWindowPreferences() {

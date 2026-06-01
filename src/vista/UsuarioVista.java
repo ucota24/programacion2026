@@ -36,7 +36,7 @@ public class UsuarioVista extends JPanel{
 		
 		add(new JScrollPane(table), BorderLayout.CENTER);
 		
-		JPanel panelButtons = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JPanel panelButtons = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
         botonAgregar = new JButton("Agregar");
         botonEditar = new JButton("Editar");
@@ -48,7 +48,7 @@ public class UsuarioVista extends JPanel{
         panelButtons.add(botonEliminar);
         panelButtons.add(botonPDF);
         
-        add(panelButtons, BorderLayout.NORTH);
+        add(panelButtons, BorderLayout.SOUTH);
         add(new JScrollPane(table), BorderLayout.CENTER);
 
 	}

@@ -8,6 +8,7 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 
 import javax.swing.Box;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -31,6 +32,7 @@ public class VentanaPrincipal extends JFrame {
 	public JMenuItem hombreTenis;
 	public JMenuItem mujerTenis;
 	public JMenuItem ninosTenis;
+	public JMenuItem admUsuarios;
 	
 	public JButton botonUsuarios;
 	public JButton botonInicio;
@@ -65,11 +67,11 @@ public class VentanaPrincipal extends JFrame {
 	public void crearNavbar() {
 		JPanel navbar = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		
-		botonInicio = new JButton("Inicio");
-		botonUsuarios = new JButton("Usuarios");
+		//botonInicio = new JButton("Inicio");
+		//botonUsuarios = new JButton("Usuarios");
 		
-		navbar.add(botonInicio);
-		navbar.add(botonUsuarios);
+		//navbar.add(botonInicio);
+		//navbar.add(botonUsuarios);
 		
 		add(navbar, BorderLayout.NORTH);
 	}
@@ -78,8 +80,11 @@ public class VentanaPrincipal extends JFrame {
 		cardLayout = new CardLayout();
 		container = new JPanel(cardLayout);
 		
-		JPanel inicioPanel = new JPanel();
-		inicioPanel.add(new JLabel("Bienvenido al Sistema"));
+		JPanel inicioPanel = new JPanel(new BorderLayout());
+		ImageIcon imagen = new ImageIcon("src/image/logoVentanaP.png");
+		Image imagenEscalada = imagen.getImage().getScaledInstance(600, 500, Image.SCALE_SMOOTH);
+		JLabel lblImagen = new JLabel(new ImageIcon(imagenEscalada), JLabel.CENTER);
+		inicioPanel.add(lblImagen, BorderLayout.CENTER);
 		
 		usuariosPanel = new UsuarioVista();
 		tenisPanel = new TenisVista();
@@ -96,8 +101,6 @@ public class VentanaPrincipal extends JFrame {
 		cardLayout.show(container, vista);
 	}
 	
-	
-	
 	public void setMenu() {
 		
 		JMenuBar mb = new JMenuBar();
@@ -106,42 +109,39 @@ public class VentanaPrincipal extends JFrame {
 		JMenu ajustes = new JMenu("Ajustes");
 		mb.add(ajustes);
 		
-		JMenuItem tamanio = new JMenuItem("Ventana original");
+		JMenu tamanio = new JMenu("Ventana original");
 		tamanio.addActionListener(e -> {
 		    setSize(1200, 500);
 		    setLocationRelativeTo(null);
 		});
 		ajustes.add(tamanio);
 		
+		JMenuItem inicio = new JMenuItem("Inicio");
+		inicio.addActionListener(e -> mostrarVista(INICIO));
+		mb.add(inicio);
+		
 		JMenu hombre = new JMenu("Hombre");
 		hombre.setMnemonic(KeyEvent.VK_H);
 		mb.add(hombre);
-
 		hombreTenis = new JMenuItem("Tenis");
 		hombre.add(hombreTenis);
-		//hombre.add(new JMenuItem("Ropa"));
 		
 		JMenu mujer = new JMenu("Mujer");
 		mujer.setMnemonic(KeyEvent.VK_M);
 		mb.add(mujer);
-
 		mujerTenis = new JMenuItem("Tenis");
 		mujer.add(mujerTenis);
-		//mujer.add(new JMenuItem("Ropa"));
 		
 		JMenu ninos = new JMenu("Niños");
 		ninos.setMnemonic(KeyEvent.VK_N);
 		mb.add(ninos);
-
 		ninosTenis = new JMenuItem("Tenis");
 		ninos.add(ninosTenis);
-		//ninos.add(new JMenuItem("Ropa"));
 		
 		mb.add(Box.createHorizontalGlue());
 		
 		JMenu cuenta = new JMenu("Mi Cuenta");
 		mb.add(cuenta);
-
 		cuenta.add(new JMenuItem("Perfil"));
 		cuenta.add(new JMenuItem("Mis Pedidos"));
 		
@@ -152,20 +152,22 @@ public class VentanaPrincipal extends JFrame {
 		cuenta.add(metodoPago);
 		
 		JMenu tema = new JMenu("Cambiar tema");
-
 		JMenuItem temaClaro = new JMenuItem("Claro");
 		temaClaro.addActionListener(e -> {
 		    GestorTema.apply("light");
 		});
-
+		
 		JMenuItem temaOscuro = new JMenuItem("Oscuro");
 		temaOscuro.addActionListener(e -> {
 		    GestorTema.apply("dark");
 		});
+		
+		admUsuarios = new JMenuItem("Usuarios");
 
 		tema.add(temaClaro);
 		tema.add(temaOscuro);
 		cuenta.add(tema);
+		cuenta.add(admUsuarios);
 		
 	}
 	

@@ -62,9 +62,9 @@ public class RegistroController {
                 
                 VentanaPrincipal ventana = new VentanaPrincipal();
                 if (Sesion.getRole().equals("ADMIN")) {
-                	ventana.botonUsuarios.setVisible(true);
+                	ventana.admUsuarios.setVisible(true);
                 } else {
-                	ventana.botonUsuarios.setVisible(false);
+                	ventana.admUsuarios.setVisible(false);
                 }
                 new PrincipalController(ventana);
                 

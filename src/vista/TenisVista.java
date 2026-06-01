@@ -38,7 +38,7 @@ public class TenisVista extends JPanel {
         JScrollPane scroll = new JScrollPane(tabla);
         add(scroll, BorderLayout.CENTER);
 
-        JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         
         botonAgregar = new JButton("Agregar");
         botonEliminar = new JButton("Eliminar");
@@ -48,7 +48,7 @@ public class TenisVista extends JPanel {
         panelBotones.add(botonEliminar);
         panelBotones.add(botonComprar);
 
-        add(panelBotones, BorderLayout.NORTH);
+        add(panelBotones, BorderLayout.SOUTH);
     }
     
     public void styleTable() {

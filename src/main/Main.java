@@ -12,7 +12,9 @@ import com.formdev.flatlaf.FlatLightLaf;
 import controladores.LoginController;
 import controladores.MetodoPagoController;
 import controladores.PrincipalController;
+import models.Usuario;
 import utils.GestorTema;
+import utils.Sesion;
 import vista.FormularioRegistro;
 import vista.LoginVentana;
 import vista.LoginVista;
@@ -40,7 +42,15 @@ public class Main {
 		
       	//MetodoPagoVentana metodoPago = new MetodoPagoVentana();
       		
-        /*VentanaPrincipal main = new VentanaPrincipal();
+        
+        /*Usuario usuarioPrueba = new Usuario();
+        usuarioPrueba.setId(1);
+        usuarioPrueba.setNombre("pepe");
+        usuarioPrueba.setCorreo("pepexd@gmail.com");
+        usuarioPrueba.setRol("ADMIN");
+        Sesion.login(usuarioPrueba);
+        
+        VentanaPrincipal main = new VentanaPrincipal();
         new PrincipalController(main);*/
 
     }
