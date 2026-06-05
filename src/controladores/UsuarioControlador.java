@@ -7,7 +7,6 @@ import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import models.Usuario;
 import repositorio.PedidoRepositorio;
 import repositorio.UsuarioRepositorio;
 import servicios.ExportarPDF;
@@ -15,9 +14,10 @@ import tablemodels.UsuarioTableModel;
 import vista.UsuarioFormDialog;
 import vista.UsuarioVista;
 import excepciones.UsuarioDuplicadoException;
+import modelos.Usuario;
 
 
-public class UsuarioController {
+public class UsuarioControlador {
 	
 	private UsuarioVista vista;
 	private UsuarioRepositorio repositorio;
@@ -25,7 +25,7 @@ public class UsuarioController {
 	private JFrame parentFrame;
 	private ExportarPDF exportarPDF;
 	
-	public UsuarioController(UsuarioVista vista, JFrame parentFrame, UsuarioRepositorio repositorio, UsuarioTableModel model) {
+	public UsuarioControlador(UsuarioVista vista, JFrame parentFrame, UsuarioRepositorio repositorio, UsuarioTableModel model) {
 		
 		this.vista = vista;
 		this.parentFrame = parentFrame;

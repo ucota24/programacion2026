@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import config.DatabaseConnection;
-import models.Tenis;
+import modelos.Tenis;
 
 public class TenisRepositorio {
 	

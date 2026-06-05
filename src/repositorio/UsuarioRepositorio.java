@@ -23,7 +23,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 
 import config.DatabaseConnection;
 import excepciones.UsuarioDuplicadoException;
-import models.Usuario;
+import modelos.Usuario;
 
 public class UsuarioRepositorio {
 	

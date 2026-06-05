@@ -4,16 +4,16 @@ import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import models.MetodoPago;
+import modelos.MetodoPago;
 import repositorio.MetodoPagoRepositorio;
-import utils.Sesion;
+import utilidades.Sesion;
 import vista.MetodoPagoVentana;
 
-public class MetodoPagoController {
+public class MetodoPagoControlador {
 	
     private MetodoPagoVentana vista;
     
-    public MetodoPagoController(MetodoPagoVentana vista) {
+    public MetodoPagoControlador(MetodoPagoVentana vista) {
         this.vista = vista;
         registrarListeners();
         

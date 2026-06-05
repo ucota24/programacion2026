@@ -9,20 +9,20 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import models.Usuario;
+import modelos.Usuario;
 import repositorio.UsuarioRepositorio;
 import tablemodels.UsuarioTableModel;
-import utils.Configuracion;
+import utilidades.Configuracion;
 import vista.LoginVentana;
 import vista.VentanaPrincipal;
 
-public class PrincipalController {
+public class PrincipalControlador {
 
 	private VentanaPrincipal vista;
-	private UsuarioController uController;
-	private TenisController tenisController;
+	private UsuarioControlador uController;
+	private TenisControlador tenisController;
 
-	public PrincipalController(VentanaPrincipal vista) {
+	public PrincipalControlador(VentanaPrincipal vista) {
 		this.vista = vista;
 		
 		loadWindowPreferences();
@@ -59,7 +59,7 @@ public class PrincipalController {
 			vista.usuariosPanel.setTableModel(model);
 
 			if (uController == null) {
-				uController = new UsuarioController(vista.usuariosPanel, vista, repositorio, model);
+				uController = new UsuarioControlador(vista.usuariosPanel, vista, repositorio, model);
 			}
 
 			vista.mostrarVista(VentanaPrincipal.USUARIOS);
@@ -71,7 +71,7 @@ public class PrincipalController {
 	
 	private void verTenis(String categoria) {
 		if (tenisController == null) {
-	        tenisController = new TenisController(vista.tenisPanel, categoria, vista);
+	        tenisController = new TenisControlador(vista.tenisPanel, categoria, vista);
 	    } else {
 	        tenisController.cambiarCategoria(categoria);
 	    }

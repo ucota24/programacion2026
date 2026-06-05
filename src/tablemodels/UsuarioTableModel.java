@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import models.Usuario;
+import modelos.Usuario;
 
 public class UsuarioTableModel extends AbstractTableModel{
 	

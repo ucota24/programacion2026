@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import config.DatabaseConnection;
-import models.Pedido;
+import modelos.Pedido;
 
 public class PedidoRepositorio {
 	

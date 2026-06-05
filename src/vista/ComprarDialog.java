@@ -17,8 +17,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import models.MetodoPago;
-import models.Tenis;
+import modelos.MetodoPago;
+import modelos.Tenis;
 
 public class ComprarDialog extends JDialog {
 	
@@ -55,7 +55,7 @@ public class ComprarDialog extends JDialog {
 
         JPanel panelTeni = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
         panelTeni.setBackground(new Color(249, 250, 251));
-        lblTenis = new JLabel("Teni: ");
+        lblTenis = new JLabel("Tenis: ");
         lblTenis.setFont(new Font("Arial", Font.BOLD, 12));
         
         lblProducto = new JLabel(tenis.getNombre() +  " - " + tenis.getMarca());

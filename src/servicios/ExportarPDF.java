@@ -23,7 +23,7 @@ import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.properties.TextAlignment;
 import com.itextpdf.layout.properties.UnitValue;
 
-import models.Usuario;
+import modelos.Usuario;
 
 public class ExportarPDF {
 	

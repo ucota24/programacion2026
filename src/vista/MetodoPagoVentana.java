@@ -64,7 +64,7 @@ public class MetodoPagoVentana extends JFrame {
 
 		inicializarComponentes();
 		asignarKeyListeners();
-		new controladores.MetodoPagoController(this);
+		new controladores.MetodoPagoControlador(this);
 		setVisible(true);
 	}
 	

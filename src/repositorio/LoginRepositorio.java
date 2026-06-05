@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import config.DatabaseConnection;
-import models.Usuario;
-import utils.PasswordUtils;
+import modelos.Usuario;
+import utilidades.PasswordUtils;
 
 public class LoginRepositorio {
 	

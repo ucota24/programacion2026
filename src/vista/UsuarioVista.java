@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 
 import tablemodels.UsuarioTableModel;
-import utils.AppFont;
+import utilidades.AppFont;
 
 public class UsuarioVista extends JPanel{
 	

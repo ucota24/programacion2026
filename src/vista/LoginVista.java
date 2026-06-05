@@ -15,8 +15,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import utils.PlaceholderPasswordField;
-import utils.PlaceholderTextField;
+import utilidades.PlaceholderPasswordField;
+import utilidades.PlaceholderTextField;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;

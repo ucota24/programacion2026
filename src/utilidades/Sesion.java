@@ -1,6 +1,6 @@
-package utils;
+package utilidades;
 
-import models.Usuario;
+import modelos.Usuario;
 
 public class Sesion {
 	

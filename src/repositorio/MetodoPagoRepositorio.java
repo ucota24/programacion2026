@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import config.DatabaseConnection;
-import models.MetodoPago;
+import modelos.MetodoPago;
 
 public class MetodoPagoRepositorio {
 	

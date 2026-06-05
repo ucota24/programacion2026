@@ -16,7 +16,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import models.Tenis;
+import modelos.Tenis;
 
 public class TenisFormDialog extends JDialog {
 	

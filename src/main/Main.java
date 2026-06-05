@@ -9,12 +9,12 @@ import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 
-import controladores.LoginController;
-import controladores.MetodoPagoController;
-import controladores.PrincipalController;
-import models.Usuario;
-import utils.GestorTema;
-import utils.Sesion;
+import controladores.LoginControlador;
+import controladores.MetodoPagoControlador;
+import controladores.PrincipalControlador;
+import modelos.Usuario;
+import utilidades.GestorTema;
+import utilidades.Sesion;
 import vista.FormularioRegistro;
 import vista.LoginVentana;
 import vista.LoginVista;
@@ -36,7 +36,7 @@ public class Main {
 		//UIManager.put(" ", AppFont.normal());
         
         LoginVentana ventanita = new LoginVentana();
-		new LoginController(ventanita.getLoginVista());
+		new LoginControlador(ventanita.getLoginVista());
         
         //FormularioRegistro registro = new FormularioRegistro();
 		

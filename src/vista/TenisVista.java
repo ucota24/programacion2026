@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 
 import tablemodels.TenisTableModel;
-import utils.AppFont;
+import utilidades.AppFont;
 
 public class TenisVista extends JPanel {
 	

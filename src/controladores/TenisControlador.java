@@ -5,19 +5,19 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import models.MetodoPago;
-import models.Pedido;
-import models.Tenis;
+import modelos.MetodoPago;
+import modelos.Pedido;
+import modelos.Tenis;
 import repositorio.MetodoPagoRepositorio;
 import repositorio.PedidoRepositorio;
 import repositorio.TenisRepositorio;
 import tablemodels.TenisTableModel;
-import utils.Sesion;
+import utilidades.Sesion;
 import vista.ComprarDialog;
 import vista.TenisFormDialog;
 import vista.TenisVista;
 
-public class TenisController {
+public class TenisControlador {
 	
 	private TenisVista vista;
     private TenisRepositorio repositorio;
@@ -25,7 +25,7 @@ public class TenisController {
     private String categoria;
 	private JFrame parentFrame;
 
-    public TenisController(TenisVista vista, String categoria, JFrame parentFrame) {
+    public TenisControlador(TenisVista vista, String categoria, JFrame parentFrame) {
         this.vista = vista;
         this.categoria = categoria;
         this.repositorio = new TenisRepositorio();

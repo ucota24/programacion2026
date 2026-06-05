@@ -9,19 +9,19 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import excepciones.UsuarioDuplicadoException;
-import models.Usuario;
+import modelos.Usuario;
 import repositorio.UsuarioRepositorio;
+import utilidades.PasswordUtils;
+import utilidades.Sesion;
 import vista.FormularioRegistro;
 import vista.LoginVentana;
 import vista.VentanaPrincipal;
-import utils.PasswordUtils;
-import utils.Sesion;
 
-public class RegistroController {
+public class RegistroControlador {
 	
 	private FormularioRegistro vista;
 
-    public RegistroController(FormularioRegistro vista) {
+    public RegistroControlador(FormularioRegistro vista) {
         this.vista = vista;
         registrarListeners();
     }
@@ -45,7 +45,7 @@ public class RegistroController {
                         vista.campoNombre.getText().trim(),
                         vista.campoApellido.getText().trim(),
                         vista.campoCorreo.getText().trim(),
-                        utils.PasswordUtils.hashPassword(String.valueOf(vista.campoContrasena.getPassword())),
+                        utilidades.PasswordUtils.hashPassword(String.valueOf(vista.campoContrasena.getPassword())),
                         vista.campoCiudadEstado.getText().trim(),
                         vista.campoDireccion.getText().trim(),
                         vista.campoFNacimiento.getText().trim(),
@@ -66,7 +66,7 @@ public class RegistroController {
                 } else {
                 	ventana.admUsuarios.setVisible(false);
                 }
-                new PrincipalController(ventana);
+                new PrincipalControlador(ventana);
                 
                 } catch (UsuarioDuplicadoException ex) {
                     vista.lblErrorCorreo.setText("Este correo ya esta registrado");
@@ -348,7 +348,7 @@ public class RegistroController {
         int opcion = JOptionPane.showConfirmDialog(vista, "¿Estas seguro de que quieres regresar? \nSe perderan los datos!");
         if (opcion == JOptionPane.YES_OPTION) {
             LoginVentana ventana = new LoginVentana();
-            new LoginController(ventana.getLoginVista());
+            new LoginControlador(ventana.getLoginVista());
             vista.dispose();
         }
     }

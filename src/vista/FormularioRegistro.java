@@ -27,7 +27,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import controladores.RegistroController;
+import controladores.RegistroControlador;
 import vista.LoginVentana;
 
 public class FormularioRegistro extends JFrame {
@@ -66,7 +66,7 @@ public class FormularioRegistro extends JFrame {
 		setIconImage(myIcon);
 		
 		inicializarComponentes();
-		new RegistroController(this);
+		new RegistroControlador(this);
 		
 		setVisible(true);
 	}

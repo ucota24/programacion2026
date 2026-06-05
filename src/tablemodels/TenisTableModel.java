@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import models.Tenis;
+import modelos.Tenis;
 
 public class TenisTableModel extends AbstractTableModel {
 	

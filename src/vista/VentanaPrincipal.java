@@ -20,7 +20,7 @@ import javax.swing.UIManager;
 
 import com.formdev.flatlaf.FlatLightLaf;
 
-import utils.GestorTema;
+import utilidades.GestorTema;
 
 public class VentanaPrincipal extends JFrame {
 	

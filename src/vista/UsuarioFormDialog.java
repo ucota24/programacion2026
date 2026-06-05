@@ -16,7 +16,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import models.Usuario;
+import modelos.Usuario;
 
 public class UsuarioFormDialog extends JDialog {
 	

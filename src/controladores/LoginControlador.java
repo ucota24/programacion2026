@@ -9,19 +9,19 @@ import javax.swing.JOptionPane;
 
 import excepciones.InvalidPasswordException;
 import excepciones.InvalidUserException;
-import models.Usuario;
+import modelos.Usuario;
 import repositorio.LoginRepositorio;
-import utils.Sesion;
+import utilidades.Sesion;
 import vista.FormularioRegistro;
 import vista.LoginVista;
 import vista.VentanaPrincipal;
 
-public class LoginController {
+public class LoginControlador {
 	
 	private LoginVista vista;
 	private LoginRepositorio loginRepositorio;
 	
-	public LoginController(LoginVista vista) {
+	public LoginControlador(LoginVista vista) {
 		this.vista = vista;
 		this.loginRepositorio = new LoginRepositorio();
 		registrarListeners();
@@ -78,11 +78,11 @@ public class LoginController {
         if (Sesion.getRole().equals("ADMIN")) {
             VentanaPrincipal ventana = new VentanaPrincipal();
             ventana.admUsuarios.setVisible(true);
-            new PrincipalController(ventana);
+            new PrincipalControlador(ventana);
         } else {
             VentanaPrincipal ventana = new VentanaPrincipal();
             ventana.admUsuarios.setVisible(false);
-            new PrincipalController(ventana);
+            new PrincipalControlador(ventana);
         }
         
         vista.getLoginVentana().dispose();
