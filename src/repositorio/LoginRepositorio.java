@@ -13,7 +13,7 @@ public class LoginRepositorio {
 	
 	public Usuario login(String correo, String contrasena) {
 
-        String sql = "SELECT id, correo, contrasena, nombre, rol FROM usuarios WHERE correo = ? " /*AND contrasena = ?"*/;
+        String sql = "SELECT id, correo, contrasena, nombre, apellido, telefono, ciudadEstado, direccion, fecha_nacimiento, rol FROM usuarios WHERE correo = ? " /*AND contrasena = ?"*/;
 
         try (
             Connection conn = DatabaseConnection.getConnection();
@@ -30,9 +30,13 @@ public class LoginRepositorio {
                 	Usuario usuario = new Usuario();
                 	usuario.setId(rs.getInt("id"));
                 	usuario.setCorreo(rs.getString("correo"));
-                    usuario.setNombre(rs.getString("nombre"));
-                    usuario.setRol(rs.getString("rol"));
-
+                	usuario.setNombre(rs.getString("nombre"));
+                	usuario.setApellido(rs.getString("apellido"));
+                	usuario.setTelefono(rs.getString("telefono"));
+                	usuario.setCiudadEstado(rs.getString("ciudadEstado"));
+                	usuario.setDireccion(rs.getString("direccion"));
+                	usuario.setFecha_Nacimiento(rs.getString("fecha_nacimiento"));
+                	usuario.setRol(rs.getString("rol"));
 
                 return usuario;
                 }

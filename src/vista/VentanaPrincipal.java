@@ -33,6 +33,9 @@ public class VentanaPrincipal extends JFrame {
 	public JMenuItem mujerTenis;
 	public JMenuItem ninosTenis;
 	public JMenuItem admUsuarios;
+	public JMenuItem perfil;
+	public JMenuItem cerrarSesion;
+
 	
 	public JButton botonUsuarios;
 	public JButton botonInicio;
@@ -142,8 +145,10 @@ public class VentanaPrincipal extends JFrame {
 		
 		JMenu cuenta = new JMenu("Mi Cuenta");
 		mb.add(cuenta);
-		cuenta.add(new JMenuItem("Perfil"));
-		cuenta.add(new JMenuItem("Mis Pedidos"));
+		
+		perfil = new JMenuItem("Perfil");
+		cuenta.add(perfil);
+		//cuenta.add(new JMenuItem("Mis Pedidos"));
 		
 		JMenuItem metodoPago = new JMenuItem("Metodo de Pago");
 		metodoPago.addActionListener(e -> {
@@ -162,12 +167,15 @@ public class VentanaPrincipal extends JFrame {
 		    GestorTema.apply("dark");
 		});
 		
+		cerrarSesion = new JMenuItem("Cerrar Sesion");
+		
 		admUsuarios = new JMenuItem("Usuarios");
 
 		tema.add(temaClaro);
 		tema.add(temaOscuro);
-		cuenta.add(tema);
+		ajustes.add(tema);
 		cuenta.add(admUsuarios);
+		cuenta.add(cerrarSesion);
 		
 	}
 	

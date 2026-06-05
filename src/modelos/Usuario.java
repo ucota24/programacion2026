@@ -13,7 +13,7 @@ public class Usuario {
 	private String correo;
 	private String contrasena;
 	private String direccion;
-	private String fecha_Nacimiento;
+	private String fecha_nacimiento;
 	private String telefono;
 	private String ciudadEstado;
 	
@@ -28,7 +28,7 @@ public class Usuario {
 	}
 	
 	public Usuario(String nombre, String apellido, String correo, String contrasena, 
-			String ciudadEstado, String direccion, String fecha_Nacimiento, String telefono, String rol) {
+			String ciudadEstado, String direccion, String fecha_nacimiento, String telefono, String rol) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -36,19 +36,19 @@ public class Usuario {
         this.contrasena = contrasena;
         this.ciudadEstado = ciudadEstado;
         this.direccion = direccion;
-        this.fecha_Nacimiento = fecha_Nacimiento;
+        this.fecha_nacimiento = fecha_nacimiento;
         this.telefono = telefono;
         this.rol = rol;
 	}
 	
-	public Usuario(int id, String nombre, String apellido, String correo,String direccion, String fecha_Nacimiento, String telefono, 
+	public Usuario(int id, String nombre, String apellido, String correo,String direccion, String fecha_nacimiento, String telefono, 
 	        String ciudadEstado, String rol) {
 	    this.id = id;
 	    this.nombre = nombre;
 	    this.apellido = apellido;
 	    this.correo = correo;
 	    this.direccion = direccion;
-	    this.fecha_Nacimiento = fecha_Nacimiento;
+	    this.fecha_nacimiento = fecha_nacimiento;
 	    this.telefono = telefono;
 	    this.ciudadEstado = ciudadEstado;
 	    this.rol = rol;
@@ -111,11 +111,11 @@ public class Usuario {
 	}
 
 	public String getFecha_Nacimiento() {
-		return fecha_Nacimiento;
+		return fecha_nacimiento;
 	}
 
 	public void setFecha_Nacimiento(String fecha_Nacimiento) {
-		this.fecha_Nacimiento = fecha_Nacimiento;
+		this.fecha_nacimiento = fecha_Nacimiento;
 	}
 
 	public String getTelefono() {
@@ -137,7 +137,7 @@ public class Usuario {
 	public String toString() {
 	    return "Nombre: " + nombre + "\nApellido: " + apellido + "\nCorreo: " + correo 
 	        + "\nCiudad / Estado: " + ciudadEstado + "Direccion: " + direccion 
-	        + "Fecha de Nacimiento: " + fecha_Nacimiento + "Telfono: " + telefono;
+	        + "Fecha de Nacimiento: " + fecha_nacimiento + "Telfono: " + telefono;
 	}
 
 	/*public String toCsv() {

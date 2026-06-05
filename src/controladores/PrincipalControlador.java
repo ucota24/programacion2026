@@ -13,6 +13,7 @@ import modelos.Usuario;
 import repositorio.UsuarioRepositorio;
 import tablemodels.UsuarioTableModel;
 import utilidades.Configuracion;
+import utilidades.Sesion;
 import vista.LoginVentana;
 import vista.VentanaPrincipal;
 
@@ -32,8 +33,14 @@ public class PrincipalControlador {
 	public void registrarListeners() {
 
 		vista.admUsuarios.addActionListener(e -> verUsuarios());
+		vista.perfil.addActionListener(e -> new PerfilControlador(vista));
 
-		//vista.botonInicio.addActionListener(e -> vista.mostrarVista(VentanaPrincipal.INICIO));
+		vista.cerrarSesion.addActionListener(e -> {
+		    Sesion.logout();
+		    vista.dispose();
+		    LoginVentana ventana = new LoginVentana();
+		    new LoginControlador(ventana.getLoginVista());
+		});
 		
 		vista.hombreTenis.addActionListener(e -> verTenis("Hombre"));
 		vista.mujerTenis.addActionListener(e -> verTenis("Mujer"));
