@@ -62,7 +62,8 @@ public class TenisControlador {
         if (form.isGuardar()) {
             try {
                 Tenis nuevo = form.getTenisFromForm();
-                repositorio.save(nuevo);
+                int idGenerado = repositorio.save(nuevo);
+                nuevo.setIdTenis(idGenerado);
                 model.addRow(nuevo);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(vista, "Error al guardar: " + ex.getMessage());
