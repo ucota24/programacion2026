@@ -79,6 +79,21 @@ public class PedidoRepositorio {
 	    return false;
 	}
 	
+	public boolean tieneDetalle(int idTenis) {
+	    String sql = "SELECT COUNT(*) FROM pedido_producto WHERE idTenis = ?";
+	    try (Connection connection = DatabaseConnection.getConnection();
+	         PreparedStatement pst = connection.prepareStatement(sql)) {
+	        pst.setInt(1, idTenis);
+	        ResultSet rs = pst.executeQuery();
+	        if (rs.next()) {
+	            return rs.getInt(1) > 0;
+	        }
+	    } catch (SQLException ex) {
+	        ex.printStackTrace();
+	    }
+	    return false;
+	}
+	
 	
 
 }

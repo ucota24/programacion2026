@@ -32,7 +32,7 @@ public class UsuarioRepositorio {
 		
 		for (Usuario u : usuarios) {
 	        if (u.getCorreo().equals(usuario.getCorreo())) {
-	            throw new UsuarioDuplicadoException("El correo " + usuario.getCorreo() + " ya esta registrado");
+	            throw new UsuarioDuplicadoException("Este correo ya esta registrado");
 	        }
 	    }
 		

@@ -63,7 +63,6 @@ public class MetodoPagoVentana extends JFrame {
 		setIconImage(myIcon);
 
 		inicializarComponentes();
-		asignarKeyListeners();
 		new controladores.MetodoPagoControlador(this);
 		setVisible(true);
 	}
@@ -228,41 +227,6 @@ public class MetodoPagoVentana extends JFrame {
         lblErrorNumeroTarjeta.setText("");
         lblErrorFechaExpiracion.setText("");
         lblErrorCampoCVV.setText("");
-    }
-	
-	private void asignarKeyListeners() {
-        for (JTextField campo : new JTextField[]{ campoNumeroTarjeta, campoCVV }) {
-            campo.addKeyListener(new java.awt.event.KeyAdapter() {
-                @Override
-                public void keyTyped(java.awt.event.KeyEvent e) {
-                    if (!Character.isDigit(e.getKeyChar()))
-                        e.consume();
-                    
-                    int limite = campo == campoNumeroTarjeta ? 16 : 3;
-                    if (campo.getText().length() >= limite)
-                        e.consume();
-                }
-            });
-        }
-        
-        campoFechaExpiracion.addKeyListener(new java.awt.event.KeyAdapter() {
-            @Override
-            public void keyTyped(java.awt.event.KeyEvent e) {
-                String texto = campoFechaExpiracion.getText();
-                if (!Character.isDigit(e.getKeyChar())) {
-                    e.consume();
-                    return;
-                }
-                if (texto.length() >= 5) {
-                    e.consume();
-                    return;
-                }
-                if (texto.length() == 2) {
-                    campoFechaExpiracion.setText(texto + "/");
-                }
-            }
-        });
-        
     }
 	
 

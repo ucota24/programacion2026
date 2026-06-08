@@ -84,6 +84,13 @@ public class TenisControlador {
 
         if (confirmar == JOptionPane.YES_OPTION) {
             Tenis seleccionado = model.getTenisAt(fila);
+            
+            PedidoRepositorio pedidoRepo = new PedidoRepositorio();
+            if (pedidoRepo.tieneDetalle(seleccionado.getIdTenis())) {
+                JOptionPane.showMessageDialog(vista, "No se puede eliminar, tiene pedidos asociados");
+                return;
+            }
+            
             repositorio.eliminar(seleccionado.getIdTenis());
             model.removeRow(fila);
         }

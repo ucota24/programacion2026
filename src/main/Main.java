@@ -29,8 +29,8 @@ public class Main {
         GestorTema.applySavedTheme();
         UIManager.put("TextComponent.arc", 8); // bordes redondeados en los campos
         UIManager.put("Button.arc", 8); // bordes redondeados en los botones
-        UIManager.put("Component.focusWidth", 1);
-        UIManager.put("Component.innerFocusWidth", 0);
+        UIManager.put("Component.focusWidth", 1); // grosor del borde
+        UIManager.put("Component.innerFocusWidth", 0); // grosor del borde interior
         UIManager.put("Component.focusColor", new Color(17, 17, 17));  //color del borde del campo
         
 		//UIManager.put(" ", AppFont.normal());

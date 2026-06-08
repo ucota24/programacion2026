@@ -1,6 +1,7 @@
 package controladores;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -51,6 +52,44 @@ public class MetodoPagoControlador {
                 JOptionPane.showMessageDialog(vista,
                         "Se ha registrado su metodo de pago!", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
                 vista.dispose();
+            }
+        });
+        
+        for (JTextField campo : new JTextField[]{ vista.campoNumeroTarjeta, vista.campoCVV }) {
+            campo.addKeyListener(new java.awt.event.KeyAdapter() {
+                @Override
+                public void keyTyped(java.awt.event.KeyEvent e) {
+                    if (!Character.isDigit(e.getKeyChar()))
+                        e.consume();
+                    
+                    int limite;
+                    if (campo == vista.campoNumeroTarjeta) {
+                        limite = 16;
+                    } else {
+                        limite = 3;
+                    }
+                    
+                    if (campo.getText().length() >= limite)
+                        e.consume();
+                }
+            });
+        }
+        
+        vista.campoFechaExpiracion.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyTyped(java.awt.event.KeyEvent e) {
+                String texto = vista.campoFechaExpiracion.getText();
+                if (!Character.isDigit(e.getKeyChar())) {
+                    e.consume();
+                    return;
+                }
+                if (texto.length() >= 5) {
+                    e.consume();
+                    return;
+                }
+                if (texto.length() == 2) {
+                	vista.campoFechaExpiracion.setText(texto + "/");
+                }
             }
         });
         
