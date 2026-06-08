@@ -134,7 +134,6 @@ public class FormularioRegistro extends JFrame {
 		lblErrorDireccion = errorLabel();
 		
 		asignarFocusListeners();
-        asignarKeyListeners();
 				
 		JPanel panelComponentes = new JPanel(new GridLayout(0, 2, 15, 6));
 		panelComponentes.setBorder(BorderFactory.createEmptyBorder(10, 20, 40, 20));
@@ -266,68 +265,6 @@ public class FormularioRegistro extends JFrame {
         });
     }
  
-    private void asignarKeyListeners() {
-        for (JTextField campo : new JTextField[]{campoNombre, campoApellido}) {
-            campo.addKeyListener(new java.awt.event.KeyAdapter() {
-                @Override
-                public void keyTyped(KeyEvent e) {
-                    char c = e.getKeyChar();
-                    if (Character.isDigit(c) || (!Character.isAlphabetic(c) && c != ' '))
-                        e.consume();
-                    if (((JTextField) e.getSource()).getText().length() >= 20)
-                        e.consume();
-                }
-            });
-        }
-        
-        for (JTextField campo : new JTextField[]{campoTelefono, campoFNacimiento}) {
-            campo.addKeyListener(new java.awt.event.KeyAdapter() {
-                @Override
-                public void keyTyped(KeyEvent e) {
-                    if (!Character.isDigit(e.getKeyChar()))
-                        e.consume();
-                }
-            });
-        }
-        
-        campoFNacimiento.addKeyListener(new java.awt.event.KeyAdapter() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                String texto = campoFNacimiento.getText();
-                if (!Character.isDigit(e.getKeyChar())) {
-                    e.consume();
-                    return;
-                }
-                if (texto.length() >= 10) {
-                    e.consume();
-                    return;
-                }
-                if (texto.length() == 2 || texto.length() == 5) {
-                    campoFNacimiento.setText(texto + "/");
-                }
-            }
-        });
-        
-        campoTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                if (campoTelefono.getText().length() >= 10)
-                    e.consume();
-            }
-        });
-        
-        campoCiudadEstado.addKeyListener(new java.awt.event.KeyAdapter() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                char c = e.getKeyChar();
-                if (Character.isDigit(c) || (!Character.isAlphabetic(c) && c != ' '))
-                    e.consume();
-                if (campoCiudadEstado.getText().length() >= 40)
-                    e.consume();
-            }
-        });
-        
-    }
 	
 	
 }

@@ -126,19 +126,19 @@ public class VentanaPrincipal extends JFrame {
 		JMenu hombre = new JMenu("Hombre");
 		hombre.setMnemonic(KeyEvent.VK_H);
 		mb.add(hombre);
-		hombreTenis = new JMenuItem("Tenis");
+		hombreTenis = new JMenuItem("Ver catalogo");
 		hombre.add(hombreTenis);
 		
 		JMenu mujer = new JMenu("Mujer");
 		mujer.setMnemonic(KeyEvent.VK_M);
 		mb.add(mujer);
-		mujerTenis = new JMenuItem("Tenis");
+		mujerTenis = new JMenuItem("Ver catalogo");
 		mujer.add(mujerTenis);
 		
 		JMenu ninos = new JMenu("Niños");
 		ninos.setMnemonic(KeyEvent.VK_N);
 		mb.add(ninos);
-		ninosTenis = new JMenuItem("Tenis");
+		ninosTenis = new JMenuItem("Ver catalogo");
 		ninos.add(ninosTenis);
 		
 		mb.add(Box.createHorizontalGlue());

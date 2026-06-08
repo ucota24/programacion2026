@@ -26,6 +26,10 @@ public class ComprarDialog extends JDialog {
 	private JLabel lblProducto;
     private JLabel lblPrecio;
     private JLabel lblCantidad;
+    private JLabel lblTalla;
+    private JLabel lblTallaNumero;
+    private JLabel lblColor;
+    private JLabel lblColorTipo;
     private JComboBox<String> cbMetodoPago;
     
     private JButton botonConfirmar;
@@ -37,7 +41,7 @@ public class ComprarDialog extends JDialog {
     public ComprarDialog(JFrame parent, Tenis tenis, List<MetodoPago> metodos) {
         super(parent, true);
         this.metodoPg = metodos;
-        setSize(300, 210);
+        setSize(300, 280);
         setLocationRelativeTo(parent);
         setLayout(new BorderLayout());
         setTitle("Confirmar Compra");
@@ -49,7 +53,7 @@ public class ComprarDialog extends JDialog {
     }
   
     private JPanel crearInfoPanel(Tenis tenis) {
-        JPanel panel = new JPanel(new GridLayout(4, 1, 0, 8));
+        JPanel panel = new JPanel(new GridLayout(6, 1, 0, 8));
         panel.setBackground(new Color(249, 250, 251));
         panel.setBorder(BorderFactory.createEmptyBorder(15, 20, 15, 20));
 
@@ -77,6 +81,27 @@ public class ComprarDialog extends JDialog {
         panelPrecio.add(lblPrecio);
         panelPrecio.add(lblCantidad);
         
+        JPanel panelTalla = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        panelTalla.setBackground(new Color(249, 250, 251));
+        lblTalla = new JLabel("Talla: ");
+        lblTalla.setFont(new Font("Arial", Font.BOLD, 12));
+        
+        lblTallaNumero = new JLabel("" + tenis.getTalla());
+        lblTallaNumero.setFont(new Font("Arial", Font.ITALIC, 14));
+        lblTallaNumero.setForeground(new Color(70, 130, 180));
+        panelTalla.add(lblTalla);
+        panelTalla.add(lblTallaNumero);
+        
+        JPanel panelColor = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        panelColor.setBackground(new Color(249, 250, 251));
+        lblColor = new JLabel("Color: ");
+        lblColor.setFont(new Font("Arial", Font.BOLD, 12));
+        
+        lblColorTipo = new JLabel(tenis.getColor());
+        lblColorTipo.setFont(new Font("Arial", Font.ITALIC, 14));
+        lblColorTipo.setForeground(new Color(70, 130, 180));
+        panelColor.add(lblColor);
+        panelColor.add(lblColorTipo);
         
         JLabel lblMetodoPg = new JLabel("Metodo de pago:");
         lblMetodoPg.setFont(new Font("Arial", Font.BOLD, 12));
@@ -89,6 +114,8 @@ public class ComprarDialog extends JDialog {
 
         panel.add(panelTeni);
         panel.add(panelPrecio);
+        panel.add(panelTalla);
+        panel.add(panelColor);
         panel.add(lblMetodoPg);
         panel.add(cbMetodoPago);
         

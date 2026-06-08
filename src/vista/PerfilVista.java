@@ -84,7 +84,7 @@ public class PerfilVista extends JDialog {
         seccionPago.add(fila("Numero de tarjeta:", lblNumero));
 
         panel.add(seccionDatos);
-        panel.add(javax.swing.Box.createVerticalStrut(10));
+        panel.add(Box.createVerticalStrut(10));
         panel.add(seccionPago);
 
         return panel;

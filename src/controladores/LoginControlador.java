@@ -16,6 +16,7 @@ import vista.FormularioRegistro;
 import vista.LoginVista;
 import vista.VentanaPrincipal;
 
+
 public class LoginControlador {
 	
 	private LoginVista vista;

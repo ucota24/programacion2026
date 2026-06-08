@@ -1,10 +1,12 @@
 package controladores;
 
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -194,6 +196,67 @@ public class RegistroControlador {
     				validacionFNacimiento();				
     			}
     		});
+    		
+    		for (JTextField campo : new JTextField[]{vista.campoNombre, vista.campoApellido}) {
+                campo.addKeyListener(new java.awt.event.KeyAdapter() {
+                    @Override
+                    public void keyTyped(KeyEvent e) {
+                        char c = e.getKeyChar();
+                        if (Character.isDigit(c) || (!Character.isAlphabetic(c) && c != ' '))
+                            e.consume();
+                        if (((JTextField) e.getSource()).getText().length() >= 20)
+                            e.consume();
+                    }
+                });
+            }
+            
+            for (JTextField campo : new JTextField[]{vista.campoTelefono, vista.campoFNacimiento}) {
+                campo.addKeyListener(new java.awt.event.KeyAdapter() {
+                    @Override
+                    public void keyTyped(KeyEvent e) {
+                        if (!Character.isDigit(e.getKeyChar()))
+                            e.consume();
+                    }
+                });
+            }
+            
+            vista.campoFNacimiento.addKeyListener(new java.awt.event.KeyAdapter() {
+                @Override
+                public void keyTyped(KeyEvent e) {
+                    String texto = vista.campoFNacimiento.getText();
+                    if (!Character.isDigit(e.getKeyChar())) {
+                        e.consume();
+                        return;
+                    }
+                    if (texto.length() >= 10) {
+                        e.consume();
+                        return;
+                    }
+                    if (texto.length() == 2 || texto.length() == 5) {
+                    	vista.campoFNacimiento.setText(texto + "/");
+                    }
+                }
+            });
+            
+            vista.campoTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+                @Override
+                public void keyTyped(KeyEvent e) {
+                    if (vista.campoTelefono.getText().length() >= 10)
+                        e.consume();
+                }
+            });
+            
+            vista.campoCiudadEstado.addKeyListener(new java.awt.event.KeyAdapter() {
+                @Override
+                public void keyTyped(KeyEvent e) {
+                    char c = e.getKeyChar();
+                    if (Character.isDigit(c) || (!Character.isAlphabetic(c) && c != ' '))
+                        e.consume();
+                    if (vista.campoCiudadEstado.getText().length() >= 40)
+                        e.consume();
+                }
+            });
+            
     }
     
     public boolean validacionFormulario() {
